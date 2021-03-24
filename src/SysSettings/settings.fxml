@@ -23,7 +23,7 @@
             <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
          </children>
       </Group>
-      <Label layoutX="290.0" layoutY="34.0" text="System Setttings">
+      <Label layoutX="290.0" layoutY="34.0" text="System Settings">
          <font>
             <Font size="31.0" />
          </font>
@@ -33,7 +33,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="367.0" layoutY="403.0" ripplerFill="#818b9a" style="-fx-background-color: #909294;" text="Save">
+      <JFXButton buttonType="RAISED" layoutX="367.0" layoutY="403.0" onAction="#saveSetChanges" ripplerFill="#818b9a" style="-fx-background-color: #909294;" text="Save">
          <font>
             <Font size="19.0" />
          </font>

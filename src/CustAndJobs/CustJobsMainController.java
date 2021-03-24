@@ -19,4 +19,32 @@ public class CustJobsMainController {
         window.setScene(newScene);
         window.show();
     }
+
+    @FXML
+    private void changeToActiveJob(ActionEvent actionEvent) throws IOException {
+        Parent newParent = FXMLLoader.load(getClass().getResource("ActiveJob.fxml"));
+        Scene newScene = new Scene(newParent);
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+
+    @FXML
+    private void changeToCustSearch(ActionEvent actionEvent) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustSearch.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+
+    @FXML
+    private void saveForm(ActionEvent actionEvent) {
+//Needs to be done
+    }
+
+    @FXML
+    private void saveAndChangeToJob(ActionEvent actionEvent) {
+//Needs to be done
+    }
 }

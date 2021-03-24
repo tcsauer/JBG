@@ -1,4 +1,4 @@
-package QuickInvoice;
+package CustAndJobs;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,23 +10,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class quickInvoiceController {
+public class JobCreateEditController {
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Dashboard/dashboard.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newScene);
         window.show();
-    }
-
-    @FXML
-    private void printInvoice(ActionEvent actionEvent) {
-//Needs to be started
-    }
-
-    @FXML
-    private void ExportInvoice(ActionEvent actionEvent) {
-//Needs to be started
     }
 }

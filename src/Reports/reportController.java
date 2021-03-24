@@ -19,4 +19,14 @@ public class reportController {
         window.setScene(newScene);
         window.show();
     }
+
+    @FXML
+    private void printReport(ActionEvent actionEvent) {
+//Needs to be Started
+    }
+
+    @FXML
+    private void ExportReport(ActionEvent actionEvent) {
+//Needs to be started
+    }
 }

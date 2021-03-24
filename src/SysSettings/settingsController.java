@@ -20,4 +20,10 @@ public class settingsController {
         window.setScene(newScene);
         window.show();
     }
+
+    @FXML
+    private void saveSetChanges(ActionEvent actionEvent) {
+//Needs to be started
+
+    }
 }
