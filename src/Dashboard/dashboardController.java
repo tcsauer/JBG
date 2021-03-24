@@ -1,4 +1,8 @@
 package Dashboard;
+import SysSettings.*;
+import CustAndJobs.*;
+import Reports.*;
+import QuickInvoice.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,11 +17,37 @@ import java.io.IOException;
 public class dashboardController {
 
     @FXML
-    private void changeToBook(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("BookMedia.fxml"));
+    private void changeToSystem(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/SysSettings/settings.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newScene);
         window.show();
     }
+    @FXML
+    private void changeToCustJobs(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/CustAndJobs/CustJobsMain.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+    @FXML
+    private void changeToReports(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Reports/report.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+    @FXML
+    private void changeToQuickInvoice(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/QuickInvoice/quickInvoice.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+
+
 }

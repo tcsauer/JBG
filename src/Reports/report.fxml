@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="Reports.reportController">
+    <children>
+        <Group layoutX="732.0">
+            <children>
+                <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/exit.png" />
+                    </image>
+                </ImageView>
+                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
+            </children>
+        </Group>
+    </children>
+</AnchorPane>
