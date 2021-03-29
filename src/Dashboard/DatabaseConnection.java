@@ -1,30 +1,37 @@
 package Dashboard;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javafx.fxml.Initializable;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.*;
+import java.util.ResourceBundle;
 
 public class DatabaseConnection {
-//Help Here! Keep Getting Connection Errors...
-    final static String hostname = "jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com";
-    final static String dbName = "test";
-    final static String port = "3306";
-    final static String username = "texstar";
-    final static String password = "all4gibbs";
-    final static String DB_URL_PREFACE = "jdbc:mysql://";
-    public static String connectionUrl =
-            "jdbc:mysql://jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com:3306/test?user=texstar&password=all4gibbs";
+    //URL not in ./preferences/URL.txt file & updatable through GUI
+    String URL;
 
-    public static Statement ConnectToDatabase()
-    {
+
+    public Statement ConnectToDatabase() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(DB_URL_PREFACE + hostname + ":" + port + "/" + dbName, username, password );
+            FileReader reader = new FileReader("./preferences/URL.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            URL = bufferedReader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(URL, "texstar", "all4gibbs");
             Statement stmt = connection.createStatement();
             System.out.println("Remote connection successful.");
             return stmt;
         } catch (SQLException | ClassNotFoundException ex) {
+            System.out.println(ex);
             System.out.println("Error Connecting");
         }
         return null;
@@ -40,4 +47,5 @@ public class DatabaseConnection {
         }
         System.out.println("Successfully disconnected from DB");
     }
+
 }

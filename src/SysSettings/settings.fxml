@@ -41,7 +41,7 @@
       <HBox layoutX="244.0" layoutY="212.0">
          <children>
             <Label prefHeight="38.0" prefWidth="109.0" text="MySQL Database Address" textAlignment="CENTER" wrapText="true" />
-            <JFXTextField labelFloat="true" prefHeight="27.0" prefWidth="203.0" promptText="Can be local or remote" text="Address">
+            <JFXTextField fx:id="textBoxURL" labelFloat="true" prefHeight="27.0" prefWidth="203.0" promptText="Can be local or remote" text="Address">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -49,6 +49,11 @@
                   <Insets top="16.0" />
                </padding>
             </JFXTextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER" layoutY="323.0" prefHeight="46.0" prefWidth="800.0">
+         <children>
+            <Label fx:id="setLab" contentDisplay="CENTER" textAlignment="CENTER" />
          </children>
       </HBox>
    </children>
