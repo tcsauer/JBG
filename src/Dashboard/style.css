@@ -1,0 +1,14 @@
+.button{
+    -fx-background-color: #253543;
+    -fx-pref-width: 210;
+}
+
+.button:hover {
+    -fx-background-color: #aaaaaa;
+    -fx-text-fill: black;
+}
+
+.button:armed {
+    -fx-background-color: red;
+    -fx-text-fill: black;
+}
