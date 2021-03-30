@@ -1,4 +1,4 @@
-package CustAndJobs;
+package Cust;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,10 +10,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SearchReturnController {
+public class CustSearchController {
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustSearch.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newScene);
@@ -21,13 +21,12 @@ public class SearchReturnController {
     }
 
     @FXML
-    private void viewCstProfile(ActionEvent actionEvent) throws IOException {
+    private void custSearch(ActionEvent actionEvent) throws IOException {
+//Needs to be done
 
 
 
-
-
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustEdit.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("SearchReturn.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);

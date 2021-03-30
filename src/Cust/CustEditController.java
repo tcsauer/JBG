@@ -1,4 +1,4 @@
-package CustAndJobs;
+package Cust;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ActiveJobController {
+public class CustEditController {
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
         Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
@@ -21,12 +21,18 @@ public class ActiveJobController {
     }
 
     @FXML
-    private void changeToViewJobs(ActionEvent actionEvent) throws IOException {
+    private void editAndSave(ActionEvent actionEvent) {
+//Needs to be done
+    }
+
+    @FXML
+    private void viewJob(ActionEvent actionEvent) throws IOException {
 //Needs to be done
 
 
 
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("JobCreateEdit.fxml"));
+
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("../Jobs/JobCreateEdit.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);
@@ -34,10 +40,7 @@ public class ActiveJobController {
     }
 
     @FXML
-    private void printJob(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void completeJob(ActionEvent actionEvent) {
+    private void jobComplete(ActionEvent actionEvent) {
+//Needs to be done
     }
 }

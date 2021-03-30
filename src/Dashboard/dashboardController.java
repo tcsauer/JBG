@@ -1,8 +1,4 @@
 package Dashboard;
-import SysSettings.*;
-import CustAndJobs.*;
-import Reports.*;
-import QuickInvoice.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +22,7 @@ public class dashboardController {
     }
     @FXML
     private void changeToCustJobs(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("/CustAndJobs/CustJobsMain.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Cust/CustJobsMain.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newScene);

@@ -1,4 +1,4 @@
-package CustAndJobs;
+package Cust;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,7 +22,7 @@ public class CustJobsMainController {
 
     @FXML
     private void changeToActiveJob(ActionEvent actionEvent) throws IOException {
-        Parent newParent = FXMLLoader.load(getClass().getResource("ActiveJob.fxml"));
+        Parent newParent = FXMLLoader.load(getClass().getResource("../Jobs/ActiveJob.fxml"));
         Scene newScene = new Scene(newParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);
@@ -45,7 +45,7 @@ public class CustJobsMainController {
 
     @FXML
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("JobCreateEdit.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("../Jobs/JobCreateEdit.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);

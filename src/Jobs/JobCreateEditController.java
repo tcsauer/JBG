@@ -1,5 +1,6 @@
-package CustAndJobs;
+package Jobs;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +11,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CustEditController {
+public class JobCreateEditController {
+    @FXML
+    private JFXButton printBtn;
+
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("../Cust/CustJobsMain.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newScene);
@@ -21,18 +25,16 @@ public class CustEditController {
     }
 
     @FXML
-    private void editAndSave(ActionEvent actionEvent) {
-//Needs to be done
-    }
-
-    @FXML
-    private void viewJob(ActionEvent actionEvent) throws IOException {
-//Needs to be done
+    private void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
+//NEEDS TO BE DONE
+        //Not sure if user should be transitioning scenes here
 
 
 
 
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("JobCreateEdit.fxml"));
+        printBtn.setVisible(true); //Print button should be hidden unless fields are populated
+
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("ActiveJob.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);
@@ -40,7 +42,6 @@ public class CustEditController {
     }
 
     @FXML
-    private void jobComplete(ActionEvent actionEvent) {
-//Needs to be done
+    private void PrintJob(ActionEvent actionEvent) {
     }
 }
