@@ -21,7 +21,15 @@ public class CustSearchController {
     }
 
     @FXML
-    private void custSearch(ActionEvent actionEvent) {
+    private void custSearch(ActionEvent actionEvent) throws IOException {
 //Needs to be done
+
+
+
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("SearchReturn.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
     }
 }

@@ -26,8 +26,17 @@ public class CustEditController {
     }
 
     @FXML
-    private void viewJob(ActionEvent actionEvent) {
+    private void viewJob(ActionEvent actionEvent) throws IOException {
 //Needs to be done
+
+
+
+
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("JobCreateEdit.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
     }
 
     @FXML

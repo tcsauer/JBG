@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustAndJobs.SearchReturnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustAndJobs.SearchReturnController">
     <children>
         <Group layoutX="732.0">
             <children>
@@ -33,7 +33,7 @@
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <JFXButton layoutX="350.0" layoutY="454.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View Profile">
+      <JFXButton layoutX="350.0" layoutY="454.0" onAction="#viewCstProfile" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View Profile">
          <font>
             <Font size="19.0" />
          </font>

@@ -44,7 +44,15 @@ public class CustJobsMainController {
     }
 
     @FXML
-    private void saveAndChangeToJob(ActionEvent actionEvent) {
+    private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("JobCreateEdit.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+
+
+
 //Needs to be done
     }
 }

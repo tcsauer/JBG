@@ -19,4 +19,18 @@ public class SearchReturnController {
         window.setScene(newScene);
         window.show();
     }
+
+    @FXML
+    private void viewCstProfile(ActionEvent actionEvent) throws IOException {
+
+
+
+
+
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustEdit.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
 }
