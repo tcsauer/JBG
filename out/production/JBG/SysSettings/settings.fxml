@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SysSettings.settingsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="SysSettings.settingsController">
    <children>
-      <Group layoutX="732.0">
+      <Group layoutX="1126.0" layoutY="4.0">
          <children>
             <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                <image>
@@ -23,25 +23,25 @@
             <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
          </children>
       </Group>
-      <Label layoutX="290.0" layoutY="34.0" text="System Settings">
+      <Label layoutX="494.0" layoutY="19.0" text="System Settings" textFill="WHITE">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <Label layoutX="7.0" layoutY="472.0" prefHeight="34.0" prefWidth="282.0" text="J B and G Upholstery's CRM was created by TextStar Consulting" wrapText="true">
+      <Label layoutX="14.0" layoutY="566.0" prefHeight="34.0" prefWidth="282.0" text="J B and G Upholstery's CRM was created by TextStar Consulting" textFill="WHITE" wrapText="true">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
-      <JFXButton buttonType="RAISED" layoutX="367.0" layoutY="403.0" onAction="#saveSetChanges" ripplerFill="#818b9a" style="-fx-background-color: #909294;" text="Save">
+      <JFXButton buttonType="RAISED" layoutX="568.0" layoutY="474.0" onAction="#saveSetChanges" ripplerFill="#818b9a" style="-fx-background-color: #909294;" text="Save">
          <font>
             <Font size="19.0" />
          </font>
       </JFXButton>
-      <HBox layoutX="244.0" layoutY="212.0">
+      <HBox layoutX="284.0" layoutY="262.0">
          <children>
-            <Label prefHeight="38.0" prefWidth="109.0" text="MySQL Database Address" textAlignment="CENTER" wrapText="true" />
-            <JFXTextField fx:id="textBoxURL" labelFloat="true" prefHeight="27.0" prefWidth="203.0" promptText="Can be local or remote" text="Address">
+            <Label prefHeight="38.0" prefWidth="130.0" text="MySQL Database Address" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
+            <JFXTextField fx:id="textBoxURL" labelFloat="true" prefHeight="33.0" prefWidth="518.0" promptText="Can be local or remote" style="-fx-prompt-text-fill: #ffffff;" text="Address">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -53,7 +53,7 @@
       </HBox>
       <HBox alignment="CENTER" layoutY="323.0" prefHeight="46.0" prefWidth="800.0">
          <children>
-            <Label fx:id="setLab" contentDisplay="CENTER" textAlignment="CENTER" />
+            <Label fx:id="setLab" contentDisplay="CENTER" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </HBox>
    </children>

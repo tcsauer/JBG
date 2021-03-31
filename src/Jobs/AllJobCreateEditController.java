@@ -1,6 +1,9 @@
 package Jobs;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,6 +32,20 @@ public class AllJobCreateEditController {
 
     @FXML
     private ImageView sketchView;
+    @FXML
+    private JFXComboBox jobType;
+    @FXML
+    private JFXComboBox paymentType;
+    @FXML
+    private JFXComboBox jobStatus;
+    @FXML
+    private JFXTextField cost;
+    @FXML
+    private JFXDatePicker fDate;
+    @FXML
+    private JFXDatePicker startDate;
+    @FXML
+    private JFXTextField filePath;
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {

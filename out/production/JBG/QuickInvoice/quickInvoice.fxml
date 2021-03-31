@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="QuickInvoice.quickInvoiceController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="QuickInvoice.quickInvoiceController">
     <children>
-        <Group layoutX="732.0">
+        <Group layoutX="1132.0">
             <children>
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
@@ -25,12 +25,12 @@
                 <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
-      <Label layoutX="313.0" layoutY="15.0" text="Quick Invoice">
+      <Label layoutX="515.0" layoutY="15.0" text="Quick Invoice" textFill="WHITE">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <TableView fx:id="activeTable" layoutX="30.0" layoutY="99.0" prefHeight="352.0" prefWidth="377.0">
+      <TableView fx:id="activeTable" layoutX="30.0" layoutY="99.0" prefHeight="460.0" prefWidth="771.0">
         <columns>
           <TableColumn fx:id="col_sketch" prefWidth="75.0" text="Job Sketch" />
           <TableColumn fx:id="col_type" prefWidth="75.0" text="Job Type" />
@@ -39,12 +39,12 @@
             <TableColumn fx:id="col_dateStart" prefWidth="75.0" text="Date Start" />
         </columns>
       </TableView>
-      <Label layoutX="179.0" layoutY="68.0" text="Active Jobs">
+      <Label layoutX="376.0" layoutY="68.0" text="Active Jobs" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <GridPane layoutX="433.0" layoutY="175.0" prefHeight="167.0" prefWidth="338.0" style="-fx-background-color: #ffffff;">
+      <GridPane layoutX="838.0" layoutY="192.0" prefHeight="167.0" prefWidth="338.0" style="-fx-background-color: #ffffff;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -55,17 +55,17 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label layoutX="570.0" layoutY="142.0" text="Options">
+      <Label layoutX="975.0" layoutY="159.0" text="Options" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <JFXButton layoutX="509.0" layoutY="393.0" onAction="#printInvoice" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Print">
+      <JFXButton layoutX="898.0" layoutY="402.0" onAction="#printInvoice" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Print Invoice">
          <font>
             <Font size="16.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="623.0" layoutY="393.0" onAction="#ExportInvoice" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Export">
+      <JFXButton layoutX="1028.0" layoutY="402.0" onAction="#ExportInvoice" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Export">
          <font>
             <Font size="16.0" />
          </font>

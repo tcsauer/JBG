@@ -1,5 +1,6 @@
 package Cust;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +13,9 @@ import java.io.IOException;
 
 public class CustEditController {
     @FXML
+    private JFXTextField fName;
+
+    @FXML
     private void changeToDash(ActionEvent event) throws IOException {
         Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
         Scene newScene = new Scene(SceneParent);
@@ -22,7 +26,10 @@ public class CustEditController {
 
     @FXML
     private void editAndSave(ActionEvent actionEvent) {
-//Needs to be done
+        //Needs to be done
+        //This is to test error label alt
+        fName.getStylesheets().add("assets/error.css");
+        fName.setPromptText("Please enter letters only");
     }
 
     @FXML

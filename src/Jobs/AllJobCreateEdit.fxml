@@ -15,11 +15,13 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobCreateEditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobCreateEditController">
     <children>
-        <Group layoutX="732.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="458.0" layoutX="723.0" layoutY="81.0" stroke="TRANSPARENT" strokeType="INSIDE" width="443.0" />
+        <Group layoutX="1132.0">
             <children>
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
@@ -29,12 +31,13 @@
                 <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
-        <GridPane layoutX="52.0" layoutY="80.0" prefHeight="348.0" prefWidth="403.0">
+        <GridPane layoutX="58.0" layoutY="81.0" prefHeight="458.0" prefWidth="574.0" style="-fx-background-color: #142432#142432;">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="64.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="137.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="66.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="123.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="230.0" minWidth="6.0" prefWidth="70.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="253.0" minWidth="0.0" prefWidth="176.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.0" minWidth="10.0" prefWidth="62.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="0.0" prefWidth="160.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="0.0" prefWidth="119.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
@@ -44,77 +47,92 @@
                 <RowConstraints maxHeight="114.0" minHeight="0.0" prefHeight="79.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <JFXComboBox prefHeight="27.0" prefWidth="149.0" promptText="Job Type" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                <JFXComboBox fx:id="jobType" labelFloat="true" prefHeight="27.0" prefWidth="204.0" promptText="Job Type" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                     <GridPane.margin>
                         <Insets left="8.0" />
                     </GridPane.margin>
                 </JFXComboBox>
-                <Label text="Cost" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <Label text="Start Date" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                <Label text="Finish Date" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                <JFXComboBox promptText="Payment Type" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <Label text="Cost" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <Label text="Start Date" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                <Label text="Finish Date" textFill="WHITE" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                <JFXComboBox fx:id="paymentType" labelFloat="true" prefHeight="27.0" prefWidth="160.0" promptText="Payment Type" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <padding>
                         <Insets right="8.0" />
                     </padding>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
                 </JFXComboBox>
-                <JFXComboBox prefHeight="27.0" prefWidth="149.0" promptText="Job Status" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                <JFXComboBox fx:id="jobStatus" labelFloat="true" prefHeight="27.0" prefWidth="203.0" promptText="Job Status" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                     <GridPane.margin>
                         <Insets left="8.0" />
                     </GridPane.margin>
                 </JFXComboBox>
-                <JFXTextField prefHeight="11.0" prefWidth="123.0" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                <JFXDatePicker GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                <JFXDatePicker GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                <Label text="Job Information" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <JFXTextField fx:id="cost" labelFloat="true" prefHeight="11.0" prefWidth="123.0" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <JFXDatePicker fx:id="fDate" defaultColor="WHITE" prefHeight="29.0" prefWidth="206.0" style="-fx-prompt-text-fill: #ffffff;" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="3">
+               <padding>
+                  <Insets left="10.0" />
+               </padding></JFXDatePicker>
+                <JFXDatePicker fx:id="startDate" defaultColor="WHITE" prefHeight="29.0" prefWidth="170.0" style="-fx-prompt-text-fill: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Job Information" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <font>
                         <Font size="16.0" />
                     </font>
                 </Label>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                <HBox alignment="CENTER" prefHeight="106.0" prefWidth="574.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
                     <children>
-                        <JFXButton buttonType="RAISED" onAction="#changeToActiveJobs" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Submit">
+                        <JFXButton buttonType="RAISED" onAction="#changeToActiveJobs" prefHeight="37.0" prefWidth="86.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Submit">
                             <HBox.margin>
                                 <Insets left="5.0" right="10.0" />
                             </HBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
                         </JFXButton>
-                        <JFXButton fx:id="deleteBtn" buttonType="RAISED" onAction="#DeleteJob" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Delete">
+                        <JFXButton fx:id="deleteBtn" buttonType="RAISED" onAction="#DeleteJob" prefHeight="37.0" prefWidth="85.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Delete">
                             <HBox.margin>
                                 <Insets left="10.0" right="5.0" />
                             </HBox.margin>
+                     <font>
+                        <Font size="17.0" />
+                     </font>
                         </JFXButton>
                     </children>
                 </HBox>
             </children>
         </GridPane>
-        <Label layoutX="340.0" layoutY="15.0" text="Job View">
+        <Label layoutX="547.0" layoutY="15.0" prefHeight="38.0" prefWidth="123.0" text="Job View" textFill="WHITE">
             <font>
                 <Font size="31.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="518.0" layoutY="134.0" prefHeight="231.0" prefWidth="245.0" style="-fx-background-color: #dedede;">
+        <AnchorPane layoutX="761.0" layoutY="121.0" prefHeight="359.0" prefWidth="368.0" style="-fx-background-color: #dedede;">
             <children>
-                <ImageView fx:id="sketchView" fitHeight="232.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="sketchView" fitHeight="359.0" fitWidth="368.0" layoutX="-13.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
-        <Button fx:id="browseBtn" onAction="#BrowseFile" layoutX="703.0" layoutY="393.0" mnemonicParsing="false" text="Browse" />
-        <JFXTextField editable="false" layoutX="518.0" layoutY="393.0" promptText="jpg or png only" text="File Location" />
-        <Label layoutX="610.0" layoutY="117.0" text="Job Sketch" />
-        <Label layoutX="22.0" layoutY="475.0" text="Job ID:">
+        <Button fx:id="browseBtn" layoutX="1064.0" layoutY="499.0" mnemonicParsing="false" onAction="#BrowseFile" prefHeight="27.0" prefWidth="68.0" text="Browse" />
+        <JFXTextField fx:id="filePath" editable="false" labelFloat="true" layoutX="761.0" layoutY="499.0" prefHeight="27.0" prefWidth="268.0" promptText="jpg or png only" style="-fx-prompt-text-fill: #ffffff;" text="File Location" unFocusColor="WHITE" />
+        <Label layoutX="904.0" layoutY="90.0" text="Job Sketch" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font></Label>
+        <Label layoutX="22.0" layoutY="562.0" text="Job ID:">
             <font>
                 <Font size="10.0" />
             </font>
         </Label>
-        <Label layoutX="58.0" layoutY="475.0" text="BLANK">
+        <Label fx:id="jobID" layoutX="58.0" layoutY="562.0" text="BLANK">
             <font>
                 <Font size="10.0" />
             </font>
         </Label>
-        <Label layoutX="123.0" layoutY="463.0" prefHeight="36.0" prefWidth="58.0" text="Customer ID:" textAlignment="CENTER" wrapText="true">
+        <Label layoutX="123.0" layoutY="550.0" prefHeight="36.0" prefWidth="58.0" text="Customer ID:" textAlignment="CENTER" wrapText="true">
             <font>
                 <Font size="10.0" />
             </font>
         </Label>
-        <Label layoutX="189.0" layoutY="475.0" text="BLANK">
+        <Label fx:id="custID" layoutX="189.0" layoutY="562.0" text="BLANK">
             <font>
                 <Font size="10.0" />
             </font>

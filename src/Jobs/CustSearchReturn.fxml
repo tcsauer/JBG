@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.CustSearchReturnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.CustSearchReturnController">
     <children>
-        <Group layoutX="732.0">
+        <Group layoutX="1132.0">
             <children>
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
@@ -22,18 +22,18 @@
                 <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
-      <Label layoutX="241.0" layoutY="15.0" text="Customer Search Return">
+      <Label layoutX="441.0" layoutY="15.0" text="Customer Search Return" textFill="WHITE">
          <font>
             <Font size="31.0" />
          </font>
       </Label>
-      <TableView layoutX="17.0" layoutY="68.0" prefHeight="378.0" prefWidth="766.0">
+      <TableView layoutX="17.0" layoutY="68.0" prefHeight="459.0" prefWidth="1163.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <JFXButton layoutX="350.0" layoutY="454.0" onAction="#viewCstProfile" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Create Job">
+      <JFXButton layoutX="543.0" layoutY="548.0" onAction="#viewCstProfile" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294; -fx-prompt-text-fill: #ffffff;" text="Create Job">
          <font>
             <Font size="19.0" />
          </font>

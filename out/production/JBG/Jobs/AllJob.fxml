@@ -11,11 +11,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
     <children>
-        <Group layoutX="732.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="200.0" layoutX="1032.0" layoutY="194.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
+        <Group layoutX="1132.0" layoutY="6.0">
             <children>
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
@@ -25,18 +27,18 @@
                 <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
-        <Label layoutX="349.0" layoutY="21.0" text="All Jobs">
+        <Label layoutX="549.0" layoutY="14.0" text="All Jobs" textFill="#fffefe">
             <font>
                 <Font size="31.0" />
             </font>
         </Label>
-        <TableView layoutX="14.0" layoutY="68.0" prefHeight="364.0" prefWidth="584.0">
+        <TableView layoutX="14.0" layoutY="68.0" prefHeight="451.0" prefWidth="1009.0">
             <columns>
                 <TableColumn prefWidth="75.0" text="C1" />
                 <TableColumn prefWidth="75.0" text="C2" />
             </columns>
         </TableView>
-        <HBox alignment="CENTER" layoutX="153.0" layoutY="440.0" prefHeight="46.0" prefWidth="495.0">
+        <HBox alignment="CENTER" layoutX="353.0" layoutY="529.0" prefHeight="46.0" prefWidth="495.0">
             <children>
                 <JFXButton onAction="#changeToViewJobs" prefHeight="38.0" prefWidth="108.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View/Edit Job">
                     <HBox.margin>
@@ -57,7 +59,12 @@
                 </JFXButton>
             </children>
         </HBox>
-        <JFXCheckBox layoutX="630.0" layoutY="224.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" />
-        <JFXCheckBox layoutX="630.0" layoutY="250.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" />
+        <JFXCheckBox layoutX="1044.0" layoutY="252.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
+        <JFXCheckBox layoutX="1044.0" layoutY="281.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="WHITE" />
+      <Label layoutX="1088.0" layoutY="206.0" text="Filters" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>
