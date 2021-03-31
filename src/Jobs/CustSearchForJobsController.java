@@ -11,22 +11,21 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CustSearchForJobsController {
+
+
+
     @FXML
-    private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
+    private void changeToDash(ActionEvent actionEvent) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("AllJob.fxml"));
         Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);
         window.show();
     }
 
     @FXML
     private void custSearch(ActionEvent actionEvent) throws IOException {
-//Needs to be done
-
-
-
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("SearchReturn.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustSearchReturn.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);

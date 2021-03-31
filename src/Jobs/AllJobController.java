@@ -26,7 +26,7 @@ public class AllJobController {
 
 
 
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("JobCreateEdit.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("AllJobCreateEdit.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(newScene);

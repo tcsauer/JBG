@@ -22,7 +22,7 @@ public class dashboardController {
     }
 
     @FXML
-    private void changeToJobs(ActionEvent event) throws IOException {
+    private void changeToCust(ActionEvent event) throws IOException {
         Parent SceneParent = FXMLLoader.load(getClass().getResource("/Cust/CustJobsMain.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -31,7 +31,7 @@ public class dashboardController {
     }
 
     @FXML
-    private void changeToCust(ActionEvent event) throws IOException {
+    private void changeToJobs(ActionEvent event) throws IOException {
         Parent SceneParent = FXMLLoader.load(getClass().getResource("/Jobs/AllJob.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
