@@ -1,16 +1,24 @@
 package Cust;
 
+import Dashboard.DatabaseConnection;
+import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Statement;
 
-public class CustJobsMainController {
+public class CustJobsMainController extends DatabaseConnection {
+
+    @FXML
+    public JFXTextField firstNameBox, lastNameBox, phoneBox, emailBox, streetAddressBox, stateBox, cityBox, zipBox;
+
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
         Parent SceneParent = FXMLLoader.load(getClass().getResource("/Dashboard/dashboard.fxml"));
@@ -40,7 +48,21 @@ public class CustJobsMainController {
 
     @FXML
     private void saveForm(ActionEvent actionEvent) {
-//Needs to be done
+        try {
+            Statement sqlInsert = ConnectToDatabase();
+            sqlInsert.execute("INSERT INTO Customer(cust_fname, cust_lname, cust_phone, cust_email, cust_street, cust_city, cust_state, cust_zip) Values ('" + firstNameBox.getText() + "','" + lastNameBox.getText() + "','" + phoneBox.getText() + "','" + emailBox.getText() + "','" + streetAddressBox.getText() + "','" + cityBox.getText() + "','" + stateBox.getText() + "','" + zipBox.getText() + "')");
+            disconnectFromDB(sqlInsert);
+         }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        firstNameBox.clear();
+        lastNameBox.clear();
+        phoneBox.clear();
+        emailBox.clear();
+        streetAddressBox.clear();
+        stateBox.clear();
+        cityBox.clear();
+        zipBox.clear();
     }
 
     @FXML
