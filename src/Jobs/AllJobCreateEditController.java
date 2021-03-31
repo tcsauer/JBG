@@ -1,6 +1,7 @@
 package Jobs;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class AllJobCreateEditController {
     @FXML
@@ -20,6 +26,9 @@ public class AllJobCreateEditController {
 
     @FXML
     private Button browseBtn;
+
+    @FXML
+    private ImageView sketchView;
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
@@ -49,9 +58,12 @@ public class AllJobCreateEditController {
         );
         File selectedFile = fc.showOpenDialog(null);
 
-        if(selectedFile != null) {
+        try {
+            BufferedImage bufferedImage = ImageIO.read(selectedFile);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            sketchView.setImage(image);
             System.out.println(selectedFile.getName());
-        }else {
+        } catch (IOException ex) {
             System.out.println("File is not valid");
         }
     }

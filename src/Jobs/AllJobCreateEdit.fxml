@@ -93,7 +93,7 @@
         </Label>
         <AnchorPane layoutX="518.0" layoutY="134.0" prefHeight="231.0" prefWidth="245.0" style="-fx-background-color: #dedede;">
             <children>
-                <ImageView fitHeight="232.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="sketchView" fitHeight="232.0" fitWidth="245.0" pickOnBounds="true" preserveRatio="true" />
             </children>
         </AnchorPane>
         <Button fx:id="browseBtn" onAction="#BrowseFile" layoutX="703.0" layoutY="393.0" mnemonicParsing="false" text="Browse" />
