@@ -7,13 +7,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 public class AllJobCreateEditController {
     @FXML
-    private JFXButton printBtn;
+    private JFXButton deleteBtn;
+
+    @FXML
+    private Button browseBtn;
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
@@ -31,6 +37,22 @@ public class AllJobCreateEditController {
     }
 
     @FXML
-    private void DeletetJob(ActionEvent actionEvent) {
+    private void DeleteJob(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void BrowseFile(ActionEvent actionEvent){
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
+        );
+        File selectedFile = fc.showOpenDialog(null);
+
+        if(selectedFile != null) {
+            System.out.println(selectedFile.getName());
+        }else {
+            System.out.println("File is not valid");
+        }
     }
 }
