@@ -41,7 +41,7 @@
       <HBox layoutX="284.0" layoutY="262.0">
          <children>
             <Label prefHeight="38.0" prefWidth="130.0" text="MySQL Database Address" textAlignment="CENTER" textFill="WHITE" wrapText="true" />
-            <JFXTextField fx:id="textBoxURL" labelFloat="true" prefHeight="33.0" prefWidth="518.0" promptText="Can be local or remote" style="-fx-prompt-text-fill: #ffffff;" text="Address">
+            <JFXTextField fx:id="textBoxURL" labelFloat="true" prefHeight="33.0" prefWidth="518.0" promptText="Can be local or remote" style="-fx-prompt-text-fill: #ffffff; -fx-text-fill: #ffffff;" text="Address">
                <HBox.margin>
                   <Insets />
                </HBox.margin>

@@ -1,5 +1,6 @@
 package Jobs;
 
+import Dashboard.DatabaseConnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -8,6 +9,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,9 +23,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class AllJobCreateEditController {
+public class AllJobCreateEditController extends DatabaseConnection implements Initializable {
     @FXML
     private JFXButton deleteBtn;
 
@@ -33,11 +37,11 @@ public class AllJobCreateEditController {
     @FXML
     private ImageView sketchView;
     @FXML
-    private JFXComboBox jobType;
+    private JFXComboBox<String> jobType;
     @FXML
-    private JFXComboBox paymentType;
+    private JFXComboBox<String> paymentType;
     @FXML
-    private JFXComboBox jobStatus;
+    private JFXComboBox<String> jobStatus;
     @FXML
     private JFXTextField cost;
     @FXML
@@ -47,6 +51,28 @@ public class AllJobCreateEditController {
     @FXML
     private JFXTextField filePath;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        jobType.getItems().addAll(
+                "Drapes",
+                "Window Treatment",
+                "Couch",
+                "Chairs(s)"
+        );
+
+        jobType.setEditable(true);
+
+        paymentType.getItems().addAll(
+                "Card",
+                "Cash",
+                "Check"
+        );
+
+        jobStatus.getItems().addAll(
+                "Complete",
+                "Pending"
+        );
+    }
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
         Parent SceneParent = FXMLLoader.load(getClass().getResource("AllJob.fxml"));

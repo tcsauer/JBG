@@ -36,7 +36,7 @@
                 <TableColumn prefWidth="75.0" text="C2" />
             </columns>
         </TableView>
-        <Label layoutX="361.0" layoutY="68.0" text="Avalible Reports" textFill="WHITE">
+        <Label layoutX="361.0" layoutY="68.0" text="Available Reports" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
