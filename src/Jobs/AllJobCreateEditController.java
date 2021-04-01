@@ -24,6 +24,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -84,8 +85,18 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @FXML
     private void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
-//NEEDS TO BE DONE
-
+        try {
+            Statement sqlInsert = ConnectToDatabase();
+            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('" + null + "','" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        jobType.setValue(null);
+        cost.clear();
+        jobStatus.setValue(null);
+        startDate.setValue(null);
+        fDate.setValue(null);
+        paymentType.setValue(null);
     }
 
     @FXML
