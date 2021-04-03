@@ -22,8 +22,12 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -111,14 +115,18 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
         );
         File selectedFile = fc.showOpenDialog(null);
+        String filename = selectedFile.getAbsolutePath();
+        filePath.setText(filename);
 
         try {
             BufferedImage bufferedImage = ImageIO.read(selectedFile);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             sketchView.setImage(image);
-            System.out.println(selectedFile.getName());
-        } catch (IOException ex) {
-            System.out.println("File is not valid");
+            Statement sqlInsert = ConnectToDatabase();
+            InputStream inputS = new FileInputStream(new File(filename));
+            sqlInsert.execute("UPDATE Job " + "SET job_sketch = ('" + inputS + "') ORDER BY job_id DESC LIMIT 1");
+        } catch (IOException | SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }
