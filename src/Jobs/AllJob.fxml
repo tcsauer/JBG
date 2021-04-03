@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="200.0" layoutX="1032.0" layoutY="194.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
         <Group layoutX="1132.0" layoutY="6.0">
@@ -32,10 +32,15 @@
                 <Font size="31.0" />
             </font>
         </Label>
-        <TableView layoutX="14.0" layoutY="68.0" prefHeight="451.0" prefWidth="1009.0">
+        <TableView fx:id="AllJobsTable" layoutX="14.0" layoutY="68.0" prefHeight="451.0" prefWidth="1009.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="col_sketch" prefWidth="350.0" text="Job Sketch" />
+                <TableColumn fx:id="col_type" prefWidth="100.0" text="Job Type" />
+            <TableColumn fx:id="col_cost" prefWidth="100.0" text="Job Cost" />
+            <TableColumn fx:id="col_status" prefWidth="100.0" text="Job Status" />
+            <TableColumn fx:id="col_dateStart" prefWidth="108.0" text="Date Start" />
+            <TableColumn fx:id="col_dateComplete" prefWidth="130.0" text="Date Complete" />
+            <TableColumn fx:id="col_payment" prefWidth="130.0" text="Payment Type" />
             </columns>
         </TableView>
         <HBox alignment="CENTER" layoutX="353.0" layoutY="529.0" prefHeight="46.0" prefWidth="495.0">
