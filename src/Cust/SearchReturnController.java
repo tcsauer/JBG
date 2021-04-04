@@ -12,12 +12,13 @@ import java.io.IOException;
 
 public class SearchReturnController {
     @FXML
-    private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustSearch.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+    private void changeToDash(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustSearch.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -26,11 +27,11 @@ public class SearchReturnController {
 
 
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustEdit.fxml"));
+        Parent root = loader.load();
 
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustEdit.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

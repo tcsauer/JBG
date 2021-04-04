@@ -21,29 +21,34 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Dashboard/dashboard.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard/dashboard.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
     private void changeToActiveJob(ActionEvent actionEvent) throws IOException {
-        Parent newParent = FXMLLoader.load(getClass().getResource("../Jobs/ActiveJob.fxml"));
-        Scene newScene = new Scene(newParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/ActiveJob.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+
     }
 
     @FXML
     private void changeToCustSearch(ActionEvent actionEvent) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustSearch.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustSearch.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
@@ -67,12 +72,13 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
-        saveForm(actionEvent);
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+
 
     }
 }
