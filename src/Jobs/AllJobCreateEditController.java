@@ -22,8 +22,12 @@ import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -38,11 +42,11 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     @FXML
     private ImageView sketchView;
     @FXML
-    private JFXComboBox<String> jobType;
+    private JFXComboBox jobType;
     @FXML
-    private JFXComboBox<String> paymentType;
+    private JFXComboBox paymentType;
     @FXML
-    private JFXComboBox<String> jobStatus;
+    private JFXComboBox jobStatus;
     @FXML
     private JFXTextField cost;
     @FXML
@@ -88,7 +92,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     private void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
         try {
             Statement sqlInsert = ConnectToDatabase();
-            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('" + null + "','" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+            disconnectFromDB(sqlInsert);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
@@ -102,6 +107,20 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @FXML
     private void DeleteJob(ActionEvent actionEvent) {
+        try {
+            Statement sqlDelete = ConnectToDatabase();
+            sqlDelete.execute("DELETE FROM Customer ORDER BY customer_id DESC LIMIT 1");
+            disconnectFromDB(sqlDelete);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        deleteBtn.setDisable(true);
+        jobType.setValue(null);
+        cost.clear();
+        jobStatus.setValue(null);
+        startDate.setValue(null);
+        fDate.setValue(null);
+        paymentType.setValue(null);
     }
 
     @FXML
@@ -112,14 +131,19 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
         );
         File selectedFile = fc.showOpenDialog(null);
+        String filename = selectedFile.getAbsolutePath();
+        filePath.setText(filename);
 
         try {
             BufferedImage bufferedImage = ImageIO.read(selectedFile);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             sketchView.setImage(image);
-            System.out.println(selectedFile.getName());
-        } catch (IOException ex) {
-            System.out.println("File is not valid");
+            Statement sqlInsert = ConnectToDatabase();
+            InputStream inputS = new FileInputStream(new File(filename));
+            sqlInsert.execute("UPDATE Job " + "SET job_sketch = ('" + inputS + "') ORDER BY job_id DESC LIMIT 1");
+            disconnectFromDB(sqlInsert);
+        } catch (IOException | SQLException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }
