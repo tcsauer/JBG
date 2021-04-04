@@ -21,12 +21,38 @@ public class reportController {
     }
 
     @FXML
-    private void printReport(ActionEvent actionEvent) {
-//Needs to be Started
+    private void customerInfo(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Reports/CustomerReport.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
     }
 
     @FXML
-    private void ExportReport(ActionEvent actionEvent) {
-//Needs to be started
+    private void pastJobs(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Reports/pastJobs.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+
+    @FXML
+    private void unpaidJobs(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Reports/unpaidJobs.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
+    }
+
+    @FXML
+    private void badMonth(ActionEvent event) throws IOException {
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Reports/badMonth.fxml"));
+        Scene newScene = new Scene(SceneParent);
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newScene);
+        window.show();
     }
 }
