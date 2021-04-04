@@ -55,7 +55,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
                 jobList.add(new Jobs(rs.getString("job_sketch"),rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
             }disconnectFromDB(con);
         } catch (Exception ex) {
-            Logger.getLogger(quickInvoiceController.class.getName()).log(Level.SEVERE,null,ex);
+            Logger.getLogger(AllJobController.class.getName()).log(Level.SEVERE,null,ex);
         }
         col_sketch.setCellValueFactory(new PropertyValueFactory<>("jobSketch"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
