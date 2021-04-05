@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="backup_scenes.CustSearchAndReturnController">
+    <children>
+        <Group layoutX="1132.0">
+            <children>
+                <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/exit.png" />
+                    </image>
+                </ImageView>
+                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
+            </children>
+        </Group>
+        <Label layoutX="441.0" layoutY="15.0" text="Customer Search Return" textFill="WHITE">
+            <font>
+                <Font size="31.0" />
+            </font>
+        </Label>
+        <TableView layoutX="17.0" layoutY="296.0" prefHeight="231.0" prefWidth="1163.0">
+            <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+            </columns>
+        </TableView>
+        <JFXComboBox fx:id="searchBy" labelFloat="true" layoutX="272.0" layoutY="162.0" prefHeight="27.0" prefWidth="156.0" promptText="Search By" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" />
+        <JFXTextField fx:id="textField" labelFloat="true" layoutX="567.0" layoutY="162.0" prefHeight="27.0" prefWidth="358.0" style="-fx-text-fill: #ffffff;" text="Enter String" unFocusColor="WHITE" />
+        <JFXButton layoutX="464.0" layoutY="155.0" onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </JFXButton>
+        <JFXButton layoutX="543.0" layoutY="548.0" onAction="#viewCstProfile" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294; -fx-prompt-text-fill: #ffffff;" text="Create Job">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </JFXButton>
+      <Label layoutX="571.0" layoutY="255.0" text="Results" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

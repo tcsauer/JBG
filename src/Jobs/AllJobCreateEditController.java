@@ -79,12 +79,13 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         );
     }
     @FXML
-    private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("AllJob.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+    private void changeToDash(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJob.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
