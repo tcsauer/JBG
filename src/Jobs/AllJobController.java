@@ -5,6 +5,7 @@ import Dashboard.DatabaseConnection;
 import QuickInvoice.quickInvoiceController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,12 +13,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -30,7 +36,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     @FXML
     private TableView<Jobs> AllJobsTable;
     @FXML
-    private TableColumn<Jobs,String> col_sketch;
+    public TableColumn<Jobs,byte[]> col_sketch;
     @FXML
     private TableColumn<Jobs,String> col_type;
     @FXML
@@ -51,13 +57,50 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         try {
             Statement con = ConnectToDatabase();
             ResultSet rs = con.executeQuery("SELECT job_sketch, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job");
+
             while(rs.next()){
-                jobList.add(new Jobs(rs.getString("job_sketch"),rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
+                InputStream in = rs.getBinaryStream("job_sketch");
+                /*
+                OutputStream os = new FileOutputStream(new File("photo.jpg"));
+                byte[] content = new byte[1024];
+                int size = 0;
+                while((size = in.read(content)) != -1){
+                    os.write(content, 0,size);
+                }
+                os.close();
+                in.close();
+
+                Image image = new Image("file:photo.jpg",100,150,true,true);
+                ImageView imageView1 = new ImageView(image);
+                imageView1.setFitWidth(100);
+                imageView1.setFitHeight(150);
+                imageView1.setPreserveRatio(true);
+                //Image image = new Image(in);
+                */
+                jobList.add(new Jobs(rs.getBytes("job_sketch"),rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
             }disconnectFromDB(con);
         } catch (Exception ex) {
             Logger.getLogger(AllJobController.class.getName()).log(Level.SEVERE,null,ex);
+            //System.out.println(ex.getMessage());
         }
         col_sketch.setCellValueFactory(new PropertyValueFactory<>("jobSketch"));
+        /*col_sketch.setCellFactory(param -> new TableCell<Jobs, byte[]>() {
+
+            private ImageView imageView = new ImageView();
+
+            @Override
+            protected void updateItem(byte[] item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(getImageFromBytes(item));
+                    setGraphic(imageView);
+                }
+                this.setItem(item);
+            }
+        });*/
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("jobCost"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("jobStatus"));
@@ -66,6 +109,17 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         col_payment.setCellValueFactory(new PropertyValueFactory<>("paymentType"));
 
         AllJobsTable.setItems(jobList);
+    }
+
+    private Image getImageFromBytes(byte[] imgBytes) {
+        try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(imgBytes);
+            BufferedImage bufferedImage = ImageIO.read(inputStream);
+            return SwingFXUtils.toFXImage(bufferedImage, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @FXML
