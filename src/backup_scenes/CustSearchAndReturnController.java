@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -51,6 +52,8 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     private JFXTextField textField;
 
     ObservableList<SaveCust> custList = FXCollections.observableArrayList();
+    @FXML
+    private Label errorLab;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -114,7 +117,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
             stage.setScene(new Scene(root));
             stage.show();
         }else{
-            System.out.println("Cant do that.");
+            errorLab.setVisible(true);
         }
     }
 
