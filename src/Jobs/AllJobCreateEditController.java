@@ -1,5 +1,6 @@
 package Jobs;
 
+import Cust.CustJobsMainController;
 import Dashboard.DatabaseConnection;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -82,7 +83,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     private void changeToDash(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJob.fxml"));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

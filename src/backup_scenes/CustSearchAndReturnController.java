@@ -1,10 +1,12 @@
 package backup_scenes;
 
+import Cust.CustJobsMainController;
 import Cust.CustSearchController;
 import Cust.SaveCust;
 import Dashboard.DatabaseConnection;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -47,19 +50,16 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     @FXML
     private JFXTextField textField;
 
-    private CustSearchController search;
-
     ObservableList<SaveCust> custList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Statement con = ConnectToDatabase();
-            //LIKE '%'"+CustSearchController.textField.getText()+"'%'"
-            ResultSet rs = con.executeQuery("SELECT cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer");
-            //ResultSet rs = con.executeQuery("SELECT cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer WHERE CONCAT (cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip) LIKE '%"+CustSearchController.textField.getText()+"%'");
+            ResultSet rs = con.executeQuery("SELECT customer_id, cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer");
             while(rs.next()){
-                custList.add(new SaveCust(rs.getString("cust_fname"),
+                custList.add(new SaveCust(rs.getInt("customer_id"),
+                        rs.getString("cust_fname"),
                         rs.getString("cust_lname"),
                         rs.getString("cust_phone"),
                         rs.getString("cust_email"),
@@ -70,7 +70,6 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
             }disconnectFromDB(con);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
-            //Logger.getLogger(SearchReturnController.class.getName()).log(Level.SEVERE,null,ex);
         }
         col_firstName.setCellValueFactory(new PropertyValueFactory<>("custFirstName"));
         col_lastName.setCellValueFactory(new PropertyValueFactory<>("custLastName"));
@@ -83,28 +82,40 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
 
         searchTable.setItems(custList);
 
+
+        searchTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        searchTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<SaveCust>() {
+            @Override
+            public void onChanged(Change<? extends SaveCust> c) {
+                for(SaveCust s: c.getList()){
+                    System.out.println(s.getCustID());
+                }
+            }
+        });
+
     }
 
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustSearchForJobs.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustJobsMain.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
     }
 
     @FXML
     private void viewCstProfile(ActionEvent actionEvent) throws IOException {
-
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJobCreateEdit.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        if(searchTable.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }else{
+            System.out.println("Cant do that.");
+        }
     }
 
     @FXML
@@ -112,11 +123,10 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         try {
             searchTable.getItems().clear();
             Statement con = ConnectToDatabase();
-            //LIKE '%'"+CustSearchController.textField.getText()+"'%'"
-            ResultSet rs = con.executeQuery("SELECT cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer WHERE CONCAT (cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip) LIKE '%"+textField.getText()+"%'");
-            //ResultSet rs = con.executeQuery("SELECT cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer WHERE CONCAT (cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip) LIKE '%"+CustSearchController.textField.getText()+"%'");
+            ResultSet rs = con.executeQuery("SELECT customer_id, cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer WHERE CONCAT (cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip) LIKE '%"+textField.getText()+"%'");
             while(rs.next()){
-                custList.add(new SaveCust(rs.getString("cust_fname"),
+                custList.add(new SaveCust(rs.getInt("customer_id"),
+                        rs.getString("cust_fname"),
                         rs.getString("cust_lname"),
                         rs.getString("cust_phone"),
                         rs.getString("cust_email"),
@@ -127,7 +137,6 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
             }disconnectFromDB(con);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
-            //Logger.getLogger(SearchReturnController.class.getName()).log(Level.SEVERE,null,ex);
         }
         col_firstName.setCellValueFactory(new PropertyValueFactory<>("custFirstName"));
         col_lastName.setCellValueFactory(new PropertyValueFactory<>("custLastName"));

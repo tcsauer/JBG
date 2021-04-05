@@ -53,6 +53,7 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void saveForm(ActionEvent actionEvent) {
+
         try {
             Statement sqlInsert = ConnectToDatabase();
             sqlInsert.execute("INSERT INTO Customer(cust_fname, cust_lname, cust_phone, cust_email, cust_street, cust_city, cust_state, cust_zip) Values ('" + firstNameBox.getText() + "','" + lastNameBox.getText() + "','" + phoneBox.getText() + "','" + emailBox.getText() + "','" + streetAddressBox.getText() + "','" + cityBox.getText() + "','" + stateBox.getText() + "','" + zipBox.getText() + "')");
