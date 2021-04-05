@@ -155,7 +155,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     @FXML
     private void newJob(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustSearchForJobs.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../backup_scenes/custSearchAndReturn.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

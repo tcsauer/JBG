@@ -43,7 +43,7 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void changeToCustSearch(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustSearch.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../backup_scenes/custSearchAndReturn.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
