@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="backup_scenes.CustSearchAndReturnController">
+    <children>
+        <Group layoutX="1132.0">
+            <children>
+                <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../assets/exit.png" />
+                    </image>
+                </ImageView>
+                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
+            </children>
+        </Group>
+        <Label layoutX="441.0" layoutY="15.0" text="Customer Search Return" textFill="WHITE">
+            <font>
+                <Font size="31.0" />
+            </font>
+        </Label>
+        <TableView fx:id="searchTable" layoutX="17.0" layoutY="245.0" prefHeight="254.0" prefWidth="1163.0">
+            <columns>
+                <TableColumn fx:id="col_firstName" prefWidth="145.0" text="First Name" />
+                <TableColumn fx:id="col_lastName" prefWidth="145.0" text="Last Name" />
+            <TableColumn fx:id="col_phone" prefWidth="145.0" text="Phone" />
+            <TableColumn fx:id="col_email" prefWidth="145.0" text="Email" />
+            <TableColumn fx:id="col_street" prefWidth="145.0" text="Street" />
+            <TableColumn fx:id="col_city" prefWidth="145.0" text="City" />
+            <TableColumn fx:id="col_state" prefWidth="145.0" text="State" />
+            <TableColumn fx:id="col_zip" prefWidth="145.0" text="Zip" />
+            </columns>
+        </TableView>
+        <JFXTextField fx:id="textField" labelFloat="true" layoutX="420.0" layoutY="149.0" prefHeight="27.0" prefWidth="358.0" promptText="Enter String" style="-fx-text-fill: #ffffff; -fx-text-prompt-fill: #ffffff;" styleClass="-fx-text-prompt-fill" unFocusColor="WHITE" />
+        <JFXButton layoutX="795.0" layoutY="142.0" onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search">
+            <font>
+                <Font size="15.0" />
+            </font>
+        </JFXButton>
+        <JFXButton layoutX="543.0" layoutY="548.0" onAction="#viewCstProfile" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294; -fx-prompt-text-fill: #ffffff;" text="Create Job">
+            <font>
+                <Font size="19.0" />
+            </font>
+        </JFXButton>
+      <Label layoutX="572.0" layoutY="218.0" text="Results" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="errorLab" layoutX="515.0" layoutY="518.0" text="Please Select a Customer" textFill="RED" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>

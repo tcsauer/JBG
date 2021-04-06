@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cust.SearchReturnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@../assets/white.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cust.SearchReturnController">
     <children>
         <Group layoutX="1132.0">
             <children>
@@ -27,10 +27,16 @@
             <Font size="31.0" />
          </font>
       </Label>
-      <TableView layoutX="17.0" layoutY="68.0" prefHeight="459.0" prefWidth="1162.0">
+      <TableView fx:id="searchTable" layoutX="17.0" layoutY="68.0" prefHeight="459.0" prefWidth="1162.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="col_firstName" prefWidth="145.0" text="First Name" />
+          <TableColumn fx:id="col_lastName" prefWidth="145.0" text="Last Name" />
+            <TableColumn fx:id="col_phone" prefWidth="145.0" text="Phone" />
+            <TableColumn fx:id="col_email" prefWidth="145.0" text="Email" />
+            <TableColumn fx:id="col_street" prefWidth="145.0" text="Street" />
+            <TableColumn fx:id="col_city" prefWidth="145.0" text="City" />
+            <TableColumn fx:id="col_state" prefWidth="145.0" text="State" />
+            <TableColumn fx:id="col_zip" prefWidth="145.0" text="Zip" />
         </columns>
       </TableView>
       <JFXButton layoutX="540.0" layoutY="542.0" onAction="#viewCstProfile" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View Profile">

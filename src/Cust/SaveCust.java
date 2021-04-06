@@ -2,6 +2,7 @@ package Cust;
 
 public class SaveCust {
 
+    private int custID;
     private String custFirstName;
     private String custLastName;
     private String custPhone;
@@ -10,6 +11,18 @@ public class SaveCust {
     private String custState;
     private String custCity;
     private String custZip;
+
+    public SaveCust(int custID, String custFirstName, String custLastName, String custPhone, String custEmail, String custStreetAddress, String custState, String custCity, String custZip) {
+        this.custID = custID;
+        this.custFirstName = custFirstName;
+        this.custLastName = custLastName;
+        this.custPhone = custPhone;
+        this.custEmail = custEmail;
+        this.custStreetAddress = custStreetAddress;
+        this.custState = custState;
+        this.custCity = custCity;
+        this.custZip = custZip;
+    }
 
     public SaveCust(String custFirstName, String custLastName, String custPhone, String custEmail, String custStreetAddress, String custState, String custCity, String custZip) {
         this.custFirstName = custFirstName;
@@ -22,6 +35,8 @@ public class SaveCust {
         this.custZip = custZip;
     }
 
+    public int getCustID(){return custID;}
+    public void setCustID(int custID){this.custID = custID;}
     public String getCustFirstName() {return custFirstName;}
     public void setCustFirstName(String custFirstName){this.custFirstName = custFirstName;}
     public String getCustLastName() {return custLastName;}

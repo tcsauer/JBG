@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cust.CustSearchController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@../assets/white.css" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cust.CustSearchController">
     <children>
         <Group layoutX="1132.0">
             <children>
@@ -38,8 +38,7 @@
             <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXComboBox fx:id="searchBy" prefHeight="27.0" prefWidth="156.0" promptText="Search By" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" GridPane.rowIndex="1" />
-            <JFXTextField fx:id="textField" labelFloat="true" style="-fx-prompt-text-fill: #ffffff;" text="Enter String" unFocusColor="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <JFXTextField fx:id="textField" labelFloat="true" promptText="Enter String" style="-fx-prompt-text-fill: white;-fx-text-fill: white;" unFocusColor="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <JFXButton onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font size="15.0" />
@@ -47,7 +46,7 @@
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="486.0" layoutY="15.0" prefHeight="38.0" prefWidth="229.0" text="Customer Search" textFill="WHITE">
+      <Label layoutX="486.0" layoutY="15.0" prefHeight="38.0" prefWidth="300.0" text="Customer Search" textFill="WHITE">
          <font>
             <Font size="31.0" />
          </font>

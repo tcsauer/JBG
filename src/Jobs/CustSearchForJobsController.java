@@ -22,19 +22,21 @@ public class CustSearchForJobsController {
 
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("AllJob.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJob.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
     private void custSearch(ActionEvent actionEvent) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustSearchReturn.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("CustSearchReturn.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

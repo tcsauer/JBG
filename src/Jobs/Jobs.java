@@ -1,8 +1,12 @@
 package Jobs;
 
+import javafx.scene.image.Image;
+
+import javax.swing.*;
+
 public class Jobs {
 
-    private String jobSketch;
+    private byte[] jobSketch;
     private String jobType;
     private String jobCost;
     private String jobStatus;
@@ -10,8 +14,8 @@ public class Jobs {
     private String dateComplete;
     private String paymentType;
 
-    public Jobs(String jobSketch, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
-        this.jobSketch = new String(jobSketch);
+    public Jobs(byte[] jobSketch, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
+        this.jobSketch = jobSketch;
         this.jobType = new String(jobType);
         this.jobCost = new String(jobCost);
         this.jobStatus = new String(jobStatus);
@@ -20,8 +24,8 @@ public class Jobs {
         this.paymentType = new String(paymentType);
     }
 
-    public String getJobSketch() {return jobSketch;}
-    public void setJobSketch(String jobSketch) {this.jobSketch=jobSketch;}
+    public byte[] getJobSketch() {return jobSketch;}
+    //public void setJobSketch(String jobSketch) {this.jobSketch=jobSketch;}
     public String getJobType() {return jobType;}
     public void setJobType(String jobType) {this.jobType=jobType;}
     public String getJobCost() {return jobCost;}

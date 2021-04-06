@@ -24,6 +24,13 @@ public class settingsController implements Initializable {
     @FXML
     private Label setLab;
 
+
+    //example on receiving data
+    public void test(String T, String V){
+        System.out.println(T);
+        System.out.println(V);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -41,12 +48,13 @@ public class settingsController implements Initializable {
 
 
     @FXML
-    private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("/Dashboard/dashboard.fxml"));
-        Scene newScene = new Scene(SceneParent);
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newScene);
-        window.show();
+    private void changeToDash(ActionEvent actionEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard/dashboard.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
 
     }
 
