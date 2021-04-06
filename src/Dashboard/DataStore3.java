@@ -5,7 +5,6 @@ public class DataStore3 {
     private String firstName;
     private String lastName;
     private String phone;
-    private String id;
     private String type;
     private String cost;
     private String status;
@@ -13,11 +12,10 @@ public class DataStore3 {
 
 
 
-    public DataStore3(String firstName, String lastName, String phone, String id, String type, String cost, String status, String date){
+    public DataStore3(String firstName, String lastName, String phone, String type, String cost, String status, String date){
         this.firstName = new String(firstName);
         this.lastName = new String(lastName);
         this.phone = new String(phone);
-        this.id = new String(id);
         this.type = new String(type);
         this.cost = new String(cost);
         this.status = new String(status);
@@ -32,9 +30,6 @@ public class DataStore3 {
 
     public String getPhone() {return phone;}
     public void setPhone(String phone) {this.phone=phone;}
-
-    public String getId() {return id;}
-    public void setId(String id) {this.id=id;}
 
     public String getType() {return type;}
     public void setType(String type) {this.type=type;}

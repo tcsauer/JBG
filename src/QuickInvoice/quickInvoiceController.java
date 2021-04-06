@@ -52,6 +52,7 @@ public class quickInvoiceController extends DatabaseConnection implements Initia
         } catch (Exception ex) {
             Logger.getLogger(quickInvoiceController.class.getName()).log(Level.SEVERE,null,ex);
         }
+
         col_sketch.setCellValueFactory(new PropertyValueFactory<>("jobSketch"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("jobCost"));
@@ -59,6 +60,7 @@ public class quickInvoiceController extends DatabaseConnection implements Initia
         col_dateStart.setCellValueFactory(new PropertyValueFactory<>("dateStart"));
 
         activeTable.setItems(activeList);
+
     }
 
     @FXML
