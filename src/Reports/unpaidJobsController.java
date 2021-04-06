@@ -40,8 +40,6 @@ public class unpaidJobsController extends DatabaseConnection implements Initiali
     @FXML
     private TableColumn<DataStore3, String> col_phone;
     @FXML
-    private TableColumn<DataStore3, String> col_id;
-    @FXML
     private TableColumn<DataStore3, String> col_type;
     @FXML
     private TableColumn<DataStore3, String> col_cost;
@@ -57,9 +55,9 @@ public class unpaidJobsController extends DatabaseConnection implements Initiali
 
         try {
             Statement con = ConnectToDatabase();
-            ResultSet rs = con.executeQuery("SELECT Customer.cust_fname, Customer.cust_lname, Customer.cust_phone, Job.job_id, Job.job_type, Job.job_cost, Job.job_status, Job.date_start FROM Customer JOIN Job ON Job.customer_id = Customer.customer_id WHERE Job.job_status = 'Pending';");
+            ResultSet rs = con.executeQuery("SELECT Customer.cust_fname, Customer.cust_lname, Customer.cust_phone, Job.job_type, Job.job_cost, Job.job_status, Job.date_start FROM Customer JOIN Job ON Job.customer_id = Customer.customer_id WHERE Job.job_status = 'Pending';");
             while (rs.next()) {
-                activeList3.add(new DataStore3(rs.getString("Customer.cust_fname"), rs.getString("Customer.cust_lname"), rs.getString("Customer.cust_phone"), rs.getString("Job.job_id"), rs.getString("Job.job_type"), rs.getString("Job.job_cost"), rs.getString("Job.job_status"), rs.getString("Job.date_start")));
+                activeList3.add(new DataStore3(rs.getString("Customer.cust_fname"), rs.getString("Customer.cust_lname"), rs.getString("Customer.cust_phone"), rs.getString("Job.job_type"), rs.getString("Job.job_cost"), rs.getString("Job.job_status"), rs.getString("Job.date_start")));
             }
             disconnectFromDB(con);
         } catch (Exception ex) {
@@ -69,7 +67,6 @@ public class unpaidJobsController extends DatabaseConnection implements Initiali
         col_fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         col_lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
         col_phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("status"));

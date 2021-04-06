@@ -39,8 +39,6 @@ public class pastJobsController extends DatabaseConnection implements Initializa
     @FXML
     private TableColumn<DataStore5, String> col_lname;
     @FXML
-    private TableColumn<DataStore5, String> col_id;
-    @FXML
     private TableColumn<DataStore5, String> col_type;
     @FXML
     private TableColumn<DataStore5, String> col_cost;
@@ -56,9 +54,9 @@ public class pastJobsController extends DatabaseConnection implements Initializa
 
         try {
             Statement con = ConnectToDatabase();
-            ResultSet rs = con.executeQuery("SELECT Customer.cust_fname, Customer.cust_lname, Job.job_id, Job.job_type, Job.job_cost, Job.job_status, Job.date_complete FROM Customer JOIN Job ON Job.customer_id = Customer.customer_id;");
+            ResultSet rs = con.executeQuery("SELECT Customer.cust_fname, Customer.cust_lname, Job.job_type, Job.job_cost, Job.job_status, Job.date_complete FROM Customer JOIN Job ON Job.customer_id = Customer.customer_id;");
             while (rs.next()) {
-                activeList5.add(new DataStore5(rs.getString("Customer.cust_fname"), rs.getString("Customer.cust_lname"), rs.getString("Job.job_id"), rs.getString("Job.job_type"), rs.getString("Job.job_cost"), rs.getString("Job.job_status"), rs.getString("Job.date_complete")));
+                activeList5.add(new DataStore5(rs.getString("Customer.cust_fname"), rs.getString("Customer.cust_lname"), rs.getString("Job.job_type"), rs.getString("Job.job_cost"), rs.getString("Job.job_status"), rs.getString("Job.date_complete")));
             }
             disconnectFromDB(con);
         } catch (Exception ex) {
@@ -67,7 +65,6 @@ public class pastJobsController extends DatabaseConnection implements Initializa
 
         col_fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
         col_lname.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("type"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("cost"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("status"));

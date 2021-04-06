@@ -36,12 +36,11 @@
             <columns>
                 <TableColumn fx:id="col_fname" prefWidth="175.0" text="First Name" />
                 <TableColumn fx:id="col_lname" prefWidth="175.0" text="Last Name" />
-                <TableColumn fx:id="col_phone" prefWidth="100.0" text="Phone" />
-                <TableColumn fx:id="col_id" prefWidth="190.0" text="Job ID" />
+                <TableColumn fx:id="col_phone" prefWidth="200.0" text="Phone" />
                 <TableColumn fx:id="col_type" prefWidth="200.0" text="Job Type" />
-                <TableColumn fx:id="col_cost" prefWidth="105.0" text="Job Cost" />
-                <TableColumn fx:id="col_status" prefWidth="105.0" text="Job Status" />
-                <TableColumn fx:id="col_date" prefWidth="105.0" text="Start Date" />
+                <TableColumn fx:id="col_cost" prefWidth="145.0" text="Job Cost" />
+                <TableColumn fx:id="col_status" prefWidth="130.0" text="Job Status" />
+                <TableColumn fx:id="col_date" prefWidth="130.0" text="Start Date" />
 
             </columns>
         </TableView>

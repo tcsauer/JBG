@@ -18,6 +18,7 @@ public class DataStore {
 
     public String getJobSketch() {return jobSketch;}
     public void setJobSketch(String jobSketch) {this.jobSketch=jobSketch;}
+
     public String getJobType() {return jobType;}
     public void setJobType(String jobType) {this.jobType=jobType;}
     public String getJobCost() {return jobCost;}

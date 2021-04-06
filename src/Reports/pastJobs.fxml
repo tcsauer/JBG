@@ -38,11 +38,10 @@
             <columns>
                 <TableColumn fx:id="col_fname" prefWidth="185.0" text="First Name" />
                 <TableColumn fx:id="col_lname" prefWidth="185.0" text="Last Name" />
-                <TableColumn fx:id="col_id" prefWidth="90.0" text="Job ID" />
                 <TableColumn fx:id="col_type" prefWidth="200.0" text="Job Type" />
-                <TableColumn fx:id="col_cost" prefWidth="140.0" text="Job Cost" />
-                <TableColumn fx:id="col_status" prefWidth="135.0" text="Job Status" />
-                <TableColumn fx:id="col_date" prefWidth="140.0" text="Date Completed" />
+                <TableColumn fx:id="col_cost" prefWidth="164.0" text="Job Cost" />
+                <TableColumn fx:id="col_status" prefWidth="164.0" text="Job Status" />
+                <TableColumn fx:id="col_date" prefWidth="164.0" text="Date Completed" />
             </columns>
         </TableView>
         <Label  layoutX="411.0" layoutY="129.0" text="Search Customer Name: " textFill="WHITE">
