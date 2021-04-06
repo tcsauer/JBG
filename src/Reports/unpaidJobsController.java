@@ -63,7 +63,7 @@ public class unpaidJobsController extends DatabaseConnection implements Initiali
             }
             disconnectFromDB(con);
         } catch (Exception ex) {
-            Logger.getLogger(CustomerReportController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(unpaidJobsController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         col_fname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
