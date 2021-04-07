@@ -22,14 +22,9 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -58,6 +53,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     @FXML
     private JFXTextField filePath;
 
+    int prevJobID;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jobType.getItems().addAll(
@@ -81,6 +78,10 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 "Pending"
         );
         jobStatus.setEditable(true);
+    }
+    public void getPreviousVariables(int j){
+        prevJobID =j;
+
     }
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
@@ -141,6 +142,26 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         filePath.setText(filename);
 
         try {
+//            String URL;
+//            FileReader reader = new FileReader("./preferences/URL.txt");
+//            BufferedReader bufferedReader = new BufferedReader(reader);
+//            URL = bufferedReader.readLine();
+//            reader.close();
+//
+//            Class.forName("com.mysql.cj.jdbc.Driver");
+//            Connection conn = DriverManager
+//                    .getConnection(URL, "texstar", "all4gibbs");
+//
+//            String INSERT_PICTURE = "UPDATE Job " + "SET job_sketch = (?) ORDER BY job_id DESC LIMIT 1";
+//
+//            conn.setAutoCommit(false);
+//            File file = new File(filename);
+//            try (FileInputStream fis = new FileInputStream(file);
+//                 PreparedStatement ps = conn.prepareStatement(INSERT_PICTURE)) {
+//                ps.setBinaryStream(1, fis, (int) file.length());
+//                ps.executeUpdate();
+//                conn.commit();
+//                System.out.println("Made it here"); }
             BufferedImage bufferedImage = ImageIO.read(selectedFile);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             sketchView.setImage(image);

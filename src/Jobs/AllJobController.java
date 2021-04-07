@@ -3,6 +3,7 @@ package Jobs;
 import Dashboard.DataStore;
 import Dashboard.DatabaseConnection;
 import QuickInvoice.quickInvoiceController;
+import SysSettings.settingsController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -134,12 +135,13 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     @FXML
     private void changeToViewJobs(ActionEvent actionEvent) throws IOException {
-//Needs to be done
 
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJobCreateEdit.fxml"));
         Parent root = loader.load();
-
+        AllJobCreateEditController scene2Controller = loader.getController();
+//need to put job id in method call
+        scene2Controller.getPreviousVariables(1);
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

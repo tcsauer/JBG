@@ -40,7 +40,7 @@
                   <Font name="Georgia" size="56.0" />
                </font>
             </Text>
-            <Label layoutX="50.0" layoutY="106.0" prefHeight="23.0" prefWidth="250.0" text="Upholstery / Drapery" textFill="WHITE">
+            <Label layoutX="59.0" layoutY="101.0" prefHeight="23.0" prefWidth="157.0" text="Upholstery / Drapery" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -79,12 +79,12 @@
                </font>
             </Label>
             <!--Month revenue -->
-            <Label fx:id="revenue" layoutX="521.0" layoutY="80.0"  textFill="WHITE">
+            <Label fx:id="revenue" layoutX="521.0" layoutY="80.0" textFill="WHITE">
                <font><Font name="Segoe UI Semibold" size="60.0" /></font>
             </Label>
             <!--Date and time -->
 
-            <Label layoutX="75.0" layoutY="80.0" fx:id="date" textFill="WHITE">
+            <Label fx:id="date" layoutX="75.0" layoutY="80.0" textFill="WHITE">
                <font><Font name="Segoe UI Semibold" size="60.0" /></font>
             </Label>
 
