@@ -73,9 +73,9 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
+        //saveForm(actionEvent);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
