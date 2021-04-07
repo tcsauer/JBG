@@ -2,29 +2,61 @@ package Dashboard;
 
 public class DataStore {
 
-    private String jobSketch;
-    private String jobType;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String email;
+    private String street;
+    private String city;
+    private String state;
+    private String zip;
     private String jobCost;
-    private String jobStatus;
-    private String dateStart;
+    private String jobType;
 
-    public DataStore(String jobSketch, String jobType, String jobCost, String jobStatus, String dateStart){
-        this.jobSketch = new String(jobSketch);
-        this.jobType = new String(jobType);
+
+
+
+    public DataStore(String firstName, String lastName, String phone, String email, String street, String city, String state, String zip, String jobCost, String jobType){
+        this.firstName = new String(firstName);
+        this.lastName = new String(lastName);
+        this.phone = new String(phone);
+        this.email = new String(email);
+        this.street = new String(street);
+        this.city = new String(city);
+        this.state = new String(state);
+        this.zip = new String(zip);
         this.jobCost = new String(jobCost);
-        this.jobStatus = new String(jobStatus);
-        this.dateStart = new String(dateStart);
+        this.jobType = new String(jobType);
     }
 
-    public String getJobSketch() {return jobSketch;}
-    public void setJobSketch(String jobSketch) {this.jobSketch=jobSketch;}
+    public String getFirstName() {return firstName;}
+    public void setFirstName(String firstName) {this.firstName=firstName;}
+
+    public String getLastName() {return lastName;}
+    public void setLastName(String lastName) {this.lastName=lastName;}
+
+
+    public String getPhone() {return phone;}
+    public void setPhone(String phone) {this.phone=phone;}
+
+    public String getEmail() {return email;}
+    public void setEmail(String email) {this.email=email;}
+
+    public String getStreet() {return street;}
+    public void setStreet(String street) {this.street=street;}
+
+    public String getCity() {return city;}
+    public void setCity(String city) {this.city=city;}
+
+    public String getState() {return state;}
+    public void setState(String state) {this.state=state;}
+
+    public String getZip() {return zip;}
+    public void setZip(String zip) {this.zip=zip;}
+
+    public String getJobCost() {return jobCost;}
+    public void setJobCost(String jobCost) {this.jobCost=jobCost;}
 
     public String getJobType() {return jobType;}
     public void setJobType(String jobType) {this.jobType=jobType;}
-    public String getJobCost() {return jobCost;}
-    public void setJobCost(String jobCost) {this.jobCost=jobCost;}
-    public String getJobStatus() {return jobStatus;}
-    public void setJobStatus(String jobStatus) {this.jobStatus=jobStatus;}
-    public String getDateStart() {return dateStart;}
-    public void setDateStart(String dateStart) {this.dateStart=dateStart;}
 }
