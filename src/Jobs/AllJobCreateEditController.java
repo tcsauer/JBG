@@ -30,6 +30,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
@@ -92,7 +93,10 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     private void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
         try {
             Statement sqlInsert = ConnectToDatabase();
-            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+            DecimalFormat x = new DecimalFormat("###,###,###.00");
+            double num = Double.parseDouble(cost.getText());
+            System.out.println(x.format(num));
+            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + x.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
             disconnectFromDB(sqlInsert);
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
