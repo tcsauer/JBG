@@ -74,11 +74,13 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 "Cash",
                 "Check"
         );
+        paymentType.setEditable(true);
 
         jobStatus.getItems().addAll(
                 "Complete",
                 "Pending"
         );
+        jobStatus.setEditable(true);
     }
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {

@@ -5,7 +5,7 @@
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com:3306/test</jdbc-url>
+      <jdbc-url>jdbc:mysql://jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com:3306/JBandG</jdbc-url>
     </data-source>
   </component>
 </project>

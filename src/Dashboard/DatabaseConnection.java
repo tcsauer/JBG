@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class DatabaseConnection {
-    //URL not in ./preferences/URL.txt file & updatable through GUI
+    //URL in ./preferences/URL.txt file & updatable through GUI
     String URL;
 
 
