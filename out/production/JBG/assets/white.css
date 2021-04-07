@@ -1,0 +1,29 @@
+.jfx-text-field
+{
+    -jfx-focus-color: white;
+}
+
+.jfx-combo-box
+{
+    -jfx-focus-color: white;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}
+
+.text-field
+{
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}
+
+.text-field .input-line
+{
+    -fx-background-color: white;
+}
+
+.date-picker .text-field {
+    -fx-control-inner-background: white ;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+}
+
