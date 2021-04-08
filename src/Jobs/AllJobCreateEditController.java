@@ -26,10 +26,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -60,12 +57,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     private Object x;
     private boolean y;
-    int JobID;
-
-    public void getJobID (int j){
-        JobID =j;
-        System.out.println(JobID);
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,8 +80,49 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 "Complete",
                 "Pending"
         );
+
+        Connection connection = null;
+
+        try {
+
+            connection = getConnectionPlain();
+            ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job ORDER BY job_id DESC LIMIT 1");
+
+            if (rs.next()) {
+                InputStream is = rs.getBinaryStream("job_sketch");
+
+                // instead of the next 9 lines, you could just do
+                // javafx.scene.image.Image image1 = new Image(is);
+
+                OutputStream os = new FileOutputStream(new File("img.png"));
+                byte[] content = new byte[1024];
+                int size = 0;
+
+
+                while ((size = is.read(content)) != -1) {
+
+                    os.write(content, 0, size);
+                }
+
+                os.close();
+                is.close();
+                File file =new File("img.png");
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+                sketchView.setImage(image1);
+            }
+
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                System.out.println("SQLException Finally: - " + e);
+            }
+        }
     }
-    @FXML
+        @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJob.fxml"));
         Parent root = loader.load();
@@ -146,7 +178,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     private void BrowseFile(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
         );
         File selectedFile = fc.showOpenDialog(null);
@@ -161,6 +192,9 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         FileInputStream inputStream = null;
 
         try {
+            BufferedImage bufferedImage = ImageIO.read(selectedFile);
+            Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+            sketchView.setImage(image1);
             File image = new File(filename);
             inputStream = new FileInputStream(image);
 
@@ -174,6 +208,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             System.out.println("FileNotFoundException: - " + e);
         } catch (SQLException e) {
             System.out.println("SQLException: - " + e);
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
 
             try {

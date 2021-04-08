@@ -15,12 +15,12 @@
    <children>
       <Group layoutX="1126.0" layoutY="4.0">
          <children>
+            <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                <image>
                   <Image url="@../assets/exit.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
          </children>
       </Group>
       <Label layoutX="494.0" layoutY="19.0" text="System Settings" textFill="WHITE">
