@@ -72,10 +72,9 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 "Drapes",
                 "Window Treatment",
                 "Couch",
-                "Chairs(s)"
+                "Chairs(s)",
+                "Custom"
         );
-
-        jobType.setEditable(true);
 
         paymentType.getItems().addAll(
                 "Card",

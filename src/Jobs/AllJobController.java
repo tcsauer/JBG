@@ -121,7 +121,8 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         jobFilter.getItems().addAll("Drapes",
                 "Window Treatment",
                 "Couch",
-                "Chair(s)");
+                "Chair(s)",
+                "Custom");
         paymentFilter.getItems().addAll("Card",
                 "Cash",
                 "Check");
@@ -333,6 +334,12 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             AllJobsTable.setItems(jobItems);
 
             Predicate<Jobs> type1 = i -> i.getJobType().contains("Couch");
+            jobItems.setPredicate(type1);
+        }else if(jobFilter.getValue() == "Custom"){
+            FilteredList<Jobs> jobItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(jobItems);
+
+            Predicate<Jobs> type1 = i -> i.getJobType().contains("Custom");
             jobItems.setPredicate(type1);
         }else{
             FilteredList<Jobs> jobItems = new FilteredList<Jobs>(jobList);
