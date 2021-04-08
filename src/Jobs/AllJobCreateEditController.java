@@ -38,7 +38,7 @@ import java.util.logging.Logger;
 
 public class AllJobCreateEditController extends DatabaseConnection implements Initializable {
     @FXML
-    private JFXButton deleteBtn;
+    private JFXButton deleteBtn, submitBtn;
 
     @FXML
     private Button browseBtn;
@@ -66,6 +66,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        browseBtn.setDisable(true);
+
         jobType.getItems().addAll(
                 "Drapes",
                 "Window Treatment",
@@ -135,28 +137,11 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             fDate.setValue(null);
             paymentType.setValue(null);
         }
+        browseBtn.setDisable(false);
     }
 
     @FXML
-    private void DeleteJob(ActionEvent actionEvent) {
-        try {
-            Statement sqlDelete = ConnectToDatabase();
-            sqlDelete.execute("DELETE FROM Customer ORDER BY customer_id DESC LIMIT 1");
-            disconnectFromDB(sqlDelete);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        deleteBtn.setDisable(true);
-        jobType.setValue(null);
-        cost.clear();
-        jobStatus.setValue(null);
-        startDate.setValue(null);
-        fDate.setValue(null);
-        paymentType.setValue(null);
-    }
-
-    @FXML
-    private void BrowseFile(ActionEvent actionEvent){
+    private void BrowseFile(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg"),

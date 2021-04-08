@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -46,15 +47,17 @@
         <HBox alignment="CENTER" layoutX="353.0" layoutY="529.0" prefHeight="46.0" prefWidth="495.0">
             <children>
             <JFXButton onAction="#newJob" prefHeight="38.0" prefWidth="118.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Create New Job" />
+            <VBox prefHeight="200.0" prefWidth="100.0" />
+            <JFXButton fx:id="deleteBtn" onAction="#deleteJob" layoutX="210.0" layoutY="14.0" prefHeight="38.0" prefWidth="118.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Delete Job" />
             </children>
         </HBox>
-        <JFXCheckBox fx:id="activeFilter" onAction="#filterActive" layoutX="1044.0" layoutY="252.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
+        <JFXCheckBox fx:id="activeFilter" layoutX="1044.0" layoutY="252.0" onAction="#filterActive" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
       <Label layoutX="1088.0" layoutY="206.0" text="Filters" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="jobFilter" onAction="#filterJob" layoutX="1040.0" layoutY="288.0" prefHeight="25.0" prefWidth="118.0" promptText="Job Type" />
-      <JFXComboBox fx:id="paymentFilter" onAction="#filterPayment" layoutX="1040.0" layoutY="338.0" prefHeight="25.0" prefWidth="118.0" promptText="Payment Type" />
+      <JFXComboBox fx:id="jobFilter" layoutX="1040.0" layoutY="288.0" onAction="#filterJob" prefHeight="25.0" prefWidth="118.0" promptText="Job Type" />
+      <JFXComboBox fx:id="paymentFilter" layoutX="1040.0" layoutY="338.0" onAction="#filterPayment" prefHeight="25.0" prefWidth="118.0" promptText="Payment Type" />
     </children>
 </AnchorPane>

@@ -365,4 +365,16 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             paymentItems.setPredicate(type2);
         }
     }
+
+    @FXML
+    private void deleteJob(ActionEvent actionEvent) throws IOException{
+        try {
+            Statement sqlDelete = ConnectToDatabase();
+            sqlDelete.execute("DELETE FROM Job WHERE job_id = '"+AllJobsTable.getSelectionModel().getSelectedItem().getJobID()+"'");
+            disconnectFromDB(sqlDelete);
+            AllJobsTable.getItems().removeAll(AllJobsTable.getSelectionModel().getSelectedItem());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
