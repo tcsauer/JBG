@@ -2,7 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" stylesheets="@../assets/white.css" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" stylesheets="@../assets/white.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="200.0" layoutX="1032.0" layoutY="194.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
         <Group layoutX="1132.0" layoutY="6.0">
@@ -45,31 +45,16 @@
         </TableView>
         <HBox alignment="CENTER" layoutX="353.0" layoutY="529.0" prefHeight="46.0" prefWidth="495.0">
             <children>
-                <JFXButton onAction="#changeToViewJobs" prefHeight="38.0" prefWidth="108.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View/Edit Job">
-                    <HBox.margin>
-                        <Insets right="5.0" />
-                    </HBox.margin>
-                </JFXButton>
             <JFXButton onAction="#newJob" prefHeight="38.0" prefWidth="118.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Create New Job" />
-                <JFXButton onAction="#printJob" prefHeight="38.0" prefWidth="81.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Print Job">
-                    <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-
-                    </HBox.margin>
-                </JFXButton>
-                <JFXButton onAction="#completeJob" prefHeight="38.0" prefWidth="121.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Mark As Complete" wrapText="true">
-                    <HBox.margin>
-                        <Insets />
-                    </HBox.margin>
-                </JFXButton>
             </children>
         </HBox>
-        <JFXCheckBox layoutX="1044.0" layoutY="252.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
-        <JFXCheckBox layoutX="1044.0" layoutY="281.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="WHITE" />
+        <JFXCheckBox fx:id="activeFilter" onAction="#filterActive" layoutX="1044.0" layoutY="252.0" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
       <Label layoutX="1088.0" layoutY="206.0" text="Filters" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
+      <JFXComboBox fx:id="jobFilter" onAction="#filterJob" layoutX="1040.0" layoutY="288.0" prefHeight="25.0" prefWidth="118.0" promptText="Job Type" />
+      <JFXComboBox fx:id="paymentFilter" onAction="#filterPayment" layoutX="1040.0" layoutY="338.0" prefHeight="25.0" prefWidth="118.0" promptText="Payment Type" />
     </children>
 </AnchorPane>

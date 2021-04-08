@@ -4,9 +4,12 @@ import Cust.SaveCust;
 import Dashboard.DataStore;
 import Dashboard.DatabaseConnection;
 import QuickInvoice.quickInvoiceController;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +40,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,6 +62,11 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     private TableColumn<Jobs, String> col_dateComplete;
     @FXML
     private TableColumn<Jobs, String> col_payment;
+    @FXML
+    private JFXComboBox jobFilter, paymentFilter;
+    @FXML
+    private JFXCheckBox activeFilter;
+
 
     ObservableList<Jobs> jobList = FXCollections.observableArrayList();
 
@@ -68,48 +77,12 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             ResultSet rs = con.executeQuery("SELECT job_id, job_sketch, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job");
 
             while(rs.next()){
-                InputStream in = rs.getBinaryStream("job_sketch");
-                /*
-                OutputStream os = new FileOutputStream(new File("photo.jpg"));
-                byte[] content = new byte[1024];
-                int size = 0;
-                while((size = in.read(content)) != -1){
-                    os.write(content, 0,size);
-                }
-                os.close();
-                in.close();
-
-                Image image = new Image("file:photo.jpg",100,150,true,true);
-                ImageView imageView1 = new ImageView(image);
-                imageView1.setFitWidth(100);
-                imageView1.setFitHeight(150);
-                imageView1.setPreserveRatio(true);
-                //Image image = new Image(in);
-                */
                 jobList.add(new Jobs(rs.getInt("job_id"), rs.getBytes("job_sketch"),rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
             }disconnectFromDB(con);
         } catch (Exception ex) {
             Logger.getLogger(AllJobController.class.getName()).log(Level.SEVERE,null,ex);
-            //System.out.println(ex.getMessage());
         }
         col_sketch.setCellValueFactory(new PropertyValueFactory<>("jobSketch"));
-        /*col_sketch.setCellFactory(param -> new TableCell<Jobs, byte[]>() {
-
-            private ImageView imageView = new ImageView();
-
-            @Override
-            protected void updateItem(byte[] item, boolean empty) {
-                super.updateItem(item, empty);
-                if (item == null || empty) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    imageView.setImage(getImageFromBytes(item));
-                    setGraphic(imageView);
-                }
-                this.setItem(item);
-            }
-        });*/
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("jobCost"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("jobStatus"));
@@ -145,19 +118,15 @@ public class AllJobController extends DatabaseConnection implements Initializabl
                 "Check"
         );
         col_payment.setCellFactory(ComboBoxTableCell.forTableColumn(paymentTypeList));
+        jobFilter.getItems().addAll("Drapes",
+                "Window Treatment",
+                "Couch",
+                "Chair(s)");
+        paymentFilter.getItems().addAll("Card",
+                "Cash",
+                "Check");
     }
-/*
-    private Image getImageFromBytes(byte[] imgBytes) {
-        try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(imgBytes);
-            BufferedImage bufferedImage = ImageIO.read(inputStream);
-            return SwingFXUtils.toFXImage(bufferedImage, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-*/
+
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../dashboard/dashboard.fxml"));
@@ -172,7 +141,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     public void changeJobTypeCellEvent(TableColumn.CellEditEvent editedCell) {
         Jobs jobSelected = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
             @Override
             public void onChanged(Change<? extends Jobs> c) {
@@ -184,10 +152,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         int tempID = jobSelected.getJobID();
         jobSelected.setJobType(editedCell.getNewValue().toString());
         String newJobType = jobSelected.getJobType();
-        if (newJobType == null || newJobType.length() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-            //jobSelected.setJobType(editedCell.getOldValue().toString());
-        } else {
             try {
                 Statement sqlUpdate = ConnectToDatabase();
                 sqlUpdate.execute("UPDATE Job SET job_type= '" + newJobType + "' WHERE job_id = '" + tempID + "'");
@@ -196,12 +160,10 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-        }
     }
 
     public void changeJobCostCellEvent(TableColumn.CellEditEvent editedCell) {
         Jobs jobSelected1 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
             @Override
             public void onChanged(Change<? extends Jobs> c) {
@@ -215,7 +177,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         String newJobCost = jobSelected1.getJobCost();
         if (newJobCost == null || newJobCost.length() == 0) {
             JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-            //jobSelected.setJobType(editedCell.getOldValue().toString());
         } else {
             try {
                 Statement sqlUpdate = ConnectToDatabase();
@@ -232,7 +193,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     public void changeJobStatusCellEvent(TableColumn.CellEditEvent editedCell) {
         Jobs jobSelected2 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
             @Override
             public void onChanged(Change<? extends Jobs> c) {
@@ -244,10 +204,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         int tempID = jobSelected2.getJobID();
         jobSelected2.setJobStatus(editedCell.getNewValue().toString());
         String newJobStatus = jobSelected2.getJobStatus();
-        if (newJobStatus == null || newJobStatus.length() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-            //jobSelected.setJobType(editedCell.getOldValue().toString());
-        } else {
             try {
                 Statement sqlUpdate = ConnectToDatabase();
                 sqlUpdate.execute("UPDATE Job SET job_status= '" + newJobStatus + "' WHERE job_id = '" + tempID + "'");
@@ -256,12 +212,10 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-        }
     }
 
     public void changeDateStartCellEvent(TableColumn.CellEditEvent editedCell) {
         Jobs jobSelected3 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
             @Override
             public void onChanged(Change<? extends Jobs> c) {
@@ -275,7 +229,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         String newDateStart = jobSelected3.getDateStart();
         if (newDateStart == null || newDateStart.length() == 0) {
             JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-            //jobSelected.setJobType(editedCell.getOldValue().toString());
         } else {
             try {
                 Statement sqlUpdate = ConnectToDatabase();
@@ -304,7 +257,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         String newDateComplete = jobSelected4.getDateComplete();
         if (newDateComplete == null || newDateComplete.length() == 0) {
             JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-            //jobSelected.setJobType(editedCell.getOldValue().toString());
         } else {
             try {
                 Statement sqlUpdate = ConnectToDatabase();
@@ -319,7 +271,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     public void changePaymentTypeCellEvent(TableColumn.CellEditEvent editedCell) {
         Jobs jobSelected5 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
             @Override
             public void onChanged(Change<? extends Jobs> c) {
@@ -331,10 +282,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         int tempID = jobSelected5.getJobID();
         jobSelected5.setPaymentType(editedCell.getNewValue().toString());
         String newPaymentType = jobSelected5.getPaymentType();
-        if (newPaymentType == null || newPaymentType.length() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-            //jobSelected.setJobType(editedCell.getOldValue().toString());
-        } else {
             try {
                 Statement sqlUpdate = ConnectToDatabase();
                 sqlUpdate.execute("UPDATE Job SET payment_type = '" + newPaymentType + "' WHERE job_id = '" + tempID + "'");
@@ -343,38 +290,79 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
-        }
-    }
-
-
-    @FXML
-    private void changeToViewJobs(ActionEvent actionEvent) throws IOException {
-//Needs to be done
-
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJobCreateEdit.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    @FXML
-    private void printJob(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void completeJob(ActionEvent actionEvent) {
     }
 
     @FXML
     private void newJob(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../backup_scenes/custSearchAndReturn.fxml"));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    @FXML
+    private void filterActive(ActionEvent actionEvent) throws IOException {
+        if(activeFilter.isSelected()) {
+            FilteredList<Jobs> activeItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(activeItems);
+
+            Predicate<Jobs> active = i -> i.getJobStatus().contains("Pending");
+            activeItems.setPredicate(active);
+        }else{
+            AllJobsTable.setItems(jobList);
+        }
+    }
+
+    @FXML
+    private void filterJob(ActionEvent actionEvent) throws IOException {
+        if(jobFilter.getValue() == "Drapes"){
+            FilteredList<Jobs> jobItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(jobItems);
+
+            Predicate<Jobs> type1 = i -> i.getJobType().contains("Drapes");
+            jobItems.setPredicate(type1);
+        }else if(jobFilter.getValue() == "Window Treatment"){
+            FilteredList<Jobs> jobItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(jobItems);
+
+            Predicate<Jobs> type1 = i -> i.getJobType().contains("Window Treatment");
+            jobItems.setPredicate(type1);
+        }else if(jobFilter.getValue() == "Couch"){
+            FilteredList<Jobs> jobItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(jobItems);
+
+            Predicate<Jobs> type1 = i -> i.getJobType().contains("Couch");
+            jobItems.setPredicate(type1);
+        }else{
+            FilteredList<Jobs> jobItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(jobItems);
+
+            Predicate<Jobs> type1 = i -> i.getJobType().contains("Chair(s)");
+            jobItems.setPredicate(type1);
+        }
+    }
+
+    @FXML
+    private void filterPayment(ActionEvent actionEvent) throws IOException{
+        if(paymentFilter.getValue() == "Card"){
+            FilteredList<Jobs> paymentItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(paymentItems);
+
+            Predicate<Jobs> type2 = i -> i.getPaymentType().contains("Card");
+            paymentItems.setPredicate(type2);
+        }else if(paymentFilter.getValue() == "Cash"){
+            FilteredList<Jobs> paymentItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(paymentItems);
+
+            Predicate<Jobs> type2 = i -> i.getPaymentType().contains("Cash");
+            paymentItems.setPredicate(type2);
+        }else{
+            FilteredList<Jobs> paymentItems = new FilteredList<Jobs>(jobList);
+            AllJobsTable.setItems(paymentItems);
+
+            Predicate<Jobs> type2 = i -> i.getPaymentType().contains("Check");
+            paymentItems.setPredicate(type2);
+        }
     }
 }
