@@ -23,12 +23,12 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="458.0" layoutX="723.0" layoutY="81.0" stroke="TRANSPARENT" strokeType="INSIDE" width="443.0" />
         <Group layoutX="1132.0">
             <children>
+                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
                         <Image url="@../assets/exit.png" />
                     </image>
                 </ImageView>
-                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
         <GridPane layoutX="58.0" layoutY="81.0" prefHeight="458.0" prefWidth="574.0" style="-fx-background-color: #142432#142432;">

@@ -24,11 +24,9 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -71,7 +69,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        browseBtn.setDisable(true);
+        //browseBtn.setDisable(true);
 
         jobType.getItems().addAll(
                 "Drapes",
@@ -155,16 +153,48 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         String filename = selectedFile.getAbsolutePath();
         filePath.setText(filename);
 
+
+
+//Start of image saving. note requires that it uses prepared statement
+        Connection connection = null;
+        PreparedStatement statement = null;
+        FileInputStream inputStream = null;
+
         try {
-            BufferedImage bufferedImage = ImageIO.read(selectedFile);
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            sketchView.setImage(image);
-            Statement sqlInsert = ConnectToDatabase();
-            InputStream inputS = new FileInputStream(new File(filename));
-            sqlInsert.execute("UPDATE Job " + "SET job_sketch = ('" + inputS + "') ORDER BY job_id DESC LIMIT 1");
-            disconnectFromDB(sqlInsert);
-        } catch (IOException | SQLException ex) {
-            System.out.println(ex.getMessage());
+            File image = new File(filename);
+            inputStream = new FileInputStream(image);
+
+            connection = getConnectionPlain();
+            statement = connection.prepareStatement("UPDATE Job " + "SET job_sketch = (?) ORDER BY job_id DESC LIMIT 1");
+            statement.setBinaryStream(1, (InputStream) inputStream, (int)(image.length()));
+
+            statement.executeUpdate();
+
+        } catch (FileNotFoundException e) {
+            System.out.println("FileNotFoundException: - " + e);
+        } catch (SQLException e) {
+            System.out.println("SQLException: - " + e);
+        } finally {
+
+            try {
+                connection.close();
+                statement.close();
+            } catch (SQLException e) {
+                System.out.println("SQLException Finally: - " + e);
+            }
         }
+
+
+//        try {
+//            BufferedImage bufferedImage = ImageIO.read(selectedFile);
+//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+//            sketchView.setImage(image);
+//            Statement sqlInsert = ConnectToDatabase();
+//            InputStream inputS = new FileInputStream(new File(filename));
+//            sqlInsert.execute("UPDATE Job " + "SET job_sketch = ('" + inputS + "') ORDER BY job_id DESC LIMIT 1");
+//            disconnectFromDB(sqlInsert);
+//        } catch (IOException | SQLException ex) {
+//            System.out.println(ex.getMessage());
+//        }
     }
 }

@@ -85,7 +85,7 @@ public class CustJobsMainController extends DatabaseConnection {
     @FXML
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
         ResultSet rs = null;
-        int JobID = 0;
+        int CustID = 0;
         try {
             Connection con = getConnectionPlain();
             PreparedStatement statement =null;
@@ -94,10 +94,9 @@ public class CustJobsMainController extends DatabaseConnection {
             int rowAffected = statement.executeUpdate();
             if(rowAffected == 1)
             {
-                // get candidate id
                 rs = statement.getGeneratedKeys();
                 if(rs.next())
-                    JobID = rs.getInt(1);
+                    CustID = rs.getInt(1);
             }
             statement.close();
         }catch (Exception ex) {
@@ -107,7 +106,7 @@ public class CustJobsMainController extends DatabaseConnection {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
         Parent root = loader.load();
         AllJobCreateEditController scene2Controller = loader.getController();
-        scene2Controller.getJobID(JobID);
+        scene2Controller.diffSceneCustID(CustID, true);
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
