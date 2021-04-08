@@ -167,7 +167,6 @@ public class dashboardController extends DatabaseConnection implements Initializ
     private void changeToQuickInvoice(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/QuickInvoice/quickInvoice.fxml"));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

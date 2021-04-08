@@ -16,6 +16,7 @@ public class DataStore {
 
 
 
+
     public DataStore(String firstName, String lastName, String phone, String email, String street, String city, String state, String zip, String jobCost, String jobType){
         this.firstName = new String(firstName);
         this.lastName = new String(lastName);

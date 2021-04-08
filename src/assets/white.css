@@ -1,8 +1,8 @@
 .jfx-text-field
 {
-    -jfx-focus-color: white;
+    -jfx-focus-color: red;
+    -jfx-unfocus-color: black;
 }
-
 .jfx-combo-box
 {
     -jfx-focus-color: white;
@@ -26,4 +26,18 @@
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
 }
+.jfx-button{
+    -fx-background-color: #253543;
 
+
+}
+
+.jfx-button:hover {
+    -fx-background-color: #aaaaaa;
+    -fx-text-fill: black;
+}
+
+.jfx-button:armed {
+    -fx-background-color: red;
+    -fx-text-fill: black;
+}
