@@ -1,7 +1,9 @@
 package Jobs;
 
 import Cust.CustJobsMainController;
+import Cust.CustSearchController;
 import Dashboard.DatabaseConnection;
+import backup_scenes.CustSearchAndReturnController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -58,6 +60,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     @FXML
     private JFXTextField filePath;
 
+    private boolean sceneCheck = false;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         jobType.getItems().addAll(
@@ -91,22 +95,22 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @FXML
     private void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
-        try {
-            Statement sqlInsert = ConnectToDatabase();
-            DecimalFormat x = new DecimalFormat("###,###,###.00");
-            double num = Double.parseDouble(cost.getText());
-            System.out.println(x.format(num));
-            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + x.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
-            disconnectFromDB(sqlInsert);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        jobType.setValue(null);
-        cost.clear();
-        jobStatus.setValue(null);
-        startDate.setValue(null);
-        fDate.setValue(null);
-        paymentType.setValue(null);
+            try {
+                System.out.println("Yes");
+                Statement sqlInsert = ConnectToDatabase();
+                DecimalFormat x = new DecimalFormat("###,###,###.00");
+                double num = Double.parseDouble(cost.getText());
+                //sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + x.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                disconnectFromDB(sqlInsert);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            jobType.setValue(null);
+            cost.clear();
+            jobStatus.setValue(null);
+            startDate.setValue(null);
+            fDate.setValue(null);
+            paymentType.setValue(null);
     }
 
     @FXML

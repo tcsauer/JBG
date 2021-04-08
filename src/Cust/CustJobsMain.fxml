@@ -114,7 +114,7 @@
                         <Insets bottom="5.0" left="5.0" right="20.0" top="5.0" />
                      </HBox.margin>
                   </JFXButton>
-                  <JFXButton onAction="#saveAndChangeToJob" prefHeight="44.0" prefWidth="105.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Save and Create Job" textAlignment="CENTER" wrapText="true">
+                  <JFXButton fx:id="saveAndCreateBtn" onAction="#saveAndChangeToJob" prefHeight="44.0" prefWidth="105.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Save and Create Job" textAlignment="CENTER" wrapText="true">
                      <HBox.margin>
                         <Insets bottom="5.0" left="20.0" right="5.0" top="5.0" />
                      </HBox.margin>

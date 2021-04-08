@@ -30,6 +30,7 @@ import java.util.ResourceBundle;
 
 public class CustSearchAndReturnController extends DatabaseConnection implements Initializable {
 
+    private static boolean scene2;
     @FXML
     private TableView<SaveCust> searchTable;
     @FXML

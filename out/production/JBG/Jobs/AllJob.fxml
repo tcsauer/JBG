@@ -35,12 +35,12 @@
         <TableView fx:id="AllJobsTable" layoutX="14.0" layoutY="68.0" prefHeight="451.0" prefWidth="1009.0">
             <columns>
                 <TableColumn fx:id="col_sketch" prefWidth="350.0" text="Job Sketch" />
-                <TableColumn fx:id="col_type" prefWidth="100.0" text="Job Type" />
-            <TableColumn fx:id="col_cost" prefWidth="100.0" text="Job Cost" />
-            <TableColumn fx:id="col_status" prefWidth="100.0" text="Job Status" />
-            <TableColumn fx:id="col_dateStart" prefWidth="108.0" text="Date Start" />
-            <TableColumn fx:id="col_dateComplete" prefWidth="130.0" text="Date Complete" />
-            <TableColumn fx:id="col_payment" prefWidth="130.0" text="Payment Type" />
+                <TableColumn fx:id="col_type" onEditCommit="#changeJobTypeCellEvent" prefWidth="100.0" text="Job Type" />
+            <TableColumn fx:id="col_cost" onEditCommit="#changeJobCostCellEvent" prefWidth="100.0" text="Job Cost" />
+            <TableColumn fx:id="col_status" onEditCommit="#changeJobStatusCellEvent" prefWidth="100.0" text="Job Status" />
+            <TableColumn fx:id="col_dateStart" onEditCommit="#changeDateStartCellEvent" prefWidth="108.0" text="Date Start" />
+            <TableColumn fx:id="col_dateComplete" onEditCommit="#changeDateCompleteCellEvent" prefWidth="130.0" text="Date Complete" />
+            <TableColumn fx:id="col_payment" onEditCommit="#changePaymentTypeCellEvent" prefWidth="130.0" text="Payment Type" />
             </columns>
         </TableView>
         <HBox alignment="CENTER" layoutX="353.0" layoutY="529.0" prefHeight="46.0" prefWidth="495.0">
