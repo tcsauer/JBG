@@ -157,4 +157,16 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         searchTable.setItems(custList);
         textField.setText(null);
     }
+
+    @FXML
+    private void deleteCustomer(ActionEvent actionEvent) throws IOException{
+        try {
+            Statement sqlDelete = ConnectToDatabase();
+            sqlDelete.execute("DELETE FROM Customer WHERE customer_id = '"+searchTable.getSelectionModel().getSelectedItem().getCustID()+"'");
+            disconnectFromDB(sqlDelete);
+            searchTable.getItems().removeAll(searchTable.getSelectionModel().getSelectedItem());
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
