@@ -30,12 +30,13 @@
     <children>
         <Group layoutX="1132.0">
             <children>
+
+                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
                         <Image url="@../assets/exit.png" />
                     </image>
                 </ImageView>
-                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
         <Label layoutX="551.0" layoutY="15.0" text="Reports" textFill="WHITE">
@@ -44,10 +45,10 @@
             </font>
         </Label>
 
-        <JFXButton layoutX="515.0" layoutY="350.0" onAction="#customerInfo" prefWidth="180" prefHeight="40" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Customer Information"></JFXButton>
-        <JFXButton layoutX="515.0" layoutY="250.0" onAction="#pastJobs" prefWidth="180" prefHeight="40" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Customers Past Jobs"></JFXButton>
-        <JFXButton layoutX="515.0" layoutY="150.0" onAction="#unpaidJobs" prefWidth="180" prefHeight="40" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Unpaid Jobs"></JFXButton>
-        <JFXButton layoutX="515.0" layoutY="450.0" onAction="#badMonth" prefWidth="180" prefHeight="40" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Amount of Jobs per Month"></JFXButton>
+        <JFXButton layoutX="445.0" layoutY="350.0" onAction="#customerInfo" prefWidth="325" prefHeight="40" textFill="WHITE" text="Customer Information"> <font><Font size="22.0" /></font></JFXButton>
+        <JFXButton layoutX="445.0" layoutY="250.0" onAction="#pastJobs" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Customers Past Jobs"><font><Font size="22.0" /></font></JFXButton>
+        <JFXButton layoutX="445.0" layoutY="150.0" onAction="#unpaidJobs" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Unpaid Jobs"><font><Font size="22.0" /></font></JFXButton>
+        <JFXButton layoutX="445.0" layoutY="450.0" onAction="#badMonth" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Amount of Jobs per Month"><font><Font size="22.0" /></font></JFXButton>
 
 
     </children>

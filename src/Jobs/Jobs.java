@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class Jobs {
 
+    private int JobID;
     private byte[] jobSketch;
     private String jobType;
     private String jobCost;
@@ -24,6 +25,19 @@ public class Jobs {
         this.paymentType = new String(paymentType);
     }
 
+    public Jobs(int JobID, byte[] jobSketch, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
+        this.JobID = JobID;
+        this.jobSketch = jobSketch;
+        this.jobType = new String(jobType);
+        this.jobCost = new String(jobCost);
+        this.jobStatus = new String(jobStatus);
+        this.dateStart = new String(dateStart);
+        this.dateComplete = new String(dateComplete);
+        this.paymentType = new String(paymentType);
+    }
+
+    public int getJobID(){return JobID;}
+    public void setJobID(int JobID){this.JobID = JobID;}
     public byte[] getJobSketch() {return jobSketch;}
     //public void setJobSketch(String jobSketch) {this.jobSketch=jobSketch;}
     public String getJobType() {return jobType;}

@@ -1,7 +1,9 @@
 package Jobs;
 
 import Cust.CustJobsMainController;
+import Cust.CustSearchController;
 import Dashboard.DatabaseConnection;
+import backup_scenes.CustSearchAndReturnController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -22,16 +24,21 @@ import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 public class AllJobCreateEditController extends DatabaseConnection implements Initializable {
     @FXML
-    private JFXButton deleteBtn;
+    private JFXButton deleteBtn, submitBtn;
 
     @FXML
     private Button browseBtn;
@@ -53,35 +60,32 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     @FXML
     private JFXTextField filePath;
 
-    int prevJobID;
+    private Object x;
+    private boolean y;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        browseBtn.setDisable(true);
+
         jobType.getItems().addAll(
                 "Drapes",
                 "Window Treatment",
                 "Couch",
-                "Chairs(s)"
+                "Chairs(s)",
+                "Custom"
         );
-
-        jobType.setEditable(true);
 
         paymentType.getItems().addAll(
                 "Card",
                 "Cash",
                 "Check"
         );
-        paymentType.setEditable(true);
 
         jobStatus.getItems().addAll(
                 "Complete",
                 "Pending"
         );
-        jobStatus.setEditable(true);
-    }
-    public void getPreviousVariables(int j){
-        prevJobID =j;
-
     }
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
@@ -92,46 +96,51 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         stage.show();
     }
 
-    @FXML
-    private void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
-        try {
-            Statement sqlInsert = ConnectToDatabase();
-            DecimalFormat x = new DecimalFormat("###,###,###.00");
-            double num = Double.parseDouble(cost.getText());
-            System.out.println(x.format(num));
-            sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + x.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
-            disconnectFromDB(sqlInsert);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        jobType.setValue(null);
-        cost.clear();
-        jobStatus.setValue(null);
-        startDate.setValue(null);
-        fDate.setValue(null);
-        paymentType.setValue(null);
+    public void diffSceneCustID(Object change, boolean edit){
+        this.x = change;
+        this.y = edit;
     }
 
     @FXML
-    private void DeleteJob(ActionEvent actionEvent) {
-        try {
-            Statement sqlDelete = ConnectToDatabase();
-            sqlDelete.execute("DELETE FROM Customer ORDER BY customer_id DESC LIMIT 1");
-            disconnectFromDB(sqlDelete);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+    public void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
+        if (y == true) {
+            try {
+                Statement sqlInsert = ConnectToDatabase();
+                DecimalFormat df = new DecimalFormat("###,###,###.00");
+                double num = Double.parseDouble(cost.getText());
+                sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('"+x+"' ,'" + jobType.getValue() + "','" + df.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                disconnectFromDB(sqlInsert);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            jobType.setValue(null);
+            cost.clear();
+            jobStatus.setValue(null);
+            startDate.setValue(null);
+            fDate.setValue(null);
+            paymentType.setValue(null);
+        } else {
+            try {
+                Statement sqlInsert = ConnectToDatabase();
+                DecimalFormat df = new DecimalFormat("###,###,###.00");
+                double num = Double.parseDouble(cost.getText());
+                sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + df.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                disconnectFromDB(sqlInsert);
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            jobType.setValue(null);
+            cost.clear();
+            jobStatus.setValue(null);
+            startDate.setValue(null);
+            fDate.setValue(null);
+            paymentType.setValue(null);
         }
-        deleteBtn.setDisable(true);
-        jobType.setValue(null);
-        cost.clear();
-        jobStatus.setValue(null);
-        startDate.setValue(null);
-        fDate.setValue(null);
-        paymentType.setValue(null);
+        browseBtn.setDisable(false);
     }
 
     @FXML
-    private void BrowseFile(ActionEvent actionEvent){
+    private void BrowseFile(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.jpg"),
@@ -142,26 +151,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         filePath.setText(filename);
 
         try {
-//            String URL;
-//            FileReader reader = new FileReader("./preferences/URL.txt");
-//            BufferedReader bufferedReader = new BufferedReader(reader);
-//            URL = bufferedReader.readLine();
-//            reader.close();
-//
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection conn = DriverManager
-//                    .getConnection(URL, "texstar", "all4gibbs");
-//
-//            String INSERT_PICTURE = "UPDATE Job " + "SET job_sketch = (?) ORDER BY job_id DESC LIMIT 1";
-//
-//            conn.setAutoCommit(false);
-//            File file = new File(filename);
-//            try (FileInputStream fis = new FileInputStream(file);
-//                 PreparedStatement ps = conn.prepareStatement(INSERT_PICTURE)) {
-//                ps.setBinaryStream(1, fis, (int) file.length());
-//                ps.executeUpdate();
-//                conn.commit();
-//                System.out.println("Made it here"); }
             BufferedImage bufferedImage = ImageIO.read(selectedFile);
             Image image = SwingFXUtils.toFXImage(bufferedImage, null);
             sketchView.setImage(image);

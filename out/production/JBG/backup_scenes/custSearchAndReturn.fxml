@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="backup_scenes.CustSearchAndReturnController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="backup_scenes.CustSearchAndReturnController">
     <children>
         <Group layoutX="1132.0">
             <children>
@@ -61,5 +61,10 @@
             <Font size="16.0" />
          </font>
       </Label>
+      <JFXButton fx:id="deleteBtn" layoutX="553.0" layoutY="558.0" onAction="#deleteCustomer" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294; -fx-prompt-text-fill: #ffffff;" text="Delete Customer">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>

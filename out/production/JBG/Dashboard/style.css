@@ -12,3 +12,8 @@
     -fx-background-color: red;
     -fx-text-fill: black;
 }
+
+.text-field-table-cell{
+    -fx-font-size:20pt;
+    -fx-background-color: pink;
+}

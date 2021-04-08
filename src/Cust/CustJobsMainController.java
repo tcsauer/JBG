@@ -1,6 +1,7 @@
 package Cust;
 
 import Dashboard.DatabaseConnection;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,13 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     public JFXTextField firstNameBox, lastNameBox, phoneBox, emailBox, streetAddressBox, stateBox, cityBox, zipBox;
+
+    @FXML
+    public static JFXButton saveAndCreateButton;
+
+    public static int sceneChange(int scene1){
+        return scene1;
+    }
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
