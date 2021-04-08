@@ -62,7 +62,12 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     private Object x;
     private boolean y;
+    int JobID;
 
+    public void getJobID (int j){
+        JobID =j;
+        System.out.println(JobID);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

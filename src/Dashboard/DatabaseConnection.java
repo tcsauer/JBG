@@ -13,6 +13,27 @@ public class DatabaseConnection {
     //URL in ./preferences/URL.txt file & updatable through GUI
     String URL;
 
+    public Connection getConnectionPlain() {
+        try {
+            FileReader reader = new FileReader("./preferences/URL.txt");
+            BufferedReader bufferedReader = new BufferedReader(reader);
+            URL = bufferedReader.readLine();
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Connection connection = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(URL, "texstar", "all4gibbs");
+        } catch (Exception e) {
+            System.out.println("Error Occured While Getting the Connection: - " + e);
+        }
+        return connection;
+    }
+
 
     public Statement ConnectToDatabase() {
         try {

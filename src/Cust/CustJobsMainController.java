@@ -1,18 +1,21 @@
 package Cust;
 
 import Dashboard.DatabaseConnection;
+import Jobs.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class CustJobsMainController extends DatabaseConnection {
@@ -81,9 +84,30 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
-        //saveForm(actionEvent);
+        ResultSet rs = null;
+        int JobID = 0;
+        try {
+            Connection con = getConnectionPlain();
+            PreparedStatement statement =null;
+            statement = con.prepareStatement("INSERT INTO Customer(cust_fname, cust_lname, cust_phone, cust_email, cust_street, cust_city, cust_state, cust_zip) Values ('" + firstNameBox.getText() + "','" + lastNameBox.getText() + "','" + phoneBox.getText() + "','" + emailBox.getText() + "','" + streetAddressBox.getText() + "','" + cityBox.getText() + "','" + stateBox.getText() + "','" + zipBox.getText() + "')", Statement.RETURN_GENERATED_KEYS);
+            statement.executeUpdate();
+            int rowAffected = statement.executeUpdate();
+            if(rowAffected == 1)
+            {
+                // get candidate id
+                rs = statement.getGeneratedKeys();
+                if(rs.next())
+                    JobID = rs.getInt(1);
+            }
+            statement.close();
+        }catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
         Parent root = loader.load();
+        AllJobCreateEditController scene2Controller = loader.getController();
+        scene2Controller.getJobID(JobID);
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
