@@ -130,7 +130,7 @@ public class dashboardController extends DatabaseConnection implements Initializ
         activeTable6.setItems(activeList6);
 
 //date and time test
-        String timeStamp = new SimpleDateFormat("dd/MM/yyyy ").format(Calendar.getInstance().getTime());
+        String timeStamp = new SimpleDateFormat("MM/dd/yyyy").format(Calendar.getInstance().getTime());
         date.setText(timeStamp);
 //end date and time
     }

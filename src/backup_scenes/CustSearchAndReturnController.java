@@ -4,6 +4,7 @@ import Cust.CustJobsMainController;
 import Cust.CustSearchController;
 import Cust.SaveCust;
 import Dashboard.DatabaseConnection;
+import Jobs.AllJobCreateEditController;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -114,6 +115,8 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         if(searchTable.getSelectionModel().getSelectedItem() != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
             Parent root = loader.load();
+            AllJobCreateEditController scene2Controller = loader.getController();
+            scene2Controller.diffSceneCustID(searchTable.getSelectionModel().getSelectedItem().getCustID(), true);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
