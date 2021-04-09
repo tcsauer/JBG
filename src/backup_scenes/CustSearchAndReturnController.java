@@ -55,6 +55,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     @FXML
     private JFXTextField textField;
 
+
     ObservableList<SaveCust> custList = FXCollections.observableArrayList();
     @FXML
     private Label errorLab;
