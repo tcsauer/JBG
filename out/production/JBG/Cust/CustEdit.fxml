@@ -20,12 +20,12 @@
     <children>
         <Group layoutX="1132.0">
             <children>
+                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
                 <ImageView accessibleText="X" cache="true" fitHeight="70.0" fitWidth="68.0" preserveRatio="true">
                     <image>
                         <Image url="@../assets/exit.png" />
                     </image>
                 </ImageView>
-                <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
         <Label layoutX="492.0" layoutY="15.0" text="Customer Profile" textFill="WHITE">
@@ -112,13 +112,18 @@
          <children>
             <TableView fx:id="custJobsTable" layoutX="15.0" layoutY="33.0" prefHeight="362.0" prefWidth="542.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="col_type" prefWidth="90" text="Job Type" />
+                  <TableColumn fx:id="col_cost" prefWidth="90" text="Job Cost" />
+                  <TableColumn fx:id="col_status" prefWidth="90" text="Job Status" />
+                  <TableColumn fx:id="col_dateStart" prefWidth="90" text="Date Start" />
+                  <TableColumn fx:id="col_dateComplete" prefWidth="90" text="Date Complete" />
+                  <TableColumn fx:id="col_payment" prefWidth="90" text="Payment Type" />
               </columns>
             </TableView>
             <HBox alignment="CENTER" layoutY="395.0" prefHeight="46.0" prefWidth="571.0">
                <children>
                   <JFXButton onAction="#viewJob" prefHeight="31.0" prefWidth="84.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View Job" textAlignment="CENTER" />
+                   <JFXButton onAction="#loadJob" prefHeight="31.0" prefWidth="84.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Load Jobs" textAlignment="CENTER" />
                </children>
             </HBox>
             <Label layoutX="235.0" layoutY="4.0" text="Customer Jobs" textFill="WHITE">

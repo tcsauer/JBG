@@ -67,8 +67,8 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     @FXML
     private JFXCheckBox activeFilter;
 
-
     ObservableList<Jobs> jobList = FXCollections.observableArrayList();
+
     @FXML
     private Label errLab;
 
