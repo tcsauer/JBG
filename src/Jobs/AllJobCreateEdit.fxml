@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -17,7 +17,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.ComboBox?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" stylesheets="@../assets/white.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobCreateEditController">
     <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="458.0" layoutX="723.0" layoutY="81.0" stroke="TRANSPARENT" strokeType="INSIDE" width="443.0" />
@@ -48,11 +47,6 @@
                 <RowConstraints maxHeight="114.0" minHeight="0.0" prefHeight="79.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ComboBox fx:id="jobType" prefHeight="27.0" prefWidth="178.0" promptText="Job Type" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                    <GridPane.margin>
-                        <Insets left="8.0" />
-                    </GridPane.margin>
-                </ComboBox>
                 <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Cost" textAlignment="RIGHT" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -68,33 +62,30 @@
                   <Insets left="10.0" />
                </padding></JFXDatePicker>
                 <JFXDatePicker fx:id="startDate" defaultColor="#c9c9c9" prefHeight="29.0" prefWidth="141.0" style="-fx-prompt-text-fill: #ffffff;" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                <Label text="Job Information" textFill="WHITE" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                <Label text="Job Information" textFill="WHITE" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                     <font>
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <HBox alignment="CENTER" prefHeight="106.0" prefWidth="574.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
-                    <children>
-                        <JFXButton fx:id="submitBtn" buttonType="RAISED" onAction="#changeToActiveJobs" prefHeight="37.0" prefWidth="86.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Submit">
-                            <HBox.margin>
-                                <Insets left="5.0" right="10.0" />
-                            </HBox.margin>
+                <HBox alignment="CENTER" prefHeight="106.0" prefWidth="574.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+               <children>
+                        <JFXButton fx:id="submitBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#changeToActiveJobs" prefHeight="37.0" prefWidth="86.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Submit">
                      <font>
                         <Font size="17.0" />
                      </font>
                         </JFXButton>
-                    </children>
+               </children>
                 </HBox>
-            <ComboBox fx:id="jobStatus" prefHeight="27.0" prefWidth="178.0" promptText="Job Status" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <ComboBox fx:id="jobType" prefWidth="150.0" promptText="Job Type" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="paymentType" prefWidth="150.0" promptText="Payment Type" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <GridPane.margin>
-                  <Insets left="8.0" />
+                  <Insets left="50.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="paymentType" prefHeight="27.0" prefWidth="204.0" promptText="Payment Type" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.rowIndex="2">
-               <GridPane.margin>
-                  <Insets left="30.0" />
-               </GridPane.margin>
-            </ComboBox>
+            <ComboBox fx:id="jobStatus" prefWidth="150.0" promptText="Job Status" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
             </children>
         </GridPane>
         <Label layoutX="547.0" layoutY="15.0" prefHeight="38.0" prefWidth="123.0" text="Job View" textFill="WHITE">

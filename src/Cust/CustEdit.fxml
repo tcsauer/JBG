@@ -125,8 +125,14 @@
             </TableView>
             <HBox alignment="CENTER" layoutY="395.0" prefHeight="46.0" prefWidth="571.0">
                <children>
-                  <JFXButton onAction="#viewJob" prefHeight="31.0" prefWidth="84.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View Job" textAlignment="CENTER" />
-                   <JFXButton onAction="#loadJob" prefHeight="31.0" prefWidth="84.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Load Jobs" textAlignment="CENTER" />
+                  <JFXButton onAction="#viewJob" prefHeight="31.0" prefWidth="84.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="View Job" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></JFXButton>
+                   <JFXButton onAction="#loadJob" prefHeight="31.0" prefWidth="84.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Load Jobs" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin></JFXButton>
                </children>
             </HBox>
             <Label layoutX="235.0" layoutY="4.0" text="Customer Jobs" textFill="WHITE">
