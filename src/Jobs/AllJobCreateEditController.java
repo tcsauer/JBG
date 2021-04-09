@@ -17,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -43,11 +44,11 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     @FXML
     private ImageView sketchView;
     @FXML
-    private JFXComboBox jobType;
+    private ComboBox jobType;
     @FXML
-    private JFXComboBox paymentType;
+    private ComboBox paymentType;
     @FXML
-    private JFXComboBox jobStatus;
+    private ComboBox jobStatus;
     @FXML
     private JFXTextField cost;
     @FXML
@@ -217,6 +218,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         selectedFile = fc.showOpenDialog(null);
          filename = selectedFile.getAbsolutePath();
         filePath.setText(filename);
+        submitPhoto.setDisable(false);
 
     }
 

@@ -1,6 +1,6 @@
 .jfx-text-field
 {
-    -jfx-focus-color: red;
+    -jfx-focus-color: #4040b4;
     -jfx-unfocus-color: black;
 }
 .jfx-combo-box
@@ -8,6 +8,28 @@
     -jfx-focus-color: white;
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
+
+}
+
+.combo-box,
+.choice-box {
+    -fx-font-size: 12px;
+    -fx-prompt-text-fill: white;
+    -fx-text-fill: white;
+    -fx-background-color: none;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: #bdbdbd;
+    -fx-padding: 0 0 3 -8;
+}
+
+.combo-box .list-cell:filled:selected .text,
+.choice-box .list-cell:filled:selected .text {
+    -fx-fill: white;
+}
+
+.combo-box .arrow,
+.choice-box .arrow {
+    -fx-background-color: #142432;
 }
 
 .text-field
@@ -22,7 +44,7 @@
 }
 
 .date-picker .text-field {
-    -fx-control-inner-background: white ;
+    -fx-control-inner-background: #142432 ;
     -fx-prompt-text-fill: white;
     -fx-text-fill: white;
 }
@@ -38,6 +60,6 @@
 }
 
 .jfx-button:armed {
-    -fx-background-color: red;
+    -fx-background-color: #4040b4;
     -fx-text-fill: black;
 }

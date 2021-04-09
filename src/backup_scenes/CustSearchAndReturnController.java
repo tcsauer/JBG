@@ -26,6 +26,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
@@ -161,9 +163,15 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     @FXML
     private void deleteCustomer(ActionEvent actionEvent) throws IOException{
         try {
-            Statement sqlDelete = ConnectToDatabase();
-            sqlDelete.execute("DELETE FROM Customer WHERE customer_id = '"+searchTable.getSelectionModel().getSelectedItem().getCustID()+"'");
-            disconnectFromDB(sqlDelete);
+            Connection connection = getConnectionPlain();
+            PreparedStatement ps = getConnectionPlain().prepareStatement("DELETE FROM Job WHERE customer_id = ?;");
+            PreparedStatement p2 = connection.prepareStatement("DELETE FROM Customer WHERE customer_id = ?;");
+            ps.setInt(1, searchTable.getSelectionModel().getSelectedItem().getCustID());
+            p2.setInt(1, searchTable.getSelectionModel().getSelectedItem().getCustID());
+            ps.executeUpdate();
+            p2.executeUpdate();
+            ps.close();
+            p2.close();
             searchTable.getItems().removeAll(searchTable.getSelectionModel().getSelectedItem());
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

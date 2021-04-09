@@ -49,7 +49,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     @FXML
     private TableView<Jobs> AllJobsTable;
     @FXML
-    public TableColumn<Jobs,byte[]> col_sketch;
+    public TableColumn<Jobs,String> col_lname;
     @FXML
     private TableColumn<Jobs,String> col_type;
     @FXML
@@ -63,7 +63,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     @FXML
     private TableColumn<Jobs, String> col_payment;
     @FXML
-    private JFXComboBox jobFilter, paymentFilter;
+    public ComboBox jobFilter, paymentFilter;
     @FXML
     private JFXCheckBox activeFilter;
 
@@ -76,15 +76,15 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Statement con = ConnectToDatabase();
-            ResultSet rs = con.executeQuery("SELECT job_id, job_sketch, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job");
+            ResultSet rs = con.executeQuery("SELECT job_id, cust_lname, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job J JOIN Customer C on C.customer_id = J.customer_id");
 
             while(rs.next()){
-                jobList.add(new Jobs(rs.getInt("job_id"), rs.getBytes("job_sketch"),rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
+                jobList.add(new Jobs(rs.getInt("job_id"), rs.getString("cust_lname"), rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
             }disconnectFromDB(con);
         } catch (Exception ex) {
             Logger.getLogger(AllJobController.class.getName()).log(Level.SEVERE,null,ex);
         }
-        col_sketch.setCellValueFactory(new PropertyValueFactory<>("jobSketch"));
+        col_lname.setCellValueFactory(new PropertyValueFactory<>("cust_lname"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("jobCost"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("jobStatus"));
@@ -196,25 +196,33 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     @FXML
     private void deleteJob(ActionEvent actionEvent) throws IOException{
-        try {
-            Statement sqlDelete = ConnectToDatabase();
-            sqlDelete.execute("DELETE FROM Job WHERE job_id = '"+AllJobsTable.getSelectionModel().getSelectedItem().getJobID()+"'");
-            disconnectFromDB(sqlDelete);
-            AllJobsTable.getItems().removeAll(AllJobsTable.getSelectionModel().getSelectedItem());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        if(AllJobsTable.getSelectionModel().getSelectedItem() != null) {
+            try {
+                Statement sqlDelete = ConnectToDatabase();
+                sqlDelete.execute("DELETE FROM Job WHERE job_id = '" + AllJobsTable.getSelectionModel().getSelectedItem().getJobID() + "'");
+                disconnectFromDB(sqlDelete);
+                AllJobsTable.getItems().removeAll(AllJobsTable.getSelectionModel().getSelectedItem());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }else{
+            errLab.setVisible(true);
         }
     }
 
     @FXML
     private void editJob(ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
-        Parent root = loader.load();
-        AllJobCreateEditController editScene = loader.getController();
-        editScene.diffSceneCustID(AllJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);
-        editScene.showInfo(AllJobsTable.getSelectionModel().getSelectedItem().getJobType(), AllJobsTable.getSelectionModel().getSelectedItem().getJobCost(), AllJobsTable.getSelectionModel().getSelectedItem().getJobStatus(), AllJobsTable.getSelectionModel().getSelectedItem().getPaymentType(), AllJobsTable.getSelectionModel().getSelectedItem().getDateStart(), AllJobsTable.getSelectionModel().getSelectedItem().getDateComplete());
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        if(AllJobsTable.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+            Parent root = loader.load();
+            AllJobCreateEditController editScene = loader.getController();
+            editScene.diffSceneCustID(AllJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);
+            editScene.showInfo(AllJobsTable.getSelectionModel().getSelectedItem().getJobType(), AllJobsTable.getSelectionModel().getSelectedItem().getJobCost(), AllJobsTable.getSelectionModel().getSelectedItem().getJobStatus(), AllJobsTable.getSelectionModel().getSelectedItem().getPaymentType(), AllJobsTable.getSelectionModel().getSelectedItem().getDateStart(), AllJobsTable.getSelectionModel().getSelectedItem().getDateComplete());
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }else{
+            errLab.setVisible(true);
+        }
     }
 }

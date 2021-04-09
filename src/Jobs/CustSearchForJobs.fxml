@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane maxHeight="-Infinity" stylesheets="@../assets/white.css" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.CustSearchForJobsController">
     <children>
         <Group layoutX="1132.0">
@@ -37,7 +38,7 @@
             <RowConstraints maxHeight="47.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXComboBox fx:id="searchBy" labelFloat="true" prefHeight="27.0" prefWidth="156.0" promptText="Search By" style="-fx-prompt-text-fill: #ffffff;" unFocusColor="WHITE" GridPane.rowIndex="1" />
+            <ComboBox fx:id="searchBy"  prefHeight="27.0" prefWidth="156.0" promptText="Search By" style="-fx-prompt-text-fill: #ffffff;" GridPane.rowIndex="1" />
             <JFXTextField fx:id="textField" labelFloat="true" text="Enter String" unFocusColor="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <JFXButton onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>

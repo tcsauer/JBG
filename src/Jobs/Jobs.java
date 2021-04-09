@@ -14,6 +14,8 @@ public class Jobs {
     private String dateStart;
     private String dateComplete;
     private String paymentType;
+    private String cust_lname;
+    private String phone;
 
     public Jobs(byte[] jobSketch, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
         this.jobSketch = jobSketch;
@@ -28,6 +30,16 @@ public class Jobs {
     public Jobs(int JobID, byte[] jobSketch, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
         this.JobID = JobID;
         this.jobSketch = jobSketch;
+        this.jobType = new String(jobType);
+        this.jobCost = new String(jobCost);
+        this.jobStatus = new String(jobStatus);
+        this.dateStart = new String(dateStart);
+        this.dateComplete = new String(dateComplete);
+        this.paymentType = new String(paymentType);
+    }
+    public Jobs(int JobID, String cust_lname, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
+        this.JobID = JobID;
+        this.cust_lname = new String(cust_lname);
         this.jobType = new String(jobType);
         this.jobCost = new String(jobCost);
         this.jobStatus = new String(jobStatus);
@@ -52,4 +64,8 @@ public class Jobs {
     public void setDateComplete(String dateComplete) {this.dateComplete=dateComplete;}
     public String getPaymentType() {return paymentType;}
     public void setPaymentType(String paymentType) {this.paymentType=paymentType;}
+
+    public String getCust_lname() {
+        return cust_lname;
+    }
 }

@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import backup_scenes.*;
 
 public class CustEditController {
     @FXML
@@ -24,7 +25,7 @@ public class CustEditController {
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
-        Parent SceneParent = FXMLLoader.load(getClass().getResource("CustJobsMain.fxml"));
+        Parent SceneParent = FXMLLoader.load(getClass().getResource("/backup_scenes/CustSearchAndReturnController.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newScene);

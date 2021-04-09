@@ -13,16 +13,25 @@ public class DatabaseConnection {
     //URL in ./preferences/URL.txt file & updatable through GUI
     String URL;
 
-    public Connection getConnectionPlain() {
+    public void getURL(){
         try {
+            String tempURL;
             FileReader reader = new FileReader("./preferences/URL.txt");
             BufferedReader bufferedReader = new BufferedReader(reader);
-            URL = bufferedReader.readLine();
+            tempURL = bufferedReader.readLine();
             reader.close();
+            if(tempURL.isEmpty()){
+                URL = "jdbc:mysql://jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com:3306/JBandG";
+            }
+            else URL = tempURL;
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+    }
+
+    public Connection getConnectionPlain() {
+        getURL();
         Connection connection = null;
 
         try {
