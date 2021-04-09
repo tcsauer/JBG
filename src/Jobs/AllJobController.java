@@ -69,6 +69,8 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
 
     ObservableList<Jobs> jobList = FXCollections.observableArrayList();
+    @FXML
+    private Label errLab;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

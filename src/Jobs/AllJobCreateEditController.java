@@ -59,10 +59,15 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     private Object x;
     private int z;
+    File selectedFile;
+    String filename;
+    @FXML
+    private JFXButton submitPhoto;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         browseBtn.setDisable(true);
+        submitPhoto.setDisable(true);
 
         jobType.getItems().addAll(
                 "Drapes",
@@ -209,12 +214,15 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
         );
-        File selectedFile = fc.showOpenDialog(null);
-        String filename = selectedFile.getAbsolutePath();
+        selectedFile = fc.showOpenDialog(null);
+         filename = selectedFile.getAbsolutePath();
         filePath.setText(filename);
 
+    }
 
-//Start of image saving. note requires that it uses prepared statement
+    @FXML
+    private void submitPhoto(ActionEvent actionEvent) {
+        //Start of image saving. note requires that it uses prepared statement
         Connection connection = null;
         PreparedStatement statement = null;
         FileInputStream inputStream = null;
@@ -277,19 +285,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                     System.out.println("SQLException Finally: - " + e);
                 }
             }
-
-
-//        try {
-//            BufferedImage bufferedImage = ImageIO.read(selectedFile);
-//            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-//            sketchView.setImage(image);
-//            Statement sqlInsert = ConnectToDatabase();
-//            InputStream inputS = new FileInputStream(new File(filename));
-//            sqlInsert.execute("UPDATE Job " + "SET job_sketch = ('" + inputS + "') ORDER BY job_id DESC LIMIT 1");
-//            disconnectFromDB(sqlInsert);
-//        } catch (IOException | SQLException ex) {
-//            System.out.println(ex.getMessage());
-//        }
         }
     }
 }
