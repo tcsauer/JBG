@@ -1,5 +1,6 @@
 package backup_scenes;
 
+import Cust.CustEditController;
 import Cust.CustJobsMainController;
 import Cust.CustSearchController;
 import Cust.SaveCust;
@@ -173,6 +174,12 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     private void editCustomer(ActionEvent actionEvent) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustEdit.fxml"));
         Parent root = loader.load();
+        CustEditController custInfoScene = loader.getController();
+        custInfoScene.showInfo2(searchTable.getSelectionModel().getSelectedItem().getCustID(), searchTable.getSelectionModel().getSelectedItem().getCustFirstName(),
+                searchTable.getSelectionModel().getSelectedItem().getCustLastName(), searchTable.getSelectionModel().getSelectedItem().getCustPhone(),
+                searchTable.getSelectionModel().getSelectedItem().getCustEmail(), searchTable.getSelectionModel().getSelectedItem().getCustStreetAddress(),
+                searchTable.getSelectionModel().getSelectedItem().getCustState(), searchTable.getSelectionModel().getSelectedItem().getCustCity(),
+                searchTable.getSelectionModel().getSelectedItem().getCustZip());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

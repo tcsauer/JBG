@@ -7,13 +7,20 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class CustEditController {
     @FXML
-    private JFXTextField fName;
+    private JFXTextField fName, lName, phone, email, streetAddress, city, zip, state;
+
+    @FXML
+    private TableView<String> custJobsTable;
+
+    private int x;
 
     @FXML
     private void changeToDash(ActionEvent event) throws IOException {
@@ -34,11 +41,6 @@ public class CustEditController {
 
     @FXML
     private void viewJob(ActionEvent actionEvent) throws IOException {
-//Needs to be done
-
-
-
-
         Parent SceneParent = FXMLLoader.load(getClass().getResource("../Jobs/JobCreateEdit.fxml"));
         Scene newScene = new Scene(SceneParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -46,16 +48,16 @@ public class CustEditController {
         window.show();
     }
 
-    @FXML
-    private void jobComplete(ActionEvent actionEvent) {
-//Needs to be done
+    public void showInfo2(int custID, String firstName, String lastName, String custPhone, String custEmail, String custStreetAddress, String custCity, String custState, String custZip){
+        this.x = custID;
+        fName.setText(firstName);
+        lName.setText(lastName);
+        phone.setText(custPhone);
+        email.setText(custEmail);
+        streetAddress.setText(custStreetAddress);
+        state.setText(custState);
+        city.setText(custCity);
+        zip.setText(custZip);
     }
 
-    @FXML
-    private void deleteJob(ActionEvent actionEvent) {
-    }
-
-    @FXML
-    private void DeleteCustomer(ActionEvent actionEvent) {
-    }
 }
