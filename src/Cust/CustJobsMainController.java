@@ -106,7 +106,7 @@ public class CustJobsMainController extends DatabaseConnection {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
         Parent root = loader.load();
         AllJobCreateEditController scene2Controller = loader.getController();
-        scene2Controller.diffSceneCustID(CustID, true);
+        scene2Controller.diffSceneCustID(CustID, 3);
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

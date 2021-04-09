@@ -91,33 +91,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         col_payment.setCellValueFactory(new PropertyValueFactory<>("paymentType"));
 
         AllJobsTable.setItems(jobList);
-        AllJobsTable.setEditable(true);
 
-        ObservableList<String> jobTypeList = FXCollections.observableArrayList();
-        jobTypeList.addAll(
-             "Drapes",
-             "Window Treatment",
-             "Couch",
-             "Chair(s)"
-        );
-        col_type.setCellFactory(ComboBoxTableCell.forTableColumn(jobTypeList));
-        col_cost.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        ObservableList<String> jobStatusList = FXCollections.observableArrayList();
-        jobStatusList.addAll(
-                "Complete",
-                "Pending"
-        );
-        col_status.setCellFactory(ComboBoxTableCell.forTableColumn(jobStatusList));
-        col_dateStart.setCellFactory(TextFieldTableCell.forTableColumn());
-        col_dateComplete.setCellFactory(TextFieldTableCell.forTableColumn());
-        ObservableList<String> paymentTypeList = FXCollections.observableArrayList();
-        paymentTypeList.addAll(
-                "Card",
-                "Cash",
-                "Check"
-        );
-        col_payment.setCellFactory(ComboBoxTableCell.forTableColumn(paymentTypeList));
         jobFilter.getItems().addAll("Drapes",
                 "Window Treatment",
                 "Couch",
@@ -136,161 +110,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
-    }
-
-    JOptionPane frame = new JOptionPane();
-
-    public void changeJobTypeCellEvent(TableColumn.CellEditEvent editedCell) {
-        Jobs jobSelected = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
-            @Override
-            public void onChanged(Change<? extends Jobs> c) {
-                for (Jobs s : c.getList()) {
-                    System.out.println(s.getJobID());
-                }
-            }
-        });
-        int tempID = jobSelected.getJobID();
-        jobSelected.setJobType(editedCell.getNewValue().toString());
-        String newJobType = jobSelected.getJobType();
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                sqlUpdate.execute("UPDATE Job SET job_type= '" + newJobType + "' WHERE job_id = '" + tempID + "'");
-                disconnectFromDB(sqlUpdate);
-                JOptionPane.showMessageDialog(frame, "Updated");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-    }
-
-    public void changeJobCostCellEvent(TableColumn.CellEditEvent editedCell) {
-        Jobs jobSelected1 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
-            @Override
-            public void onChanged(Change<? extends Jobs> c) {
-                for (Jobs s : c.getList()) {
-                    System.out.println(s.getJobID());
-                }
-            }
-        });
-        int tempID = jobSelected1.getJobID();
-        jobSelected1.setJobCost(editedCell.getNewValue().toString());
-        String newJobCost = jobSelected1.getJobCost();
-        if (newJobCost == null || newJobCost.length() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-        } else {
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                DecimalFormat x = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(newJobCost);
-                sqlUpdate.execute("UPDATE Job SET job_cost= '" + x.format(num) + "' WHERE job_id = '" + tempID + "'");
-                disconnectFromDB(sqlUpdate);
-                JOptionPane.showMessageDialog(frame, "Updated");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
-
-    public void changeJobStatusCellEvent(TableColumn.CellEditEvent editedCell) {
-        Jobs jobSelected2 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
-            @Override
-            public void onChanged(Change<? extends Jobs> c) {
-                for (Jobs s : c.getList()) {
-                    System.out.println(s.getJobID());
-                }
-            }
-        });
-        int tempID = jobSelected2.getJobID();
-        jobSelected2.setJobStatus(editedCell.getNewValue().toString());
-        String newJobStatus = jobSelected2.getJobStatus();
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                sqlUpdate.execute("UPDATE Job SET job_status= '" + newJobStatus + "' WHERE job_id = '" + tempID + "'");
-                disconnectFromDB(sqlUpdate);
-                JOptionPane.showMessageDialog(frame, "Updated");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-    }
-
-    public void changeDateStartCellEvent(TableColumn.CellEditEvent editedCell) {
-        Jobs jobSelected3 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
-            @Override
-            public void onChanged(Change<? extends Jobs> c) {
-                for (Jobs s : c.getList()) {
-                    System.out.println(s.getJobID());
-                }
-            }
-        });
-        int tempID = jobSelected3.getJobID();
-        jobSelected3.setDateStart(editedCell.getNewValue().toString());
-        String newDateStart = jobSelected3.getDateStart();
-        if (newDateStart == null || newDateStart.length() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-        } else {
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                sqlUpdate.execute("UPDATE Job SET date_start = '" + newDateStart + "' WHERE job_id = '" + tempID + "'");
-                disconnectFromDB(sqlUpdate);
-                JOptionPane.showMessageDialog(frame, "Updated");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
-
-    public void changeDateCompleteCellEvent(TableColumn.CellEditEvent editedCell) {
-        Jobs jobSelected4 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
-            @Override
-            public void onChanged(Change<? extends Jobs> c) {
-                for (Jobs s : c.getList()) {
-                    System.out.println(s.getJobID());
-                }
-            }
-        });
-        int tempID = jobSelected4.getJobID();
-        jobSelected4.setDateComplete(editedCell.getNewValue().toString());
-        String newDateComplete = jobSelected4.getDateComplete();
-        if (newDateComplete == null || newDateComplete.length() == 0) {
-            JOptionPane.showMessageDialog(frame, "Cell cannot be empty");
-        } else {
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                sqlUpdate.execute("UPDATE Job SET date_complete = '" + newDateComplete + "' WHERE job_id = '" + tempID + "'");
-                disconnectFromDB(sqlUpdate);
-                JOptionPane.showMessageDialog(frame, "Updated");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
-
-    public void changePaymentTypeCellEvent(TableColumn.CellEditEvent editedCell) {
-        Jobs jobSelected5 = (Jobs) AllJobsTable.getSelectionModel().getSelectedItem();
-        AllJobsTable.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Jobs>() {
-            @Override
-            public void onChanged(Change<? extends Jobs> c) {
-                for (Jobs s : c.getList()) {
-                    System.out.println(s.getJobID());
-                }
-            }
-        });
-        int tempID = jobSelected5.getJobID();
-        jobSelected5.setPaymentType(editedCell.getNewValue().toString());
-        String newPaymentType = jobSelected5.getPaymentType();
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                sqlUpdate.execute("UPDATE Job SET payment_type = '" + newPaymentType + "' WHERE job_id = '" + tempID + "'");
-                disconnectFromDB(sqlUpdate);
-                JOptionPane.showMessageDialog(frame, "Updated");
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
     }
 
     @FXML
@@ -383,5 +202,17 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @FXML
+    private void editJob(ActionEvent actionEvent) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+        Parent root = loader.load();
+        AllJobCreateEditController editScene = loader.getController();
+        editScene.diffSceneCustID(AllJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);
+        editScene.showInfo(AllJobsTable.getSelectionModel().getSelectedItem().getJobType(), AllJobsTable.getSelectionModel().getSelectedItem().getJobCost(), AllJobsTable.getSelectionModel().getSelectedItem().getJobStatus(), AllJobsTable.getSelectionModel().getSelectedItem().getPaymentType(), AllJobsTable.getSelectionModel().getSelectedItem().getDateStart(), AllJobsTable.getSelectionModel().getSelectedItem().getDateComplete());
+        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }

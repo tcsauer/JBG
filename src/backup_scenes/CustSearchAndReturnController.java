@@ -115,7 +115,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
             FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
             Parent root = loader.load();
             AllJobCreateEditController scene2Controller = loader.getController();
-            scene2Controller.diffSceneCustID(searchTable.getSelectionModel().getSelectedItem().getCustID(), true);
+            scene2Controller.diffSceneCustID(searchTable.getSelectionModel().getSelectedItem().getCustID(), 1);
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -167,5 +167,14 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @FXML
+    private void editCustomer(ActionEvent actionEvent) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustEdit.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
