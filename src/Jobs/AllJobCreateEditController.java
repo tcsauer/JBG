@@ -22,6 +22,14 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -92,7 +100,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         Connection connection = null;
 
         try {
-
+            File t = File.createTempFile("img", ".png");
+            t.deleteOnExit();
             connection = getConnectionPlain();
             ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job ORDER BY job_id DESC LIMIT 1");
 
@@ -102,7 +111,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 // instead of the next 9 lines, you could just do
                 // javafx.scene.image.Image image1 = new Image(is);
 
-                OutputStream os = new FileOutputStream(new File("img.png"));
+                OutputStream os = Files.newOutputStream(t.toPath());
                 byte[] content = new byte[1024];
                 int size = 0;
 
@@ -114,7 +123,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
                 os.close();
                 is.close();
-                File file =new File("img.png");
+                System.out.println(t.toPath());
+                File file =new File(t.getAbsolutePath());
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
                 sketchView.setImage(image1);
@@ -210,7 +220,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     }
 
     @FXML
-    private void BrowseFile(ActionEvent actionEvent) {
+    private void BrowseFile(ActionEvent actionEvent) throws IOException {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
@@ -218,6 +228,9 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         selectedFile = fc.showOpenDialog(null);
          filename = selectedFile.getAbsolutePath();
         filePath.setText(filename);
+        BufferedImage bufferedImage = ImageIO.read(selectedFile);
+        Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+        sketchView.setImage(image1);
         submitPhoto.setDisable(false);
 
     }
@@ -233,7 +246,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             try {
                 BufferedImage bufferedImage = ImageIO.read(selectedFile);
                 Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
+//                sketchView.setImage(image1);
                 File image = new File(filename);
                 inputStream = new FileInputStream(image);
 
@@ -262,7 +275,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             try {
                 BufferedImage bufferedImage = ImageIO.read(selectedFile);
                 Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
+//                sketchView.setImage(image1);
                 File image = new File(filename);
                 inputStream = new FileInputStream(image);
 
