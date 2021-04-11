@@ -46,7 +46,7 @@
         </Label>
 
         <JFXButton layoutX="445.0" layoutY="350.0" onAction="#customerInfo" prefWidth="325" prefHeight="40" textFill="WHITE" text="Customer Information"> <font><Font size="22.0" /></font></JFXButton>
-        <JFXButton layoutX="445.0" layoutY="250.0" onAction="#pastJobs" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Customers Past Jobs"><font><Font size="22.0" /></font></JFXButton>
+        <JFXButton layoutX="445.0" layoutY="250.0" onAction="#pastJobs" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Customer's Past Jobs"><font><Font size="22.0" /></font></JFXButton>
         <JFXButton layoutX="445.0" layoutY="150.0" onAction="#unpaidJobs" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Unpaid Jobs"><font><Font size="22.0" /></font></JFXButton>
         <JFXButton layoutX="445.0" layoutY="450.0" onAction="#badMonth" prefWidth="325" prefHeight="40" ripplerFill="#818b9a" textFill="WHITE" text="Amount of Jobs per Month"><font><Font size="22.0" /></font></JFXButton>
 

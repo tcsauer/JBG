@@ -26,7 +26,7 @@
                 <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
             </children>
         </Group>
-        <Label layoutX="499.0" layoutY="15.0" text="Jobs Per Month" textFill="WHITE">
+        <Label layoutX="499.0" layoutY="15.0" text="Amount of Jobs per Month" textFill="WHITE">
             <font>
                 <Font size="31.0" />
             </font>
