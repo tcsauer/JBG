@@ -91,10 +91,10 @@ public class CustJobsMainController extends DatabaseConnection {
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
         ResultSet rs = null;
         int CustID = 0;
-        if(Validation.textFieldNotEmpty(firstNameBox, lastNameBox, phoneBox, emailBox, streetAddressBox, stateBox, cityBox, zipBox))
+       /* if(Validation.textFieldNotEmpty(firstNameBox, lastNameBox, phoneBox, emailBox, streetAddressBox, stateBox, cityBox, zipBox))
         if(Validation.phoneFormat(phoneBox))
         if(Validation.emailFormat(emailBox))
-        if(Validation.zipFormat(zipBox)){
+        if(Validation.zipFormat(zipBox)){*/
             try {
                 Connection con = getConnectionPlain();
                 PreparedStatement statement = null;
@@ -120,4 +120,4 @@ public class CustJobsMainController extends DatabaseConnection {
             stage.show();
         }
     }
-}
+

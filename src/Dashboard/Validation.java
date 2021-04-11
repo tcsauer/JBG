@@ -1,10 +1,15 @@
 package Dashboard;
 
+import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import jdk.nashorn.internal.scripts.JO;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.time.LocalDate;
 
 public class Validation {
 
@@ -46,6 +51,28 @@ public class Validation {
         return validTextFields;
     }
 
+    public static boolean costFieldNotEmpty(TextField c){
+        boolean validTextField = true;
+        JOptionPane frame = new JOptionPane();
+        if(c.getText().isEmpty()){
+            validTextField = false;
+            JOptionPane.showMessageDialog(frame, "Cost cannot be empty.");
+        }
+        return validTextField;
+    }
+
+    public static boolean costFormat (TextField c) {
+        boolean validTextField = true;
+        JOptionPane frame = new JOptionPane();
+        String pattern = "\\d{0,7}([\\\\.]\\d{0,2})?";
+        if(!c.getText().matches(pattern))
+        {
+            validTextField = false;
+            JOptionPane.showMessageDialog(frame, "Enter monetary value with decimal.");
+        }
+        return validTextField;
+    }
+
     public static boolean phoneFormat(TextField i){
         boolean validTextField = true;
         JOptionPane frame = new JOptionPane();
@@ -76,5 +103,48 @@ public class Validation {
             JOptionPane.showMessageDialog(frame, "Enter five digit zip.");
         }
         return validTextField;
+    }
+
+    public static boolean comboBoxNotEmpty(ComboBox a, ComboBox b, ComboBox c){
+        boolean validComboBox = true;
+        JOptionPane frame = new JOptionPane();
+        if(a.getValue() == null){
+            validComboBox = false;
+            JOptionPane.showMessageDialog(frame, "Job type cannot be empty.");
+        }
+        if(b.getValue() == null){
+            validComboBox = false;
+            JOptionPane.showMessageDialog(frame, "Payment type cannot be empty.");
+        }
+        if(c.getValue() == null){
+            validComboBox = false;
+            JOptionPane.showMessageDialog(frame, "Job status cannot be empty.");
+        }
+        return validComboBox;
+    }
+
+    public static boolean datePickerNotEmpty(DatePicker a, DatePicker b){
+        boolean validDatePicker = true;
+        JOptionPane frame = new JOptionPane();
+        if(a.getValue() == null){
+            validDatePicker = false;
+            JOptionPane.showMessageDialog(frame, "Start date cannot be empty.");
+        }
+        if(b.getValue() == null){
+            validDatePicker = false;
+            JOptionPane.showMessageDialog(frame, "Finish date cannot be empty.");
+        }
+        return validDatePicker;
+    }
+
+    public static boolean validDate(DatePicker a, DatePicker b){
+        boolean validDate = true;
+        JOptionPane frame = new JOptionPane();
+        LocalDate ld = a.getValue();
+        if(b.getValue().isBefore(ld)){
+            validDate = false;
+            JOptionPane.showMessageDialog(frame, "Finish date cannot be before start date.");
+        }
+        return validDate;
     }
 }

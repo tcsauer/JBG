@@ -3,6 +3,7 @@ package Jobs;
 import Cust.CustJobsMainController;
 import Cust.CustSearchController;
 import Dashboard.DatabaseConnection;
+import Dashboard.Validation;
 import backup_scenes.CustSearchAndReturnController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -144,55 +145,65 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     @FXML
     public void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
         if (z  == 1) {
-            try {
-                Statement sqlInsert = ConnectToDatabase();
-                DecimalFormat df = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(cost.getText());
-                sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('"+x+"' ,'" + jobType.getValue() + "','" + df.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
-                disconnectFromDB(sqlInsert);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
+            if(Validation.datePickerNotEmpty(startDate, fDate))
+            if(Validation.validDate(startDate, fDate))
+            if(Validation.costFieldNotEmpty(cost))
+            if(Validation.costFormat(cost)){
+                try {
+                    Statement sqlInsert = ConnectToDatabase();
+                    sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('"+x+"' ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                    disconnectFromDB(sqlInsert);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
             }
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
         } else if (z == 2) {
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                /*
-                DecimalFormat df = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(cost.getText());
-                 */
-                sqlUpdate.execute("UPDATE Job SET job_type = '"+jobType.getValue()+"', job_cost = '"+cost.getText()+"', job_status = '"+jobStatus.getValue()+"', date_start = '"+startDate.getValue().toString()+"', date_complete = '"+fDate.getValue().toString()+"', payment_type = '"+paymentType.getValue()+"' WHERE job_id = '"+x+"'");
-                disconnectFromDB(sqlUpdate);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
+            if(Validation.datePickerNotEmpty(startDate, fDate))
+            if(Validation.validDate(startDate, fDate))
+            if(Validation.costFieldNotEmpty(cost))
+            if(Validation.costFormat(cost)){
+                try {
+                    Statement sqlUpdate = ConnectToDatabase();
+                    sqlUpdate.execute("UPDATE Job SET job_type = '"+jobType.getValue()+"', job_cost = '"+cost.getText()+"', job_status = '"+jobStatus.getValue()+"', date_start = '"+startDate.getValue().toString()+"', date_complete = '"+fDate.getValue().toString()+"', payment_type = '"+paymentType.getValue()+"' WHERE job_id = '"+x+"'");
+                    disconnectFromDB(sqlUpdate);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
             }
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
         } else {
-            try {
-                Statement sqlInsert = ConnectToDatabase();
-                DecimalFormat df = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(cost.getText());
-                sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + df.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
-                disconnectFromDB(sqlInsert);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
+            if(Validation.datePickerNotEmpty(startDate, fDate))
+            if(Validation.validDate(startDate, fDate))
+            if(Validation.costFieldNotEmpty(cost))
+            if(Validation.costFormat(cost)){
+                try {
+                    Statement sqlInsert = ConnectToDatabase();
+                    sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                    disconnectFromDB(sqlInsert);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
             }
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
         }
         browseBtn.setDisable(false);
     }
