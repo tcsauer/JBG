@@ -117,7 +117,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 File file =new File("img.png");
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
+                //sketchView.setImage(image1);
             }
 
         } catch (Exception ex) {
