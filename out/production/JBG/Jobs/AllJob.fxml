@@ -45,7 +45,7 @@
                 <Font size="31.0" />
             </font>
         </Label>
-        <TableView fx:id="AllJobsTable" layoutX="94.0" layoutY="74.0" prefHeight="426.0" prefWidth="833.0">
+        <TableView fx:id="AllJobsTable" layoutX="94.0" layoutY="74.0" onMouseClicked="#clearError" prefHeight="426.0" prefWidth="833.0">
             <columns>
                 <TableColumn fx:id="col_lname" prefWidth="139.0" text="Last Name" />
                 <TableColumn fx:id="col_type" prefWidth="133.0" text="Job Type" />
