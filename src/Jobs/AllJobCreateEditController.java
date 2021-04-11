@@ -116,30 +116,33 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     public void showImage(byte[] png) throws IOException {
         Connection connection = null;
+        File f = File.createTempFile("img", ".png");
         try {
             connection = getConnectionPlain();
             ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job WHERE job_id = '" + x + "'");
             if (rs.next()) {
                 InputStream is = rs.getBinaryStream("job_sketch");
-                OutputStream os = new FileOutputStream(new File("img.png"));
-                png = new byte[1024];
-                int size = 0;
+                if(is != null){
+                    OutputStream os = new FileOutputStream(f.getAbsolutePath());
+                    png = new byte[1024];
+                    int size = 0;
 
-                while ((size = is.read(png)) != -1) {
+                    while ((size = is.read(png)) != -1) {
 
-                    os.write(png, 0, size);
+                        os.write(png, 0, size);
+                    }
+
+                    os.close();
+                    is.close();
+                    BufferedImage bufferedImage = ImageIO.read(f);
+                    Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+                    sketchView.setImage(image1);
                 }
-
-                os.close();
-                is.close();
-                File file = new File("img.png");
-                BufferedImage bufferedImage = ImageIO.read(file);
-                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        f.deleteOnExit();
     }
 
     @FXML
@@ -210,6 +213,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @FXML
     private void BrowseFile(ActionEvent actionEvent) {
+        sketchView.setCache(false);
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
@@ -241,6 +245,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 statement.setBinaryStream(1, (InputStream) inputStream, (int) (image.length()));
 
                 statement.executeUpdate();
+                System.out.println("image uploaded");
 
             } catch (FileNotFoundException e) {
                 System.out.println("FileNotFoundException: - " + e);
@@ -286,6 +291,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                     System.out.println("SQLException Finally: - " + e);
                 }
             }
+            filePath.clear();
+            sketchView.setImage(null);
         }
     }
 }
