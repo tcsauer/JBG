@@ -261,6 +261,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
 
         searchTable.setItems(custList);
         textField.setText(null);
+        resetBtn.setVisible(false);
     }
 
     @FXML

@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -35,12 +36,12 @@
                <font>
                   <Font size="22.0" />
                </font></Button>
-            <Text fill="WHITE" layoutX="43.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="J B &amp; G">
+            <Text fill="WHITE" layoutX="35.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="J B &amp; G" textAlignment="CENTER" wrappingWidth="201.51171875">
                <font>
                   <Font name="Georgia" size="56.0" />
                </font>
             </Text>
-            <Label layoutX="59.0" layoutY="101.0" prefHeight="23.0" prefWidth="157.0" text="Upholstery / Drapery" textFill="WHITE">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="101.0" prefHeight="23.0" prefWidth="182.0" text="Upholstery / Drapery" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -78,15 +79,21 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <!--Month revenue -->
-            <Label fx:id="revenue" layoutX="521.0" layoutY="80.0" textFill="WHITE">
-               <font><Font name="Segoe UI Semibold" size="60.0" /></font>
-            </Label>
             <!--Date and time -->
 
-            <Label fx:id="date" layoutX="75.0" layoutY="80.0" textFill="WHITE">
+            <Label fx:id="date" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="80.0" prefHeight="73.0" prefWidth="416.0" textAlignment="CENTER" textFill="WHITE">
                <font><Font name="Segoe UI Semibold" size="60.0" /></font>
             </Label>
+            <HBox layoutX="456.0" layoutY="80.0" prefHeight="91.0" prefWidth="416.0">
+               <children>
+                  <!--Month revenue -->
+                  <Label fx:id="revenue" alignment="CENTER" contentDisplay="CENTER" prefHeight="73.0" prefWidth="428.0" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI Semibold" size="60.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
 
 
 
