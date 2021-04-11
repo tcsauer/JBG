@@ -19,6 +19,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -65,6 +66,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     String filename;
     @FXML
     private JFXButton submitPhoto;
+    @FXML
+    private Label goodLab;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -160,12 +163,13 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                jobType.setValue(null);
-                cost.clear();
-                jobStatus.setValue(null);
-                startDate.setValue(null);
-                fDate.setValue(null);
-                paymentType.setValue(null);
+                jobType.setDisable(true);
+                cost.setDisable(true);
+                jobStatus.setDisable(true);
+                startDate.setDisable(true);
+                fDate.setDisable(true);
+                paymentType.setDisable(true);
+                goodLab.setVisible(true);
             }
         } else if (z == 2) {
             if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
@@ -180,12 +184,13 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                jobType.setValue(null);
-                cost.clear();
-                jobStatus.setValue(null);
-                startDate.setValue(null);
-                fDate.setValue(null);
-                paymentType.setValue(null);
+                jobType.setDisable(true);
+                cost.setDisable(true);
+                jobStatus.setDisable(true);
+                startDate.setDisable(true);
+                fDate.setDisable(true);
+                paymentType.setDisable(true);
+                goodLab.setVisible(true);
             }
         } else {
             if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
@@ -200,12 +205,13 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                jobType.setValue(null);
-                cost.clear();
-                jobStatus.setValue(null);
-                startDate.setValue(null);
-                fDate.setValue(null);
-                paymentType.setValue(null);
+                jobType.setDisable(true);
+                cost.setDisable(true);
+                jobStatus.setDisable(true);
+                startDate.setDisable(true);
+                fDate.setDisable(true);
+                paymentType.setDisable(true);
+                goodLab.setVisible(true);
             }
         }
         browseBtn.setDisable(false);
@@ -293,6 +299,12 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             }
             filePath.clear();
             sketchView.setImage(null);
+            jobType.setValue(null);
+            cost.clear();
+            jobStatus.setValue(null);
+            startDate.setValue(null);
+            fDate.setValue(null);
+            paymentType.setValue(null);
         }
     }
 }
