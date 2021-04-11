@@ -220,8 +220,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     }
 
     @FXML
-    private void BrowseFile(ActionEvent actionEvent) {
-        sketchView.setCache(false);
+    private void BrowseFile(ActionEvent actionEvent) throws IOException {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
@@ -229,6 +228,9 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         selectedFile = fc.showOpenDialog(null);
          filename = selectedFile.getAbsolutePath();
         filePath.setText(filename);
+        BufferedImage bufferedImage = ImageIO.read(selectedFile);
+        Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+        sketchView.setImage(image1);
         submitPhoto.setDisable(false);
 
     }
@@ -242,9 +244,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
         if (z == 2) {
             try {
-                BufferedImage bufferedImage = ImageIO.read(selectedFile);
-                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
                 File image = new File(filename);
                 inputStream = new FileInputStream(image);
 
@@ -272,9 +271,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             }
         } else {
             try {
-                BufferedImage bufferedImage = ImageIO.read(selectedFile);
-                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
                 File image = new File(filename);
                 inputStream = new FileInputStream(image);
 
