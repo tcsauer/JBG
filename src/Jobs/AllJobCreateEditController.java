@@ -88,69 +88,57 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 "Complete",
                 "Pending"
         );
-
-        Connection connection = null;
-
-        try {
-
-            connection = getConnectionPlain();
-            ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job ORDER BY job_id DESC LIMIT 1");
-
-            if (rs.next()) {
-                InputStream is = rs.getBinaryStream("job_sketch");
-
-                // instead of the next 9 lines, you could just do
-                // javafx.scene.image.Image image1 = new Image(is);
-
-                OutputStream os = new FileOutputStream(new File("img.png"));
-                byte[] content = new byte[1024];
-                int size = 0;
-
-
-                while ((size = is.read(content)) != -1) {
-
-                    os.write(content, 0, size);
-                }
-
-                os.close();
-                is.close();
-                File file =new File("img.png");
-                BufferedImage bufferedImage = ImageIO.read(file);
-                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                //sketchView.setImage(image1);
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                System.out.println("SQLException Finally: - " + e);
-            }
-        }
     }
-        @FXML
+
+    @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJob.fxml"));
         Parent root = loader.load();
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    public void diffSceneCustID(Object change, int edit){
+    public void diffSceneCustID(Object change, int edit) {
         this.x = change;
         this.z = edit;
     }
 
-    public void showInfo(String jType, String jCost, String jStatus, String jPayment, String jStart, String jFinish){
+    public void showInfo(String jType, String jCost, String jStatus, String jPayment, String jStart, String jFinish) {
         jobType.setValue(jType);
         cost.setText(jCost);
         jobStatus.setValue(jStatus);
         paymentType.setValue(jPayment);
         startDate.setValue(LocalDate.parse(jStart));
         fDate.setValue(LocalDate.parse(jFinish));
+    }
+
+    public void showImage(byte[] png) throws IOException {
+        Connection connection = null;
+        try {
+            connection = getConnectionPlain();
+            ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job WHERE job_id = '" + x + "'");
+            if (rs.next()) {
+                InputStream is = rs.getBinaryStream("job_sketch");
+                OutputStream os = new FileOutputStream(new File("img.png"));
+                png = new byte[1024];
+                int size = 0;
+
+                while ((size = is.read(png)) != -1) {
+
+                    os.write(png, 0, size);
+                }
+
+                os.close();
+                is.close();
+                File file = new File("img.png");
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+                sketchView.setImage(image1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML

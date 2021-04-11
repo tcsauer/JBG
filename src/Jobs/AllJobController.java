@@ -218,6 +218,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
             AllJobCreateEditController editScene = loader.getController();
             editScene.diffSceneCustID(AllJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);
             editScene.showInfo(AllJobsTable.getSelectionModel().getSelectedItem().getJobType(), AllJobsTable.getSelectionModel().getSelectedItem().getJobCost(), AllJobsTable.getSelectionModel().getSelectedItem().getJobStatus(), AllJobsTable.getSelectionModel().getSelectedItem().getPaymentType(), AllJobsTable.getSelectionModel().getSelectedItem().getDateStart(), AllJobsTable.getSelectionModel().getSelectedItem().getDateComplete());
+            editScene.showImage(AllJobsTable.getSelectionModel().getSelectedItem().getJobSketch());
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
