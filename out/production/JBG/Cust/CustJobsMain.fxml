@@ -79,7 +79,7 @@
                <GridPane.margin>
                   <Insets right="9.0" />
                </GridPane.margin></Label>
-            <Label text="City" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+            <Label text="City" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="9.0" />
                </GridPane.margin></Label>
@@ -89,7 +89,7 @@
                </GridPane.margin></Label>
             <JFXTextField fx:id="firstNameBox" labelFloat="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <JFXTextField fx:id="lastNameBox" labelFloat="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <JFXTextField fx:id="phoneBox" labelFloat="true" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <JFXTextField fx:id="phoneBox" labelFloat="true" promptText="xxx-xxx-xxxx" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets right="9.0" />
                </GridPane.margin></JFXTextField>
@@ -101,7 +101,7 @@
                   <Insets right="9.0" />
                </GridPane.margin></JFXTextField>
             <JFXTextField fx:id="stateBox" labelFloat="true" prefHeight="27.0" prefWidth="15.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <Label text="State" textFill="WHITE" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+            <Label text="State" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <GridPane.margin>
                   <Insets right="9.0" />
                </GridPane.margin></Label>

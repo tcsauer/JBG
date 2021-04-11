@@ -19,7 +19,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543;" stylesheets="@../assets/white.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobCreateEditController">
     <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="458.0" layoutX="723.0" layoutY="81.0" stroke="TRANSPARENT" strokeType="INSIDE" width="443.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="458.0" layoutX="724.0" layoutY="81.0" stroke="TRANSPARENT" strokeType="INSIDE" width="443.0" />
         <Group layoutX="1132.0">
             <children>
                 <JFXButton layoutX="9.0" layoutY="11.0" onAction="#changeToDash" prefHeight="46.0" prefWidth="50.0" ripplerFill="#818b9a" text=" " />
@@ -95,9 +95,9 @@
                 <Font size="31.0" />
             </font>
         </Label>
-        <AnchorPane layoutX="737.0" layoutY="121.0" maxHeight="359.0" maxWidth="416.0" minHeight="359.0" minWidth="416.0" prefHeight="359.0" prefWidth="416.0" style="-fx-background-color: #dedede;">
+        <AnchorPane layoutX="737.0" layoutY="121.0" maxHeight="359.0" maxWidth="416.0" minHeight="333.0" minWidth="416.0" prefHeight="333.0" prefWidth="416.0" style="-fx-background-color: #dedede;">
             <children>
-                <ImageView fx:id="sketchView" fitHeight="339.0" fitWidth="390.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                <ImageView fx:id="sketchView" fitHeight="316.0" fitWidth="390.0" layoutX="4.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="10.0" />
             </children>
         </AnchorPane>
         <JFXTextField fx:id="filePath" editable="false" labelFloat="true" layoutX="761.0" layoutY="499.0" prefHeight="27.0" prefWidth="244.0" promptText="png only" style="-fx-prompt-text-fill: #ffffff;" text="File Location" unFocusColor="WHITE" />
@@ -112,5 +112,6 @@
             <Font size="33.0" />
          </font>
       </Label>
+      <Label fx:id="goodLab2" layoutX="900.0" layoutY="466.0" text="Information Saved" textFill="#67bc32" visible="false" />
     </children>
 </AnchorPane>

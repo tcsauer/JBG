@@ -68,6 +68,8 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
     private JFXButton submitPhoto;
     @FXML
     private Label goodLab;
+    @FXML
+    private Label goodLab2;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -163,12 +165,12 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                jobType.setDisable(true);
-                cost.setDisable(true);
-                jobStatus.setDisable(true);
-                startDate.setDisable(true);
-                fDate.setDisable(true);
-                paymentType.setDisable(true);
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
                 goodLab.setVisible(true);
             }
         } else if (z == 2) {
@@ -184,12 +186,12 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                jobType.setDisable(true);
-                cost.setDisable(true);
-                jobStatus.setDisable(true);
-                startDate.setDisable(true);
-                fDate.setDisable(true);
-                paymentType.setDisable(true);
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
                 goodLab.setVisible(true);
             }
         } else {
@@ -205,12 +207,12 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
-                jobType.setDisable(true);
-                cost.setDisable(true);
-                jobStatus.setDisable(true);
-                startDate.setDisable(true);
-                fDate.setDisable(true);
-                paymentType.setDisable(true);
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
                 goodLab.setVisible(true);
             }
         }
@@ -299,12 +301,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             }
             filePath.clear();
             sketchView.setImage(null);
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
+            goodLab2.setVisible(true);
         }
     }
 }

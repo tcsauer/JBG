@@ -43,8 +43,9 @@
                 <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="108.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="71.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="143.0" minHeight="10.0" prefHeight="93.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="114.0" minHeight="0.0" prefHeight="79.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="147.0" minHeight="10.0" prefHeight="146.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="114.0" minHeight="0.0" prefHeight="21.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Cost" textAlignment="RIGHT" textFill="WHITE" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -67,7 +68,7 @@
                         <Font size="17.0" />
                     </font>
                 </Label>
-                <HBox alignment="CENTER" prefHeight="106.0" prefWidth="574.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="4">
+                <HBox alignment="CENTER" prefHeight="106.0" prefWidth="574.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="5">
                <children>
                         <JFXButton fx:id="submitBtn" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#changeToActiveJobs" prefHeight="37.0" prefWidth="86.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Submit">
                      <font>
@@ -86,6 +87,7 @@
                </GridPane.margin>
             </ComboBox>
             <ComboBox fx:id="jobStatus" prefWidth="150.0" promptText="Job Status" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            <Label fx:id="goodLab" text="Information Saved" textFill="#67bc32" visible="false" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
             </children>
         </GridPane>
         <Label layoutX="547.0" layoutY="15.0" prefHeight="38.0" prefWidth="123.0" text="Job View" textFill="WHITE">
@@ -103,26 +105,6 @@
          <font>
             <Font size="17.0" />
          </font></Label>
-        <Label layoutX="22.0" layoutY="562.0" text="Job ID:">
-            <font>
-                <Font size="10.0" />
-            </font>
-        </Label>
-        <Label fx:id="jobID" layoutX="58.0" layoutY="562.0" text="BLANK">
-            <font>
-                <Font size="10.0" />
-            </font>
-        </Label>
-        <Label layoutX="123.0" layoutY="550.0" prefHeight="36.0" prefWidth="58.0" text="Customer ID:" textAlignment="CENTER" wrapText="true">
-            <font>
-                <Font size="10.0" />
-            </font>
-        </Label>
-        <Label fx:id="custID" layoutX="189.0" layoutY="562.0" text="BLANK">
-            <font>
-                <Font size="10.0" />
-            </font>
-        </Label>
       <JFXButton fx:id="browseBtn" buttonType="RAISED" layoutX="1014.0" layoutY="502.0" onAction="#BrowseFile" prefHeight="29.0" prefWidth="68.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Browse" />
       <JFXButton fx:id="submitPhoto" buttonType="RAISED" layoutX="1089.0" layoutY="502.0" onAction="#submitPhoto" prefHeight="29.0" prefWidth="68.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Submit" />
       <Label layoutX="661.0" layoutY="281.0" text="&gt;&gt;" textFill="WHITE">

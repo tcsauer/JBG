@@ -42,7 +42,7 @@
             <TableColumn fx:id="col_zip" prefWidth="145.0" text="Zip" />
             </columns>
         </TableView>
-        <JFXTextField fx:id="textField" labelFloat="true" layoutX="420.0" layoutY="149.0" prefHeight="27.0" prefWidth="358.0" promptText="Enter String" style="-fx-text-fill: #ffffff; -fx-text-prompt-fill: #ffffff;" styleClass="-fx-text-prompt-fill" unFocusColor="WHITE" />
+        <JFXTextField fx:id="textField" labelFloat="true" layoutX="420.0" layoutY="149.0" prefHeight="27.0" prefWidth="358.0" promptText="Enter a Value" style="-fx-text-fill: #ffffff; -fx-text-prompt-fill: #ffffff;" styleClass="-fx-text-prompt-fill" unFocusColor="WHITE" />
         <JFXButton layoutX="795.0" layoutY="142.0" onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search">
             <font>
                 <Font size="15.0" />
