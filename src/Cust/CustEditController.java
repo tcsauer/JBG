@@ -15,14 +15,17 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -61,16 +64,22 @@ public class CustEditController extends DatabaseConnection implements Initializa
 
     @FXML
     public void loadJob(ActionEvent actionEvent){
-        try {
+        try{
             Statement con = ConnectToDatabase();
-            ResultSet rs = con.executeQuery("SELECT job_id, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job WHERE customer_id = '"+ x +"'");
-
+            ResultSet rs = con.executeQuery("SELECT job_id, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job WHERE customer_id = '"+x+"'");
             while(rs.next()){
-                jobList.add(new Jobs(rs.getInt("job_id"),rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
+                jobList.add(new Jobs(rs.getInt("job_id"),
+                        rs.getString("job_type"),
+                        rs.getString("job_cost"),
+                        rs.getString("job_status"),
+                        rs.getString("date_start"),
+                        rs.getString("date_complete"),
+                        rs.getString("payment_type")));
             }disconnectFromDB(con);
-        } catch (Exception ex) {
-            Logger.getLogger(CustEditController.class.getName()).log(Level.SEVERE,null,ex);
+        }catch(SQLException ex){
+            Logger.getLogger(CustEditController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("jobCost"));
         col_status.setCellValueFactory(new PropertyValueFactory<>("jobStatus"));
@@ -117,14 +126,19 @@ public class CustEditController extends DatabaseConnection implements Initializa
 
     @FXML
     private void viewJob(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
-        Parent root = loader.load();
-        AllJobCreateEditController editScene2 = loader.getController();
-        editScene2.diffSceneCustID(custJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);
-        editScene2.showInfo(custJobsTable.getSelectionModel().getSelectedItem().getJobType(), custJobsTable.getSelectionModel().getSelectedItem().getJobCost(), custJobsTable.getSelectionModel().getSelectedItem().getJobStatus(), custJobsTable.getSelectionModel().getSelectedItem().getPaymentType(), custJobsTable.getSelectionModel().getSelectedItem().getDateStart(), custJobsTable.getSelectionModel().getSelectedItem().getDateComplete());
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        if(custJobsTable.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+            Parent root = loader.load();
+            AllJobCreateEditController editScene2 = loader.getController();
+            editScene2.diffSceneCustID(custJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);
+            editScene2.showInfo(custJobsTable.getSelectionModel().getSelectedItem().getJobType(), custJobsTable.getSelectionModel().getSelectedItem().getJobCost(), custJobsTable.getSelectionModel().getSelectedItem().getJobStatus(), custJobsTable.getSelectionModel().getSelectedItem().getPaymentType(), custJobsTable.getSelectionModel().getSelectedItem().getDateStart(), custJobsTable.getSelectionModel().getSelectedItem().getDateComplete());
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }else{
+            JOptionPane frame = new JOptionPane();
+            JOptionPane.showMessageDialog(frame, "Please select a job.");
+        }
     }
 
 }
