@@ -130,6 +130,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
 
     @FXML
     private void custSearch(ActionEvent actionEvent) {
+        if(textField.getText() != null){
         try {
             searchTable.getItems().clear();
             Statement con = ConnectToDatabase();
@@ -147,6 +148,26 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
             }disconnectFromDB(con);
         }catch(Exception ex){
             System.out.println(ex.getMessage());
+        }}
+        else {
+            try {
+                searchTable.getItems().clear();
+                Statement con = ConnectToDatabase();
+                ResultSet rs = con.executeQuery("SELECT customer_id, cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer");
+                while(rs.next()){
+                    custList.add(new SaveCust(rs.getInt("customer_id"),
+                            rs.getString("cust_fname"),
+                            rs.getString("cust_lname"),
+                            rs.getString("cust_phone"),
+                            rs.getString("cust_email"),
+                            rs.getString("cust_street"),
+                            rs.getString("cust_city"),
+                            rs.getString("cust_state"),
+                            rs.getString("cust_zip")));
+                }disconnectFromDB(con);
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+            }
         }
         col_firstName.setCellValueFactory(new PropertyValueFactory<>("custFirstName"));
         col_lastName.setCellValueFactory(new PropertyValueFactory<>("custLastName"));

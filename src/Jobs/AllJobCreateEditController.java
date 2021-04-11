@@ -152,6 +152,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
 
     @FXML
     public void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
+        goodLab2.setVisible(false);
         if (z  == 1) {
             if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
             if(Validation.datePickerNotEmpty(startDate, fDate))
@@ -232,6 +233,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
         sketchView.setImage(image1);
         submitPhoto.setDisable(false);
+        goodLab.setVisible(false);
 
     }
 
@@ -295,9 +297,11 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                     System.out.println("SQLException Finally: - " + e);
                 }
             }
-            filePath.clear();
+            filePath.setText("Filepath");
             sketchView.setImage(null);
             goodLab2.setVisible(true);
+            browseBtn.setDisable(true);
+            submitPhoto.setDisable(true);
         }
     }
 }
