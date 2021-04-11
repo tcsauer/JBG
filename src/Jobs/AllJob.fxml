@@ -19,7 +19,7 @@
     <children>
       <Group layoutX="993.0" layoutY="181.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="200.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="237.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
               <JFXCheckBox fx:id="activeFilter" layoutX="18.0" layoutY="57.0" onAction="#filterActive" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
             <Label layoutX="56.0" layoutY="18.0" text="Filters" textFill="WHITE">
                <font>
@@ -28,6 +28,7 @@
             </Label>
             <ComboBox fx:id="jobFilter" layoutX="22.0" layoutY="100.0" onAction="#filterJob" prefHeight="27.0" prefWidth="111.0" promptText="Job Type" />
             <ComboBox fx:id="paymentFilter" layoutX="21.0" layoutY="145.0" onAction="#filterPayment" prefHeight="27.0" prefWidth="113.0" promptText="Payment Type" />
+            <JFXButton fx:id="reset" layoutX="43.0" layoutY="189.0" onAction="#reset" prefHeight="27.0" prefWidth="69.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Reset" />
          </children>
       </Group>
         <Group layoutX="1132.0" layoutY="6.0">

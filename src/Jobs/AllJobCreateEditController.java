@@ -227,13 +227,15 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
         );
         selectedFile = fc.showOpenDialog(null);
-         filename = selectedFile.getAbsolutePath();
-        filePath.setText(filename);
-        BufferedImage bufferedImage = ImageIO.read(selectedFile);
-        Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-        sketchView.setImage(image1);
-        submitPhoto.setDisable(false);
-        goodLab.setVisible(false);
+        filename = selectedFile.getAbsolutePath();
+        if (selectedFile != null) {
+            filePath.setText(filename);
+            BufferedImage bufferedImage = ImageIO.read(selectedFile);
+            Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+            sketchView.setImage(image1);
+            submitPhoto.setDisable(false);
+            goodLab.setVisible(false);
+        }
 
     }
 
@@ -243,65 +245,66 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         Connection connection = null;
         PreparedStatement statement = null;
         FileInputStream inputStream = null;
-
-        if (z == 2) {
-            try {
-                File image = new File(filename);
-                inputStream = new FileInputStream(image);
-
-                connection = getConnectionPlain();
-                statement = connection.prepareStatement("UPDATE Job " + "SET job_sketch = (?) WHERE job_id = '"+x+"'");
-                statement.setBinaryStream(1, (InputStream) inputStream, (int) (image.length()));
-
-                statement.executeUpdate();
-                System.out.println("image uploaded");
-
-            } catch (FileNotFoundException e) {
-                System.out.println("FileNotFoundException: - " + e);
-            } catch (SQLException e) {
-                System.out.println("SQLException: - " + e);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
+        if(selectedFile != null){
+            if (z == 2) {
                 try {
-                    connection.close();
-                    statement.close();
+                    File image = new File(filename);
+                    inputStream = new FileInputStream(image);
+
+                    connection = getConnectionPlain();
+                    statement = connection.prepareStatement("UPDATE Job " + "SET job_sketch = (?) WHERE job_id = '" + x + "'");
+                    statement.setBinaryStream(1, (InputStream) inputStream, (int) (image.length()));
+
+                    statement.executeUpdate();
+                    System.out.println("image uploaded");
+
+                } catch (FileNotFoundException e) {
+                    System.out.println("FileNotFoundException: - " + e);
                 } catch (SQLException e) {
-                    System.out.println("SQLException Finally: - " + e);
+                    System.out.println("SQLException: - " + e);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+
+                    try {
+                        connection.close();
+                        statement.close();
+                    } catch (SQLException e) {
+                        System.out.println("SQLException Finally: - " + e);
+                    }
                 }
-            }
-        } else {
-            try {
-                File image = new File(filename);
-                inputStream = new FileInputStream(image);
-
-                connection = getConnectionPlain();
-                statement = connection.prepareStatement("UPDATE Job " + "SET job_sketch = (?) ORDER BY job_id DESC LIMIT 1");
-                statement.setBinaryStream(1, (InputStream) inputStream, (int) (image.length()));
-
-                statement.executeUpdate();
-
-            } catch (FileNotFoundException e) {
-                System.out.println("FileNotFoundException: - " + e);
-            } catch (SQLException e) {
-                System.out.println("SQLException: - " + e);
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
+            } else {
                 try {
-                    connection.close();
-                    statement.close();
+                    File image = new File(filename);
+                    inputStream = new FileInputStream(image);
+
+                    connection = getConnectionPlain();
+                    statement = connection.prepareStatement("UPDATE Job " + "SET job_sketch = (?) ORDER BY job_id DESC LIMIT 1");
+                    statement.setBinaryStream(1, (InputStream) inputStream, (int) (image.length()));
+
+                    statement.executeUpdate();
+
+                } catch (FileNotFoundException e) {
+                    System.out.println("FileNotFoundException: - " + e);
                 } catch (SQLException e) {
-                    System.out.println("SQLException Finally: - " + e);
+                    System.out.println("SQLException: - " + e);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+
+                    try {
+                        connection.close();
+                        statement.close();
+                    } catch (SQLException e) {
+                        System.out.println("SQLException Finally: - " + e);
+                    }
                 }
+                filePath.setText("Filepath");
+                sketchView.setImage(null);
+                goodLab2.setVisible(true);
+                browseBtn.setDisable(true);
+                submitPhoto.setDisable(true);
             }
-            filePath.setText("Filepath");
-            sketchView.setImage(null);
-            goodLab2.setVisible(true);
-            browseBtn.setDisable(true);
-            submitPhoto.setDisable(true);
         }
     }
 }

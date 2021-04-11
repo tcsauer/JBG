@@ -232,4 +232,14 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     private void clearError(MouseEvent mouseEvent) {
         errLab.setVisible(false);
     }
+
+    @FXML
+    private void reset(ActionEvent actionEvent) {
+        AllJobsTable.setItems(jobList);
+        jobFilter.getSelectionModel().clearSelection();
+        jobFilter.setValue(null);
+        paymentFilter.getSelectionModel().clearSelection();
+        paymentFilter.setValue(null);
+        activeFilter.setSelected(false);
+    }
 }
