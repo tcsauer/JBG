@@ -1,6 +1,7 @@
 package Cust;
 
 import Dashboard.DatabaseConnection;
+import Dashboard.Validation;
 import Jobs.Jobs;
 import backup_scenes.CustSearchAndReturnController;
 import Jobs.AllJobCreateEditController;
@@ -91,18 +92,26 @@ public class CustEditController extends DatabaseConnection implements Initializa
 
     @FXML
     private void editAndSave(ActionEvent actionEvent) {
-        //Needs to be done
-        //This is to test error label alt
-        /*
-        fName.getStylesheets().add("assets/error.css");
-        fName.setPromptText("Please enter letters only");
-         */
-        try {
-            Statement sqlUpdate = ConnectToDatabase();
-            sqlUpdate.execute("UPDATE Customer SET cust_fname = '"+fName.getText()+"', cust_lname = '"+lName.getText()+"', cust_phone = '"+phone.getText()+"', cust_email = '"+email.getText()+"', cust_street = '"+streetAddress.getText()+"', cust_city = '"+city.getText()+"', cust_state = '"+state.getText()+"', cust_zip = '"+zip.getText()+"' WHERE customer_id = '"+ x +"'");
-            disconnectFromDB(sqlUpdate);
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        if(Validation.textFieldNotEmpty(fName, lName, phone, email, streetAddress, state, city, zip))
+        if(Validation.phoneFormat(phone))
+        if(Validation.emailFormat(email))
+        if(Validation.zipFormat(zip)){
+            try {
+                Statement sqlUpdate = ConnectToDatabase();
+                //sqlUpdate.execute("UPDATE Customer SET cust_fname = '" + fName.getText() + "', cust_lname = '" + lName.getText() + "', cust_phone = '" + phone.getText() + "', cust_email = '" + email.getText() + "', cust_street = '" + streetAddress.getText() + "', cust_city = '" + city.getText() + "', cust_state = '" + state.getText() + "', cust_zip = '" + zip.getText() + "' WHERE customer_id = '" + x + "'");
+                disconnectFromDB(sqlUpdate);
+                System.out.println("Fake");
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+            fName.clear();
+            lName.clear();
+            phone.clear();
+            email.clear();
+            streetAddress.clear();
+            state.clear();
+            city.clear();
+            zip.clear();
         }
     }
 
