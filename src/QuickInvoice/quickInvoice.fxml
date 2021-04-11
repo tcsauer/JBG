@@ -74,11 +74,11 @@
   <!-- Form -->
     <AnchorPane fx:id="anchorPane" layoutX="30.0" layoutY="25.0" prefHeight="550.0" prefWidth="425.0" style="-fx-background-color: white;">
         <children>
-            <Label layoutX="22.0" layoutY="18.0" text="J.B &amp; G"><font><Font size="17.0" /></font></Label>
-            <Label layoutX="92.0" layoutY="26.0" text="Upholstery &amp; Drapery"><font><Font size="10.0" /></font></Label>
+            <Label layoutX="22.0" layoutY="18.0" text="J B &amp; G"><font><Font size="17.0" /></font></Label>
+            <Label layoutX="78.0" layoutY="26.0" text="Upholstery &amp; Drapery"><font><Font size="10.0" /></font></Label>
             <Label layoutX="22.0" layoutY="490.0" text="12999 Murphy Rd. Suite M-15"><font><Font size="7.0" /></font></Label>
             <Label layoutX="22.0" layoutY="505.0" text="Stafford, TX 77477"><font><Font size="7.0" /></font></Label>
-            <Label layoutX="16.0" layoutY="520.0" text="  281 - 564 - 7800"><font><Font size="7.0" /></font></Label>
+            <Label layoutX="22.0" layoutY="520.0" text="281 - 564 - 7800"><font><Font size="7.0" /></font></Label>
             <Label layoutX="300.0" layoutY="14.0" text="INVOICE"><font><Font size="24.0" /></font></Label>
             <!--Customer Info  -->
             <Label layoutX="22.0" layoutY="52.0" text="Customer Information"><font><Font size="10.0" /></font></Label>
