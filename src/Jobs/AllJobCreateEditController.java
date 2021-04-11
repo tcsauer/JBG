@@ -3,6 +3,7 @@ package Jobs;
 import Cust.CustJobsMainController;
 import Cust.CustSearchController;
 import Dashboard.DatabaseConnection;
+import Dashboard.Validation;
 import backup_scenes.CustSearchAndReturnController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -22,14 +23,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -96,65 +89,23 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 "Complete",
                 "Pending"
         );
-
-        Connection connection = null;
-
-        try {
-            File t = File.createTempFile("img", ".png");
-            t.deleteOnExit();
-            connection = getConnectionPlain();
-            ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job ORDER BY job_id DESC LIMIT 1");
-
-            if (rs.next()) {
-                InputStream is = rs.getBinaryStream("job_sketch");
-
-                // instead of the next 9 lines, you could just do
-                // javafx.scene.image.Image image1 = new Image(is);
-
-                OutputStream os = Files.newOutputStream(t.toPath());
-                byte[] content = new byte[1024];
-                int size = 0;
-
-
-                while ((size = is.read(content)) != -1) {
-
-                    os.write(content, 0, size);
-                }
-
-                os.close();
-                is.close();
-                System.out.println(t.toPath());
-                File file =new File(t.getAbsolutePath());
-                BufferedImage bufferedImage = ImageIO.read(file);
-                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-                sketchView.setImage(image1);
-            }
-
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                System.out.println("SQLException Finally: - " + e);
-            }
-        }
     }
-        @FXML
+
+    @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("AllJob.fxml"));
         Parent root = loader.load();
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    public void diffSceneCustID(Object change, int edit){
+    public void diffSceneCustID(Object change, int edit) {
         this.x = change;
         this.z = edit;
     }
 
-    public void showInfo(String jType, String jCost, String jStatus, String jPayment, String jStart, String jFinish){
+    public void showInfo(String jType, String jCost, String jStatus, String jPayment, String jStart, String jFinish) {
         jobType.setValue(jType);
         cost.setText(jCost);
         jobStatus.setValue(jStatus);
@@ -163,64 +114,102 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         fDate.setValue(LocalDate.parse(jFinish));
     }
 
+    public void showImage(byte[] png) throws IOException {
+        Connection connection = null;
+        try {
+            connection = getConnectionPlain();
+            ResultSet rs = connection.createStatement().executeQuery("SELECT job_sketch FROM Job WHERE job_id = '" + x + "'");
+            if (rs.next()) {
+                InputStream is = rs.getBinaryStream("job_sketch");
+                OutputStream os = new FileOutputStream(new File("img.png"));
+                png = new byte[1024];
+                int size = 0;
+
+                while ((size = is.read(png)) != -1) {
+
+                    os.write(png, 0, size);
+                }
+
+                os.close();
+                is.close();
+                File file = new File("img.png");
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
+                sketchView.setImage(image1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     @FXML
     public void changeToActiveJobs(ActionEvent actionEvent) throws IOException {
         if (z  == 1) {
-            try {
-                Statement sqlInsert = ConnectToDatabase();
-                DecimalFormat df = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(cost.getText());
-                sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('"+x+"' ,'" + jobType.getValue() + "','" + df.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
-                disconnectFromDB(sqlInsert);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
+            if(Validation.datePickerNotEmpty(startDate, fDate))
+            if(Validation.validDate(startDate, fDate))
+            if(Validation.costFieldNotEmpty(cost))
+            if(Validation.costFormat(cost)){
+                try {
+                    Statement sqlInsert = ConnectToDatabase();
+                    sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ('"+x+"' ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                    disconnectFromDB(sqlInsert);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
             }
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
         } else if (z == 2) {
-            try {
-                Statement sqlUpdate = ConnectToDatabase();
-                /*
-                DecimalFormat df = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(cost.getText());
-                 */
-                sqlUpdate.execute("UPDATE Job SET job_type = '"+jobType.getValue()+"', job_cost = '"+cost.getText()+"', job_status = '"+jobStatus.getValue()+"', date_start = '"+startDate.getValue().toString()+"', date_complete = '"+fDate.getValue().toString()+"', payment_type = '"+paymentType.getValue()+"' WHERE job_id = '"+x+"'");
-                disconnectFromDB(sqlUpdate);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
+            if(Validation.datePickerNotEmpty(startDate, fDate))
+            if(Validation.validDate(startDate, fDate))
+            if(Validation.costFieldNotEmpty(cost))
+            if(Validation.costFormat(cost)){
+                try {
+                    Statement sqlUpdate = ConnectToDatabase();
+                    sqlUpdate.execute("UPDATE Job SET job_type = '"+jobType.getValue()+"', job_cost = '"+cost.getText()+"', job_status = '"+jobStatus.getValue()+"', date_start = '"+startDate.getValue().toString()+"', date_complete = '"+fDate.getValue().toString()+"', payment_type = '"+paymentType.getValue()+"' WHERE job_id = '"+x+"'");
+                    disconnectFromDB(sqlUpdate);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
             }
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
         } else {
-            try {
-                Statement sqlInsert = ConnectToDatabase();
-                DecimalFormat df = new DecimalFormat("###,###,###.00");
-                double num = Double.parseDouble(cost.getText());
-                sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + df.format(num) + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
-                disconnectFromDB(sqlInsert);
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            if(Validation.comboBoxNotEmpty(jobType, paymentType, jobStatus))
+            if(Validation.datePickerNotEmpty(startDate, fDate))
+            if(Validation.validDate(startDate, fDate))
+            if(Validation.costFieldNotEmpty(cost))
+            if(Validation.costFormat(cost)){
+                try {
+                    Statement sqlInsert = ConnectToDatabase();
+                    sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                    disconnectFromDB(sqlInsert);
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+                jobType.setValue(null);
+                cost.clear();
+                jobStatus.setValue(null);
+                startDate.setValue(null);
+                fDate.setValue(null);
+                paymentType.setValue(null);
             }
-            jobType.setValue(null);
-            cost.clear();
-            jobStatus.setValue(null);
-            startDate.setValue(null);
-            fDate.setValue(null);
-            paymentType.setValue(null);
         }
         browseBtn.setDisable(false);
     }
 
     @FXML
-    private void BrowseFile(ActionEvent actionEvent) throws IOException {
+    private void BrowseFile(ActionEvent actionEvent) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("PNG files (*.PNG)", "*.PNG")
@@ -228,9 +217,6 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
         selectedFile = fc.showOpenDialog(null);
          filename = selectedFile.getAbsolutePath();
         filePath.setText(filename);
-        BufferedImage bufferedImage = ImageIO.read(selectedFile);
-        Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-        sketchView.setImage(image1);
         submitPhoto.setDisable(false);
 
     }
@@ -246,7 +232,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             try {
                 BufferedImage bufferedImage = ImageIO.read(selectedFile);
                 Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-//                sketchView.setImage(image1);
+                sketchView.setImage(image1);
                 File image = new File(filename);
                 inputStream = new FileInputStream(image);
 
@@ -275,7 +261,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             try {
                 BufferedImage bufferedImage = ImageIO.read(selectedFile);
                 Image image1 = SwingFXUtils.toFXImage(bufferedImage, null);
-//                sketchView.setImage(image1);
+                sketchView.setImage(image1);
                 File image = new File(filename);
                 inputStream = new FileInputStream(image);
 

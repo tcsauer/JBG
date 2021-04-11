@@ -163,34 +163,42 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
 
     @FXML
     private void deleteCustomer(ActionEvent actionEvent) throws IOException{
-        try {
-            Connection connection = getConnectionPlain();
-            PreparedStatement ps = getConnectionPlain().prepareStatement("DELETE FROM Job WHERE customer_id = ?;");
-            PreparedStatement p2 = connection.prepareStatement("DELETE FROM Customer WHERE customer_id = ?;");
-            ps.setInt(1, searchTable.getSelectionModel().getSelectedItem().getCustID());
-            p2.setInt(1, searchTable.getSelectionModel().getSelectedItem().getCustID());
-            ps.executeUpdate();
-            p2.executeUpdate();
-            ps.close();
-            p2.close();
-            searchTable.getItems().removeAll(searchTable.getSelectionModel().getSelectedItem());
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
+        if(searchTable.getSelectionModel().getSelectedItem() != null) {
+            try {
+                Connection connection = getConnectionPlain();
+                PreparedStatement ps = getConnectionPlain().prepareStatement("DELETE FROM Job WHERE customer_id = ?;");
+                PreparedStatement p2 = connection.prepareStatement("DELETE FROM Customer WHERE customer_id = ?;");
+                ps.setInt(1, searchTable.getSelectionModel().getSelectedItem().getCustID());
+                p2.setInt(1, searchTable.getSelectionModel().getSelectedItem().getCustID());
+                ps.executeUpdate();
+                p2.executeUpdate();
+                ps.close();
+                p2.close();
+                searchTable.getItems().removeAll(searchTable.getSelectionModel().getSelectedItem());
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+        }else {
+            errorLab.setVisible(true);
         }
     }
 
     @FXML
     private void editCustomer(ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustEdit.fxml"));
-        Parent root = loader.load();
-        CustEditController custInfoScene = loader.getController();
-        custInfoScene.showInfo2(searchTable.getSelectionModel().getSelectedItem().getCustID(), searchTable.getSelectionModel().getSelectedItem().getCustFirstName(),
-                searchTable.getSelectionModel().getSelectedItem().getCustLastName(), searchTable.getSelectionModel().getSelectedItem().getCustPhone(),
-                searchTable.getSelectionModel().getSelectedItem().getCustEmail(), searchTable.getSelectionModel().getSelectedItem().getCustStreetAddress(),
-                searchTable.getSelectionModel().getSelectedItem().getCustState(), searchTable.getSelectionModel().getSelectedItem().getCustCity(),
-                searchTable.getSelectionModel().getSelectedItem().getCustZip());
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        if(searchTable.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustEdit.fxml"));
+            Parent root = loader.load();
+            CustEditController custInfoScene = loader.getController();
+            custInfoScene.showInfo2(searchTable.getSelectionModel().getSelectedItem().getCustID(), searchTable.getSelectionModel().getSelectedItem().getCustFirstName(),
+                    searchTable.getSelectionModel().getSelectedItem().getCustLastName(), searchTable.getSelectionModel().getSelectedItem().getCustPhone(),
+                    searchTable.getSelectionModel().getSelectedItem().getCustEmail(), searchTable.getSelectionModel().getSelectedItem().getCustStreetAddress(),
+                    searchTable.getSelectionModel().getSelectedItem().getCustState(), searchTable.getSelectionModel().getSelectedItem().getCustCity(),
+                    searchTable.getSelectionModel().getSelectedItem().getCustZip());
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }else{
+            errorLab.setVisible(true);
+        }
     }
 }
