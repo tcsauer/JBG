@@ -6,6 +6,7 @@ import Cust.CustSearchController;
 import Cust.SaveCust;
 import Dashboard.DatabaseConnection;
 import Jobs.AllJobCreateEditController;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
@@ -22,6 +23,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,6 +61,8 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     ObservableList<SaveCust> custList = FXCollections.observableArrayList();
     @FXML
     private Label errorLab;
+    @FXML
+    private JFXButton resetBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -130,6 +134,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
 
     @FXML
     private void custSearch(ActionEvent actionEvent) {
+        resetBtn.setVisible(true);
         if(textField.getText() != null){
         try {
             searchTable.getItems().clear();
@@ -202,6 +207,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         }else {
             errorLab.setVisible(true);
         }
+        resetBtn.setVisible(false);
     }
 
     @FXML
@@ -221,5 +227,44 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         }else{
             errorLab.setVisible(true);
         }
+    }
+
+    @FXML
+    private void ajayButn(ActionEvent actionEvent) {
+            try {
+                searchTable.getItems().clear();
+                Statement con = ConnectToDatabase();
+                ResultSet rs = con.executeQuery("SELECT customer_id, cust_fname,cust_lname,cust_phone,cust_email,cust_street,cust_city,cust_state,cust_zip FROM Customer");
+                while(rs.next()){
+                    custList.add(new SaveCust(rs.getInt("customer_id"),
+                            rs.getString("cust_fname"),
+                            rs.getString("cust_lname"),
+                            rs.getString("cust_phone"),
+                            rs.getString("cust_email"),
+                            rs.getString("cust_street"),
+                            rs.getString("cust_city"),
+                            rs.getString("cust_state"),
+                            rs.getString("cust_zip")));
+                }disconnectFromDB(con);
+            }catch(Exception ex){
+                System.out.println(ex.getMessage());
+
+        }
+        col_firstName.setCellValueFactory(new PropertyValueFactory<>("custFirstName"));
+        col_lastName.setCellValueFactory(new PropertyValueFactory<>("custLastName"));
+        col_phone.setCellValueFactory(new PropertyValueFactory<>("custPhone"));
+        col_email.setCellValueFactory(new PropertyValueFactory<>("custEmail"));
+        col_street.setCellValueFactory(new PropertyValueFactory<>("custStreetAddress"));
+        col_city.setCellValueFactory(new PropertyValueFactory<>("custState"));
+        col_state.setCellValueFactory(new PropertyValueFactory<>("custCity"));
+        col_zip.setCellValueFactory(new PropertyValueFactory<>("custZip"));
+
+        searchTable.setItems(custList);
+        textField.setText(null);
+    }
+
+    @FXML
+    private void clearError(MouseEvent mouseEvent) {
+        errorLab.setVisible(false);
     }
 }

@@ -24,6 +24,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import jdk.nashorn.internal.scripts.JO;
 import sun.java2d.pipe.SpanShapeRenderer;
@@ -225,5 +226,10 @@ public class AllJobController extends DatabaseConnection implements Initializabl
         }else{
             errLab.setVisible(true);
         }
+    }
+
+    @FXML
+    private void clearError(MouseEvent mouseEvent) {
+        errLab.setVisible(false);
     }
 }

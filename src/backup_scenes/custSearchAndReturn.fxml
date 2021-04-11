@@ -30,7 +30,7 @@
                 <Font size="31.0" />
             </font>
         </Label>
-        <TableView fx:id="searchTable" layoutX="17.0" layoutY="245.0" prefHeight="254.0" prefWidth="1163.0">
+        <TableView fx:id="searchTable" layoutX="17.0" layoutY="245.0" onMouseClicked="#clearError" prefHeight="254.0" prefWidth="1163.0">
             <columns>
                 <TableColumn fx:id="col_firstName" prefWidth="145.0" text="First Name" />
                 <TableColumn fx:id="col_lastName" prefWidth="145.0" text="Last Name" />
@@ -42,8 +42,8 @@
             <TableColumn fx:id="col_zip" prefWidth="145.0" text="Zip" />
             </columns>
         </TableView>
-        <JFXTextField fx:id="textField" labelFloat="true" layoutX="420.0" layoutY="149.0" prefHeight="27.0" prefWidth="358.0" promptText="Enter a Value" style="-fx-text-fill: #ffffff; -fx-text-prompt-fill: #ffffff;" styleClass="-fx-text-prompt-fill" unFocusColor="WHITE" />
-        <JFXButton layoutX="795.0" layoutY="142.0" onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search">
+        <JFXTextField fx:id="textField" labelFloat="true" layoutX="375.0" layoutY="152.0" prefHeight="27.0" prefWidth="358.0" promptText="Enter a Value" style="-fx-text-fill: #ffffff; -fx-text-prompt-fill: #ffffff;" styleClass="-fx-text-prompt-fill" unFocusColor="WHITE" />
+        <JFXButton layoutX="750.0" layoutY="145.0" onAction="#custSearch" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Search">
             <font>
                 <Font size="15.0" />
             </font>
@@ -89,5 +89,10 @@
             </JFXButton>
          </children>
       </HBox>
+      <JFXButton fx:id="resetBtn" layoutX="836.0" layoutY="145.0" onAction="#ajayButn" prefHeight="41.0" prefWidth="73.0" ripplerFill="#818b9a" style="-fx-background-color: #909294#909294;" text="Reset" visible="false">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>
