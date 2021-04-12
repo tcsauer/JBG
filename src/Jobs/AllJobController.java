@@ -235,15 +235,14 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     @FXML
     private void reset(ActionEvent actionEvent) {
-        //filter to nothing
-        FilteredList<Jobs> paymentItems = new FilteredList<Jobs>(jobList);
-        AllJobsTable.setItems(paymentItems);
-        paymentItems.setPredicate(null);
-
-        jobFilter.getSelectionModel().clearSelection();
         jobFilter.setValue(null);
-        paymentFilter.getSelectionModel().clearSelection();
+        if(jobFilter.getValue() == null){
+            AllJobsTable.setItems(jobList);
+        }
         paymentFilter.setValue(null);
+        if(paymentFilter.getValue() == null){
+            AllJobsTable.setItems(jobList);
+        }
         activeFilter.setSelected(false);
     }
 }
