@@ -74,7 +74,7 @@
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label layoutX="552.0" layoutY="20.0" text="This Months Revenue" textFill="WHITE">
+            <Label layoutX="552.0" layoutY="20.0" text="This Month's Revenue" textFill="WHITE">
                <font>
                   <Font size="25.0" />
                </font>

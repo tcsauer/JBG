@@ -15,9 +15,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" stylesheets="@../assets/white.css" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #253543#253543;" stylesheets="@../assets/white.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Jobs.AllJobController">
     <children>
-      <Group layoutX="993.0" layoutY="181.0">
+      <Group layoutX="1012.0" layoutY="182.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#142432" height="237.0" stroke="BLACK" strokeType="INSIDE" width="154.0" />
               <JFXCheckBox fx:id="activeFilter" layoutX="18.0" layoutY="57.0" onAction="#filterActive" prefHeight="26.0" prefWidth="130.0" text="Active Jobs" textFill="#fffdfd" />
@@ -46,15 +46,16 @@
                 <Font size="31.0" />
             </font>
         </Label>
-        <TableView fx:id="AllJobsTable" layoutX="94.0" layoutY="74.0" onMouseClicked="#clearError" prefHeight="426.0" prefWidth="833.0">
+        <TableView fx:id="AllJobsTable" layoutX="30.0" layoutY="74.0" onMouseClicked="#clearError" prefHeight="426.0" prefWidth="940.0">
             <columns>
-                <TableColumn fx:id="col_lname" prefWidth="139.0" text="Last Name" />
-                <TableColumn fx:id="col_type" prefWidth="133.0" text="Job Type" />
-            <TableColumn fx:id="col_cost" prefWidth="103.0" text="Job Cost" />
-            <TableColumn fx:id="col_status" prefWidth="106.0" text="Job Status" />
-            <TableColumn fx:id="col_dateStart" prefWidth="111.0" text="Date Start" />
-            <TableColumn fx:id="col_dateComplete" prefWidth="113.0" text="Date Complete" />
-            <TableColumn fx:id="col_payment" prefWidth="123.0" text="Payment Type" />
+            <TableColumn fx:id="col_fname" prefWidth="113.0" text="First Name" />
+                <TableColumn fx:id="col_lname" prefWidth="131.0" text="Last Name" />
+                <TableColumn fx:id="col_type" prefWidth="126.0" text="Job Type" />
+            <TableColumn fx:id="col_cost" prefWidth="95.0" text="Job Cost" />
+            <TableColumn fx:id="col_status" prefWidth="120.0" text="Job Status" />
+            <TableColumn fx:id="col_dateStart" prefWidth="106.0" text="Date Start" />
+            <TableColumn fx:id="col_dateComplete" prefWidth="104.0" text="Date Complete" />
+            <TableColumn fx:id="col_payment" prefWidth="138.0" text="Payment Type" />
             </columns>
         </TableView>
         <HBox alignment="CENTER" layoutX="353.0" layoutY="540.0" prefHeight="46.0" prefWidth="495.0">

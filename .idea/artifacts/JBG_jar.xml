@@ -2,12 +2,11 @@
   <artifact type="jar" name="JBG:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/JBG_jar</output-path>
     <root id="archive" name="JBG.jar">
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/../META-INF/MANIFEST.MF" />
-      </element>
       <element id="module-output" name="JBG" />
       <element id="extracted-dir" path="$PROJECT_DIR$/dependices/jfoenix-8.0.10.jar" path-in-jar="/" />
+      <element id="library" level="project" name="gembox-spreadsheet" />
       <element id="extracted-dir" path="$PROJECT_DIR$/dependices/mysql-connector-java-8.0.23.jar" path-in-jar="/" />
+      <element id="library" level="project" name="mysql-connector-java-8.0.23" />
     </root>
   </artifact>
 </component>

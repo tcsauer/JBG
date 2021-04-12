@@ -2,35 +2,47 @@ package Dashboard;
 
 import javafx.fxml.Initializable;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class DatabaseConnection {
     //URL in ./preferences/URL.txt file & updatable through GUI
     String URL;
 
-    public void getURL(){
-        try {
-            String tempURL;
-            FileReader reader = new FileReader("./preferences/URL.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            tempURL = bufferedReader.readLine();
-            reader.close();
-            if(tempURL.isEmpty()){
-                URL = "jdbc:mysql://jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com:3306/JBandG";
+    public void getURL() throws IOException {
+        String tempURL;
+        BufferedReader txtReader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/preferences/URL.txt")));
+        tempURL = (txtReader.readLine());
+        String path = System.getProperty("user.home") + File.separator + "Documents/JBG_CRM/";
+        File customDir = new File(path);
+        if(!customDir.exists()){
+            System.out.println("Reading New File");
+            customDir.mkdirs();
+            customDir.createNewFile();
+            FileWriter writer = new FileWriter(path+"settings.txt");
+            writer.write(tempURL);
+            writer.close();
+            URL = tempURL;
+        }
+        else{
+            System.out.println("Reading Old File");
+            File testDoc = new File(path+"settings.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(testDoc));
+            Scanner in = new Scanner(new FileReader(testDoc));
+
+            try {
+               URL = (reader.readLine());
+            } finally {
+                reader.close();
             }
-            else URL = tempURL;
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
     }
 
-    public Connection getConnectionPlain() {
+    public Connection getConnectionPlain() throws IOException {
         getURL();
         Connection connection = null;
 
@@ -38,21 +50,15 @@ public class DatabaseConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL, "texstar", "all4gibbs");
         } catch (Exception e) {
-            System.out.println("Error Occured While Getting the Connection: - " + e);
+            System.out.println("Error Occurred While Getting the Connection: - " + e);
         }
         return connection;
     }
 
 
-    public Statement ConnectToDatabase() {
-        try {
-            FileReader reader = new FileReader("./preferences/URL.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            URL = bufferedReader.readLine();
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public Statement ConnectToDatabase() throws IOException {
+        getURL();
+
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

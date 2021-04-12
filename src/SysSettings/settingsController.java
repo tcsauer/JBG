@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 import java.util.prefs.Preferences;
 
 public class settingsController implements Initializable {
@@ -23,6 +24,8 @@ public class settingsController implements Initializable {
     private JFXTextField textBoxURL;
     @FXML
     private Label setLab;
+    String path = System.getProperty("user.home") + File.separator + "Documents/JBG_CRM/";
+    File testDoc = new File(path+"settings.txt");
 
 
     //example on receiving data
@@ -34,12 +37,13 @@ public class settingsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            FileReader reader = new FileReader("./preferences/URL.txt");
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            URL = bufferedReader.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader(testDoc));
+            URL = (reader.readLine());
             reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
         }
 
         textBoxURL.setText(URL);
@@ -60,7 +64,7 @@ public class settingsController implements Initializable {
 
     @FXML
     private void saveSetChanges(ActionEvent actionEvent) throws IOException {
-        FileWriter writer = new FileWriter("./preferences/URL.txt", false);
+        FileWriter writer = new FileWriter(path + "settings.txt", false);
         String text = textBoxURL.getText();
         writer.write(text);
         writer.close();

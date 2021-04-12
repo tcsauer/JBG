@@ -76,7 +76,7 @@ public class CustEditController extends DatabaseConnection implements Initializa
                         rs.getString("date_complete"),
                         rs.getString("payment_type")));
             }disconnectFromDB(con);
-        }catch(SQLException ex){
+        }catch(SQLException | IOException ex){
             Logger.getLogger(CustEditController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
