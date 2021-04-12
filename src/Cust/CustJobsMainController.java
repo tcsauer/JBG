@@ -90,15 +90,15 @@ public class CustJobsMainController extends DatabaseConnection {
     @FXML
     private void saveAndChangeToJob(ActionEvent actionEvent) throws IOException {
         ResultSet rs = null;
-        int CustID = 0;
+        int CustID = 0;/*
         if (Validation.textFieldNotEmpty(firstNameBox, lastNameBox, phoneBox, emailBox, streetAddressBox, stateBox, cityBox, zipBox))
             if (Validation.phoneFormat(phoneBox))
                 if (Validation.emailFormat(emailBox))
-                    if (Validation.zipFormat(zipBox)) {
+                    if (Validation.zipFormat(zipBox)) */{
                         try {
                             Connection con = getConnectionPlain();
                             PreparedStatement statement = null;
-                            statement = con.prepareStatement("INSERT INTO Customer(cust_fname, cust_lname, cust_phone, cust_email, cust_street, cust_city, cust_state, cust_zip) Values ('" + firstNameBox.getText() + "','" + lastNameBox.getText() + "','" + phoneBox.getText() + "','" + emailBox.getText() + "','" + streetAddressBox.getText() + "','" + cityBox.getText() + "','" + stateBox.getText() + "','" + zipBox.getText() + "')", Statement.RETURN_GENERATED_KEYS);
+                            //statement = con.prepareStatement("INSERT INTO Customer(cust_fname, cust_lname, cust_phone, cust_email, cust_street, cust_city, cust_state, cust_zip) Values ('" + firstNameBox.getText() + "','" + lastNameBox.getText() + "','" + phoneBox.getText() + "','" + emailBox.getText() + "','" + streetAddressBox.getText() + "','" + cityBox.getText() + "','" + stateBox.getText() + "','" + zipBox.getText() + "')", Statement.RETURN_GENERATED_KEYS);
                             int rowAffected = statement.executeUpdate();
                             if (rowAffected == 1) {
                                 rs = statement.getGeneratedKeys();

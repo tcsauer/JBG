@@ -203,7 +203,7 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
             if(Validation.costFormat(cost)){
                 try {
                     Statement sqlInsert = ConnectToDatabase();
-                    sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
+                    //sqlInsert.execute("INSERT INTO Job(customer_id, job_type, job_cost, job_status, date_start, date_complete, payment_type) VALUES ((SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1) ,'" + jobType.getValue() + "','" + cost.getText() + "','" + jobStatus.getValue() + "','" + startDate.getValue().toString() + "','" + fDate.getValue().toString() + "','" + paymentType.getValue() + "')");
                     disconnectFromDB(sqlInsert);
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());

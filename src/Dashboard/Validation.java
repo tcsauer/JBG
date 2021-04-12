@@ -1,5 +1,6 @@
 package Dashboard;
 
+import com.jfoenix.validation.RequiredFieldValidator;
 import com.sun.xml.internal.messaging.saaj.soap.JpegDataContentHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -15,110 +16,167 @@ public class Validation {
 
     public static boolean textFieldNotEmpty(TextField a, TextField b, TextField c, TextField d, TextField e, TextField f, TextField g, TextField h){
         boolean validTextFields = true;
-        JOptionPane frame = new JOptionPane();
         if(a.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "First name cannot be empty.");
+            a.getStylesheets().add("assets/error.css");
+            a.setPromptText("Cannot be empty.");
+        } else {
+            a.getStylesheets().add("assets/white.css");
+            a.setPromptText(null);
         }
         if(b.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "Last name cannot be empty.");
+            b.getStylesheets().add("assets/error.css");
+            b.setPromptText("Cannot be empty.");
+        } else {
+            b.getStylesheets().add("assets/white.css");
+            b.setPromptText(null);
         }
         if(c.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "Phone cannot be empty.");
+            c.getStylesheets().add("assets/error.css");
+            c.setPromptText("Cannot be empty.");
+        }else {
+            c.getStylesheets().add("assets/white.css");
+            c.setPromptText(null);
         }
         if(d.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "Email cannot be empty.");
+            d.getStylesheets().add("assets/error.css");
+            d.setPromptText("Cannot be empty.");
+        }else {
+            d.getStylesheets().add("assets/white.css");
+            d.setPromptText(null);
         }
         if(e.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "Street address cannot be empty.");
+            e.getStylesheets().add("assets/error.css");
+            e.setPromptText("Cannot be empty.");
+        }else {
+            e.getStylesheets().add("assets/white.css");
+            e.setPromptText(null);
         }
         if(f.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "State cannot be empty.");
+            f.getStylesheets().add("assets/error.css");
+            f.setPromptText("Cannot be empty.");
+        }else {
+            f.getStylesheets().add("assets/white.css");
+            f.setPromptText(null);
         }
         if(g.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "City cannot be empty.");
+            g.getStylesheets().add("assets/error.css");
+            g.setPromptText("Cannot be empty.");
+        }else {
+            g.getStylesheets().add("assets/white.css");
+            g.setPromptText(null);
         }
         if(h.getText().isEmpty()){
             validTextFields = false;
-            JOptionPane.showMessageDialog(frame, "Zip cannot be empty.");
+            h.getStylesheets().add("assets/error.css");
+            h.setPromptText("Cannot be empty.");
+        }else {
+            h.getStylesheets().add("assets/white.css");
+            h.setPromptText(null);
         }
         return validTextFields;
     }
 
     public static boolean costFieldNotEmpty(TextField c){
         boolean validTextField = true;
-        JOptionPane frame = new JOptionPane();
         if(c.getText().isEmpty()){
             validTextField = false;
-            JOptionPane.showMessageDialog(frame, "Cost cannot be empty.");
+            c.getStylesheets().add("assets/error.css");
+            c.setPromptText("Cannot be empty.");
+        }else{
+            c.getStylesheets().add("assets/white.css");
+            c.setPromptText(null);
         }
         return validTextField;
     }
 
     public static boolean costFormat (TextField c) {
         boolean validTextField = true;
-        JOptionPane frame = new JOptionPane();
         String pattern = "\\d{0,7}([\\\\.]\\d{0,2})?";
         if(!c.getText().matches(pattern))
         {
             validTextField = false;
-            JOptionPane.showMessageDialog(frame, "Enter monetary value with decimal.");
+            c.getStylesheets().add("assets/error.css");
+            c.setPromptText("Enter monetary value with decimal.");
+        }else{
+            c.getStylesheets().add("assets/white.css");
+            c.setPromptText(null);
         }
         return validTextField;
     }
 
     public static boolean phoneFormat(TextField i){
         boolean validTextField = true;
-        JOptionPane frame = new JOptionPane();
         String pattern = "(?:\\d{3}-){2}\\d{4}";
         if(!i.getText().matches(pattern) || i.getText().length() > 13){
             validTextField = false;
-            JOptionPane.showMessageDialog(frame, "Enter correct phone format: XXX-XXX-XXXX");
+            i.getStylesheets().add("assets/error.css");
+            i.setPromptText("Use correct format: XXX-XXX-XXXX");
+        }else{
+            i.getStylesheets().add("assets/white.css");
+            i.setPromptText(null);
         }
         return validTextField;
     }
 
     public static boolean emailFormat(TextField i){
         boolean validTextField = true;
-        JOptionPane frame = new JOptionPane();
         if(!i.getText().matches("[a-zA-z0-9._-]+@[a-zA-Z0-9]+\\.com")){
             validTextField = false;
-            JOptionPane.showMessageDialog(frame, "Enter a valid email address.");
+            i.getStylesheets().add("assets/error.css");
+            i.setPromptText("Enter a valid email address.");
+        }else{
+            i.getStylesheets().add("assets/white.css");
+            i.setPromptText(null);
         }
         return validTextField;
     }
 
     public static boolean zipFormat(TextField i){
         boolean validTextField = true;
-        JOptionPane frame = new JOptionPane();
         String pattern = "\\d{5}";
         if(!i.getText().matches(pattern)){
             validTextField = false;
-            JOptionPane.showMessageDialog(frame, "Enter five digit zip.");
+            i.getStylesheets().add("assets/error.css");
+            i.setPromptText("Enter five digit zip");
+        }else{
+            i.getStylesheets().add("assets/white.css");
+            i.setPromptText(null);
         }
         return validTextField;
     }
 
     public static boolean comboBoxNotEmpty(ComboBox a, ComboBox b, ComboBox c){
         boolean validComboBox = true;
-        JOptionPane frame = new JOptionPane();
         if(a.getValue() == null){
             validComboBox = false;
-            JOptionPane.showMessageDialog(frame, "Job type cannot be empty.");
+            a.getStylesheets().add("assets/error.css");
+            a.setPromptText("Cannot be empty.");
+        }else{
+            a.getStylesheets().add("assets/white.css");
+            a.setPromptText(null);
         }
         if(b.getValue() == null){
             validComboBox = false;
-            JOptionPane.showMessageDialog(frame, "Payment type cannot be empty.");
+            b.getStylesheets().add("assets/error.css");
+            b.setPromptText("Cannot be empty.");
+        }else{
+            b.getStylesheets().add("assets/white.css");
+            b.setPromptText(null);
         }
         if(c.getValue() == null){
             validComboBox = false;
-            JOptionPane.showMessageDialog(frame, "Job status cannot be empty.");
+            c.getStylesheets().add("assets/error.css");
+            c.setPromptText("Cannot be empty.");
+        }else{
+            c.getStylesheets().add("assets/white.css");
+            c.setPromptText(null);
         }
         return validComboBox;
     }
@@ -128,11 +186,19 @@ public class Validation {
         JOptionPane frame = new JOptionPane();
         if(a.getValue() == null){
             validDatePicker = false;
-            JOptionPane.showMessageDialog(frame, "Start date cannot be empty.");
+            a.getStylesheets().add("assets/error.css");
+            a.setPromptText("Cannot be empty.");
+        }else{
+            a.getStylesheets().add("assets/white.css");
+            a.setPromptText(null);
         }
         if(b.getValue() == null){
             validDatePicker = false;
-            JOptionPane.showMessageDialog(frame, "Finish date cannot be empty.");
+            b.getStylesheets().add("assets/error.css");
+            b.setPromptText("Cannot be empty.");
+        }else{
+            b.getStylesheets().add("assets/white.css");
+            b.setPromptText(null);
         }
         return validDatePicker;
     }
@@ -143,7 +209,12 @@ public class Validation {
         LocalDate ld = a.getValue();
         if(b.getValue().isBefore(ld)){
             validDate = false;
-            JOptionPane.showMessageDialog(frame, "Finish date cannot be before start date.");
+            b.getStylesheets().add("assets/error.css");
+            b.setValue(null);
+            b.setPromptText("Enter valid date.");
+        }else{
+            b.getStylesheets().add("assets/white.css");
+            b.setPromptText(null);
         }
         return validDate;
     }
