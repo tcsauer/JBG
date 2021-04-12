@@ -184,7 +184,6 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
         col_zip.setCellValueFactory(new PropertyValueFactory<>("custZip"));
 
         searchTable.setItems(custList);
-        textField.setText(null);
     }
 
     @FXML

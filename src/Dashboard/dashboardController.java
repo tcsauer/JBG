@@ -108,10 +108,9 @@ public class dashboardController extends DatabaseConnection implements Initializ
                 activeList6.add(new DataStore6(rs.getString("Customer.cust_fname"), rs.getString("Customer.cust_lname"), rs.getString("Customer.cust_phone"), rs.getString("Job.job_type"), rs.getString("Job.job_cost"), rs.getString("Job.job_status"), rs.getString("Job.date_start")));
             }
 
-            ResultSet rs2 = con.executeQuery("SELECT sum(job_cost) as count  FROM Job WHERE MONTH(date_complete) = MONTH(CURRENT_DATE()) AND YEAR(date_complete) = YEAR(CURRENT_DATE());");
+            ResultSet rs2 = con.executeQuery("SELECT ROUND(sum(job_cost), 2) as count  FROM Job WHERE MONTH(date_complete) = MONTH(CURRENT_DATE()) AND YEAR(date_complete) = YEAR(CURRENT_DATE());");
             while (rs2.next()) {
-                double re = Double.parseDouble(rs2.getString("count"));
-                revenue.setText("$" + String.format("%.2f", re));
+                revenue.setText("$" + rs2.getString("count"));
 
             }
 
