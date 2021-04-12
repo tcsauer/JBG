@@ -1,0 +1,1 @@
+jdbc:mysql://jbgdev.cmsdvfssc2oc.us-east-2.rds.amazonaws.com:3306/JBandG
