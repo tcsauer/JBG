@@ -183,7 +183,6 @@ public class Validation {
 
     public static boolean datePickerNotEmpty(DatePicker a, DatePicker b){
         boolean validDatePicker = true;
-        JOptionPane frame = new JOptionPane();
         if(a.getValue() == null){
             validDatePicker = false;
             a.getStylesheets().add("assets/error.css");
@@ -205,7 +204,6 @@ public class Validation {
 
     public static boolean validDate(DatePicker a, DatePicker b){
         boolean validDate = true;
-        JOptionPane frame = new JOptionPane();
         LocalDate ld = a.getValue();
         if(b.getValue().isBefore(ld)){
             validDate = false;
