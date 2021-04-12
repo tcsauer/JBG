@@ -111,7 +111,7 @@ public class dashboardController extends DatabaseConnection implements Initializ
             ResultSet rs2 = con.executeQuery("SELECT sum(job_cost) as count  FROM Job WHERE MONTH(date_complete) = MONTH(CURRENT_DATE()) AND YEAR(date_complete) = YEAR(CURRENT_DATE());");
             while (rs2.next()) {
                 double re = Double.parseDouble(rs2.getString("count"));
-                revenue.setText("$" + Math.floor(re));
+                revenue.setText("$" + String.format("%.2f", re));
 
             }
 
