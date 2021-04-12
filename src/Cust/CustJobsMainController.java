@@ -94,7 +94,7 @@ public class CustJobsMainController extends DatabaseConnection {
         if (Validation.textFieldNotEmpty(firstNameBox, lastNameBox, phoneBox, emailBox, streetAddressBox, stateBox, cityBox, zipBox))
             if (Validation.phoneFormat(phoneBox))
                 if (Validation.emailFormat(emailBox))
-                    if (Validation.zipFormat(zipBox)) {
+                    if (Validation.zipFormat(zipBox)){
                         try {
                             Connection con = getConnectionPlain();
                             PreparedStatement statement = null;

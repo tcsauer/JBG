@@ -13,3 +13,29 @@
 {
     -fx-background-color: red;
 }
+
+.combo-box-base
+{
+    -fx-prompt-text-fill:red;
+    -fx-text-fill: red;
+    -fx-border-color: red;
+}
+
+.combo-box .cell::selection {
+    -fx-text-fill: red;
+}
+/*
+.combo-box-popup .list-view .list-cell:hover{
+    -fx-text-fill: red;
+}
+ */
+/*
+.combo-box {
+    -fx-background-color: red;
+}
+*/
+
+.combo-box {
+    -fx-text-inner-color: red;
+    -fx-prompt-text-fill: red;
+}
