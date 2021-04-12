@@ -166,12 +166,18 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
+                jobType.getSelectionModel().clearSelection();
                 jobType.setValue(null);
+                jobType.setPromptText("Job Type");
                 cost.clear();
+                jobStatus.getSelectionModel().clearSelection();
                 jobStatus.setValue(null);
+                jobStatus.setPromptText("Job Status");
                 startDate.setValue(null);
                 fDate.setValue(null);
+                paymentType.getSelectionModel().clearSelection();
                 paymentType.setValue(null);
+                paymentType.setPromptText("Payment Type");
                 goodLab.setVisible(true);
             }
         } else if (z == 2) {
@@ -187,12 +193,18 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
+                jobType.getSelectionModel().clearSelection();
                 jobType.setValue(null);
+                jobType.setPromptText("Job Type");
                 cost.clear();
+                jobStatus.getSelectionModel().clearSelection();
                 jobStatus.setValue(null);
+                jobStatus.setPromptText("Job Status");
                 startDate.setValue(null);
                 fDate.setValue(null);
+                paymentType.getSelectionModel().clearSelection();
                 paymentType.setValue(null);
+                paymentType.setPromptText("Payment Type");
                 goodLab.setVisible(true);
             }
         } else {
@@ -208,12 +220,18 @@ public class AllJobCreateEditController extends DatabaseConnection implements In
                 } catch (Exception ex) {
                     System.out.println(ex.getMessage());
                 }
+                jobType.getSelectionModel().clearSelection();
                 jobType.setValue(null);
+                jobType.setPromptText("Job Type");
                 cost.clear();
+                jobStatus.getSelectionModel().clearSelection();
                 jobStatus.setValue(null);
+                jobStatus.setPromptText("Job Status");
                 startDate.setValue(null);
                 fDate.setValue(null);
+                paymentType.getSelectionModel().clearSelection();
                 paymentType.setValue(null);
+                paymentType.setPromptText("Payment Type");
                 goodLab.setVisible(true);
             }
         }
