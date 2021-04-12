@@ -63,3 +63,14 @@
     -fx-background-color: #4040b4;
     -fx-text-fill: black;
 }
+
+.combo-box .cell::selection {
+    -fx-text-fill: white;
+}
+
+.combo-box-base
+{
+    -fx-prompt-text-fill:white;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}

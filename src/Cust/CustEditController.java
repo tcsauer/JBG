@@ -107,7 +107,7 @@ public class CustEditController extends DatabaseConnection implements Initializa
         if(Validation.zipFormat(zip)){
             try {
                 Statement sqlUpdate = ConnectToDatabase();
-                sqlUpdate.execute("UPDATE Customer SET cust_fname = '" + fName.getText() + "', cust_lname = '" + lName.getText() + "', cust_phone = '" + phone.getText() + "', cust_email = '" + email.getText() + "', cust_street = '" + streetAddress.getText() + "', cust_city = '" + city.getText() + "', cust_state = '" + state.getText() + "', cust_zip = '" + zip.getText() + "' WHERE customer_id = '" + x + "'");
+                //sqlUpdate.execute("UPDATE Customer SET cust_fname = '" + fName.getText() + "', cust_lname = '" + lName.getText() + "', cust_phone = '" + phone.getText() + "', cust_email = '" + email.getText() + "', cust_street = '" + streetAddress.getText() + "', cust_city = '" + city.getText() + "', cust_state = '" + state.getText() + "', cust_zip = '" + zip.getText() + "' WHERE customer_id = '" + x + "'");
                 disconnectFromDB(sqlUpdate);
             } catch (Exception ex) {
                 System.out.println(ex.getMessage());
