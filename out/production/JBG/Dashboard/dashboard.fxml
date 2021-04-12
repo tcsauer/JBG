@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.23327759197324416" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-border-color: black;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dashboard.dashboardController">
+<SplitPane dividerPositions="0.23327759197324416" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-border-color: black;" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.281" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dashboard.dashboardController">
   <items>
     <AnchorPane maxWidth="340.0" minHeight="0.0" minWidth="0.0" prefHeight="596.0" prefWidth="330.0" style="-fx-background-color: #253543;" SplitPane.resizableWithParent="false">
          <children>
