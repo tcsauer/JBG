@@ -248,7 +248,7 @@ public class quickInvoiceController extends DatabaseConnection implements Initia
            f28.setText("");
            f29.setText("");
            f30.setText("");
-
+        activeTable.getSelectionModel().clearSelection();
     }//end export
 
     @FXML
