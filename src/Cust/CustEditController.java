@@ -126,7 +126,7 @@ public class CustEditController extends DatabaseConnection implements Initializa
     @FXML
     private void viewJob(ActionEvent actionEvent) throws IOException {
         if(custJobsTable.getSelectionModel().getSelectedItem() != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jobs/AllJobCreateEdit.fxml"));
             Parent root = loader.load();
             AllJobCreateEditController editScene2 = loader.getController();
             editScene2.diffSceneCustID(custJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);

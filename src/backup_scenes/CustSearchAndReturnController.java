@@ -110,7 +110,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
 
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustJobsMain.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cust/CustJobsMain.fxml"));
             Parent root = loader.load();
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -120,7 +120,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     @FXML
     private void viewCstProfile(ActionEvent actionEvent) throws IOException {
         if(searchTable.getSelectionModel().getSelectedItem() != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jobs/AllJobCreateEdit.fxml"));
             Parent root = loader.load();
             AllJobCreateEditController scene2Controller = loader.getController();
             scene2Controller.diffSceneCustID(searchTable.getSelectionModel().getSelectedItem().getCustID(), 1);
@@ -212,7 +212,7 @@ public class CustSearchAndReturnController extends DatabaseConnection implements
     @FXML
     private void editCustomer(ActionEvent actionEvent) throws IOException{
         if(searchTable.getSelectionModel().getSelectedItem() != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Cust/CustEdit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Cust/CustEdit.fxml"));
             Parent root = loader.load();
             CustEditController custInfoScene = loader.getController();
             custInfoScene.showInfo2(searchTable.getSelectionModel().getSelectedItem().getCustID(), searchTable.getSelectionModel().getSelectedItem().getCustFirstName(),

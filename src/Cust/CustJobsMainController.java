@@ -43,7 +43,7 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void changeToActiveJob(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/ActiveJob.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jobs/ActiveJob.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -55,7 +55,7 @@ public class CustJobsMainController extends DatabaseConnection {
 
     @FXML
     private void changeToCustSearch(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../backup_scenes/custSearchAndReturn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/backup_scenes/custSearchAndReturn.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -110,7 +110,7 @@ public class CustJobsMainController extends DatabaseConnection {
                             System.out.println(ex.getMessage());
                         }
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jobs/AllJobCreateEdit.fxml"));
                         Parent root = loader.load();
                         AllJobCreateEditController scene2Controller = loader.getController();
                         scene2Controller.diffSceneCustID(CustID, 3);

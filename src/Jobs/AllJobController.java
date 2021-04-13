@@ -52,8 +52,6 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     @FXML
     public TableColumn<Jobs,String> col_lname;
     @FXML
-    public TableColumn<Jobs,String> col_fname;
-    @FXML
     private TableColumn<Jobs,String> col_type;
     @FXML
     private TableColumn<Jobs,String> col_cost;
@@ -79,15 +77,14 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             Statement con = ConnectToDatabase();
-            ResultSet rs = con.executeQuery("SELECT job_id, cust_fname, cust_lname, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job J JOIN Customer C on C.customer_id = J.customer_id");
+            ResultSet rs = con.executeQuery("SELECT job_id, cust_lname, job_type, job_cost, job_status, date_start, date_complete, payment_type FROM Job J JOIN Customer C on C.customer_id = J.customer_id");
 
             while(rs.next()){
-                jobList.add(new Jobs(rs.getInt("job_id"), rs.getString("cust_fname"), rs.getString("cust_lname"), rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
+                jobList.add(new Jobs(rs.getInt("job_id"), rs.getString("cust_lname"), rs.getString("job_type"),rs.getString("job_cost"),rs.getString("job_status"),rs.getString("date_start"),rs.getString("date_complete"),rs.getString("payment_type")));
             }disconnectFromDB(con);
         } catch (Exception ex) {
             Logger.getLogger(AllJobController.class.getName()).log(Level.SEVERE,null,ex);
         }
-        col_fname.setCellValueFactory(new PropertyValueFactory<>("cust_fname"));
         col_lname.setCellValueFactory(new PropertyValueFactory<>("cust_lname"));
         col_type.setCellValueFactory(new PropertyValueFactory<>("jobType"));
         col_cost.setCellValueFactory(new PropertyValueFactory<>("jobCost"));
@@ -110,17 +107,17 @@ public class AllJobController extends DatabaseConnection implements Initializabl
 
     @FXML
     private void changeToDash(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../dashboard/dashboard.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard/dashboard.fxml"));
         Parent root = loader.load();
 
-        Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
 
     @FXML
     private void newJob(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../backup_scenes/custSearchAndReturn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/backup_scenes/custSearchAndReturn.fxml"));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
@@ -217,7 +214,7 @@ public class AllJobController extends DatabaseConnection implements Initializabl
     @FXML
     private void editJob(ActionEvent actionEvent) throws IOException{
         if(AllJobsTable.getSelectionModel().getSelectedItem() != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../Jobs/AllJobCreateEdit.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Jobs/AllJobCreateEdit.fxml"));
             Parent root = loader.load();
             AllJobCreateEditController editScene = loader.getController();
             editScene.diffSceneCustID(AllJobsTable.getSelectionModel().getSelectedItem().getJobID(), 2);

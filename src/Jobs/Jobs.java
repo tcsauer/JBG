@@ -38,9 +38,8 @@ public class Jobs {
         this.dateComplete = new String(dateComplete);
         this.paymentType = new String(paymentType);
     }
-    public Jobs(int JobID, String cust_fname, String cust_lname, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
+    public Jobs(int JobID, String cust_lname, String jobType, String jobCost, String jobStatus, String dateStart, String dateComplete, String paymentType){
         this.JobID = JobID;
-        this.cust_fname = new String(cust_fname);
         this.cust_lname = new String(cust_lname);
         this.jobType = new String(jobType);
         this.jobCost = new String(jobCost);
